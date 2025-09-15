@@ -13,10 +13,10 @@ Incluyendo facilidad en la gestión de pedidios para los administradores.
 - **Control de versiones**: Git + GitHub
 
 ## 👥 Integrantes
-- [Brisa Nahir Valero]
-- [Rocio Soledad Maldonado]
-- [Julieta Delfina Sayago]
-- [Malvina Florencia Avendaño]
+- Brisa Nahir Valero
+- Rocio Soledad Maldonado
+- Julieta Delfina Sayago
+- Malvina Florencia Avendaño
 
 ## 📂 Organización del repositorio
 - `frontend/`: código del cliente
