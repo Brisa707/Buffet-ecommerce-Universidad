@@ -5,5 +5,8 @@ Carpeta donde se aloja el código del cliente web (HTML, CSS, JS o framework com
 
 ## Instrucciones
 1. Instalar dependencias (React/ Next.js o Astro):
+2. Ejecutar proyecto local:
+3. Carpeta organizada por módulos:
 
-Info a actualizar..
+
+Información a actualizar..
