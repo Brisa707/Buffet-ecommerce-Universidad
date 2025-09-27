@@ -1,0 +1,115 @@
+:root {
+  font-size: 16px;
+}
+
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #D1E1EB;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 32rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+}
+
+.register-logo-container {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.register-logo {
+  width: 6rem;
+  max-width: 100%;
+  height: auto;
+}
+
+.register-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.register-input-group {
+  margin-bottom: 1.5rem;
+}
+
+.register-input-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.register-input-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.625rem 1rem;
+  border-radius: 1.875rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.register-btn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  width: 100%;
+  padding: 0.625rem 2rem;
+  background-color: #01538D;
+  color: white;
+  border: none;
+  border-radius: 1.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-btn:hover {
+  background-color: #0056b3;
+}
+
+
+/* Tablet */
+@media (min-width: 48rem) { 
+  .register-card {
+    padding: 2.5rem;
+  }
+
+  .register-title {
+    font-size: 1.75rem;
+  }
+
+  .register-btn {
+    font-size: 1rem; 
+    padding: 0.75rem 2.5rem; 
+  }
+}
+
+/* Escritorio */
+@media (min-width: 64rem) { 
+  .register-card {
+    padding: 3rem 4rem;
+  }
+
+  .register-title {
+    font-size: 1.875rem; 
+  }
+
+  .register-btn {
+    font-size: 1.0625rem; 
+    padding: 0.875rem 3rem; 
+  }
+}

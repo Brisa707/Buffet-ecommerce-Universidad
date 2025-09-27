@@ -1,0 +1,271 @@
+:root {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+}
+
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 3.125rem;
+  background-color: #01538D;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 0.8rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  height: 2.5rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.search-box input {
+  width: 100%;
+  height: 1.75rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.9375rem;
+  border-radius: 50px;
+  border: 1px solid white;
+  box-sizing: border-box;
+}
+
+.cart-icon,
+.menu-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-icon-cart {
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-elements {
+  position: absolute;
+  top: 3.125rem;
+  right: 0;
+  width: 0;
+  height: calc(100vh - 3.125rem);
+  background-color: #E5F5FF;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-elements.active {
+  width: 100%;
+}
+
+.nav-elements ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0 1rem;
+}
+
+.nav-elements ul li {
+  margin-top: 1.25rem;
+}
+
+.nav-elements ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.nav-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+.desktop-nav {
+  display: none;
+}
+
+
+
+/* Desktop*/
+@media (min-width: 48rem) {
+  .nav-elements,
+  .menu-icon,
+  .cart-icon {
+    display: none;
+  }
+
+  .navbar {
+    height: 3.5rem;
+  }
+
+  .logo img {
+    height: 2.9rem;
+  }
+
+  .search-box input {
+    width: 350px;
+  }
+
+  .desktop-nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .desktop-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .right-links,
+  .right-icons {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .right-links li,
+  .right-icons li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .right-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .right-icons li {
+    position: relative;
+    cursor: pointer;
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  .profile-desktop {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-right: 0.5rem;
+  }
+
+  .dropdown-arrow {
+    font-size: 0.8rem;
+    color: white;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 2.49rem;
+    right: 0;
+    background: white;
+    box-shadow: 0px 2px 8px rgba(1, 83, 141, 0.4);
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 0;
+  }
+
+  .dropdown li {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dropdown li a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    line-height: 1.2;
+    width: 100%;
+  }
+
+  .nav-icon {
+    font-size: 1.2rem;
+  }
+
+.profile-desktop.active .nav-icon,
+.profile-desktop.active .dropdown-arrow {
+  color: black;  
+}
+
+
+}
+
+/* Tablet */
+@media (min-width: 48rem) and (max-width: 64rem) {
+  .navbar {
+    height: 3.25rem; 
+  }
+
+  .logo img {
+    height: 2.7rem; 
+  }
+
+  .search-box input {
+    width: 280px;/
+  }
+
+  .desktop-nav {
+    gap: 2rem;
+  }
+
+  .right-links,
+  .right-icons {
+    gap: 2rem;
+  }
+
+  .right-links li a {
+    font-size: 0.95rem;
+  }
+
+  .right-icons li {
+    font-size: 1.35rem; 
+  }
+
+  .dropdown {
+    top: 2.5rem; 
+  }
+
+  .dropdown li a {
+    font-size: 0.95rem;
+    padding: 0.45rem 0.9rem;
+  }
+}
