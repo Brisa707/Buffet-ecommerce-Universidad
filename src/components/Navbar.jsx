@@ -114,7 +114,7 @@ const Navbar = () => {
                     <ul className="right-links">
                         <li><NavLink to="/home">Inicio</NavLink></li>
                         <li><NavLink to="/">Productos</NavLink></li>
-                        <li><NavLink to="/">Contacto</NavLink></li>
+                        <li><NavLink to="/contacto">Contacto</NavLink></li>
                     </ul>
                     <ul className="right-icons">
                         <li><MdLocalGroceryStore className="nav-icon-cart" /></li>

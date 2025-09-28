@@ -19,7 +19,7 @@
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 1.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
 .back-button {
@@ -121,18 +121,18 @@
 }
 
 /* Tablet */
-@media (min-width: 48rem) { 
+@media (min-width: 48rem) {
   .login-card {
     padding: 2.5rem;
   }
 
   .login-title {
-    font-size: 1.75rem; 
+    font-size: 1.75rem;
   }
 
   .login-btn {
     font-size: 1rem;
-    padding: 0.75rem 2.5rem; 
+    padding: 0.75rem 2.5rem;
   }
 }
 
@@ -147,7 +147,7 @@
   }
 
   .login-btn {
-    font-size: 1.0625rem; 
+    font-size: 1.0625rem;
     padding: 0.875rem 3rem;
   }
 }
