@@ -1,0 +1,158 @@
+.pedidoDetalle-container {
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+.pedidoDetalle-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.8rem;
+  max-width: 600px;
+  margin:0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pedidoDetalle-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.pedidoDetalle-back {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #004080;
+}
+
+.pedidoDetalle-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #004080;
+  margin: 0;
+}
+
+.pedidoDetalle-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1.8px solid #01538D;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #f9fbff;
+}
+
+.pedidoDetalle-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.pedidoDetalle-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: flex-start; 
+  gap: 1.9;
+  flex: 1; 
+}
+
+.pedidoDetalle-nombre {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.pedidoDetalle-precio {
+  font-size: 0.95rem;
+  color: #004080;
+  font-weight: 600;
+}
+
+.pedidoDetalle-cantidad {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.pedidoDetalle-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0.8rem 0;
+}
+
+.pedidoDetalle-total-precio {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #004080;
+}
+
+.btn-qr {
+  background: #004080;
+  color: white;
+  padding: 0.6rem;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-qr:hover {
+  background: #002b59;
+}
+
+/* Responsive Mobile */
+@media (max-width: 600px) {
+  .pedidoDetalle-card {
+    background: none;   
+    box-shadow: none;   
+    padding: 0;         
+  }
+
+  .pedidoDetalle-item {
+    display: flex;
+    flex-direction: row; /* Apila imagen + info */
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 0.8rem;
+    border-radius: 20px;
+  }
+
+  .pedidoDetalle-info {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .pedidoDetalle-nombre {
+    font-size: 0.95rem;
+  }
+
+  .pedidoDetalle-precio {
+    font-size: 0.9rem;
+  }
+
+  .pedidoDetalle-cantidad {
+    font-size: 0.85rem;
+  }
+
+  .btn-qr {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+}
+
+
+
+
+
+

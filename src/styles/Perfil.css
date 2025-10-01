@@ -1,0 +1,139 @@
+.perfil-container {
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+.perfil-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.perfil-back {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #004080;
+}
+.perfil-back:hover {
+  transform: translateX(-3px);
+}
+
+.perfil-titulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #004080;
+  margin: 0;
+}
+
+.perfil-input-card {
+  background: #dcebf5;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.perfil-input-card label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #004080;
+}
+
+.perfil-input-card input {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.perfil-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.perfil-boton {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s ease;
+}
+
+.perfil-boton.guardar {
+  background: #004080;
+  color: white;
+}
+
+.perfil-boton.cancelar {
+  background: #ddd;
+  color: #333;
+}
+
+.perfil-boton:hover {
+  transform: scale(1.05);
+}
+
+.perfil-boton.guardar:hover {
+  background: #002b59;
+}
+
+.perfil-boton.cancelar:hover {
+  background: #bbb;
+}
+
+/* Responsive para mobile */
+@media (max-width: 600px) {
+  .perfil-card {
+    background: none;   
+    box-shadow: none;   
+    padding: 0;  
+  }
+
+  .perfil-titulo {
+    font-size: 1.3rem;
+  }
+
+  .perfil-input-card {
+    padding: 0.8rem;
+  }
+
+  .perfil-input-card input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .perfil-actions {
+    flex-direction: column;
+  }
+
+  .perfil-boton {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
+
+
