@@ -34,12 +34,14 @@ function Productos() {
   ];
 
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("all");
+  const [mensaje, setMensaje] = useState(""); // Estado para mostrar mensaje
 
   const productosFiltrados =
     categoriaSeleccionada === "all"
       ? productosData
       : productosData.filter((p) => p.categoria === categoriaSeleccionada);
 
+  // Añadir producto al carrito dinámicamente
   const handleAddToCart = (producto) => {
     const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
     const existe = carritoActual.find((p) => p.id === producto.id);
@@ -51,7 +53,10 @@ function Productos() {
     }
 
     localStorage.setItem("carrito", JSON.stringify(carritoActual));
-    navigate("/carrito");
+
+    // Mostrar mensaje temporal
+    setMensaje(` ${producto.nombre} añadido al carrito`);
+    setTimeout(() => setMensaje(""), 2000);
   };
 
   return (
@@ -63,6 +68,9 @@ function Productos() {
           <button className="productos-back" onClick={() => navigate(-1)}>←</button>
           <h2 className="productos-titulo">Productos</h2>
         </div>
+
+        {/* Mensaje de añadido */}
+        {mensaje && <div className="mensaje-carrito">{mensaje}</div>}
 
         {/* Categorías */}
         <div className="productos-categorias">
@@ -96,6 +104,7 @@ function Productos() {
 }
 
 export default Productos;
+
 
 
 
