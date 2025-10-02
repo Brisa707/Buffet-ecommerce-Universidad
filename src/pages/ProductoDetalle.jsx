@@ -2,6 +2,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/ProductoDetalle.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Footer from "../components/Footer";
+
+
 
 function ProductoDetalle() {
   const { id } = useParams();
@@ -50,7 +54,13 @@ function ProductoDetalle() {
         <div className="detalle-card">
           {/* Header con botón atrás */}
           <div className="detalle-header">
-            <button className="detalle-back" onClick={() => navigate(-1)}>←</button>
+            <button
+              className="detalle-back"
+              type="button"
+              onClick={() => navigate(-1)}
+            >
+              <AiOutlineArrowLeft size={20} />
+            </button>
           </div>
 
           {/* Imagen */}
@@ -70,12 +80,13 @@ function ProductoDetalle() {
               <span>{cantidad}</span>
               <button onClick={() => actualizarCantidad(1)}>+</button>
             </div>
-            <button className="btn-add" onClick={handleAddToCart}>
+            <button className="detalle-btn-add" onClick={handleAddToCart}>
               + Añadir
             </button>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

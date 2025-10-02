@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../styles/Perfil.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Footer from "../components/Footer";
 
 function Perfil() {
   const navigate = useNavigate();
@@ -12,7 +14,9 @@ function Perfil() {
         <div className="perfil-card">
           {/* Encabezado con flecha */}
           <div className="perfil-header">
-            <button className="perfil-back" onClick={() => navigate(-1)}>←</button>
+            <button className="perfil-back" onClick={() => navigate(-1)}>
+            <AiOutlineArrowLeft size={20} />
+          </button>
             <h2 className="perfil-titulo">Mi Cuenta</h2>
           </div>
 
@@ -39,6 +43,7 @@ function Perfil() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

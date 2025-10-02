@@ -2,6 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../styles/Pedidos.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Footer from "../components/Footer";
+
 
 const Pedidos = () => {
   const navigate = useNavigate();
@@ -18,9 +21,13 @@ const Pedidos = () => {
       <div className="pedidos-container">
         <div className="pedidos-card">
           <div className="pedidos-header">
-            <button className="pedidos-back" onClick={() => navigate(-1)}>
-              ←
-            </button>
+            <button
+                          className="detalle-back"
+                          type="button"
+                          onClick={() => navigate(-1)}
+                        >
+                          <AiOutlineArrowLeft size={20} />
+                        </button>
             <h2 className="pedidos-title">Mis pedidos</h2>
           </div>
 
@@ -46,6 +53,7 @@ const Pedidos = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

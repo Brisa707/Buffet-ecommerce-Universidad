@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import Navbar from "../components/Navbar";
 import "../styles/QRPage.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Footer from "../components/Footer";
 
 function QRPage() {
   const { id } = useParams();
@@ -14,7 +16,13 @@ function QRPage() {
         <div className="qr-card">
           {/* Encabezado con flecha */}
           <div className="qr-header">
-            <button className="qr-back" onClick={() => navigate(-1)}>←</button>
+            <button
+                        className="back-button"
+                        type="button"
+                        onClick={() => navigate(-1)}
+                    >
+                        <AiOutlineArrowLeft size={20} />
+                    </button>
             <h2 className="qr-titulo">Código QR</h2>
           </div>
 
@@ -25,6 +33,7 @@ function QRPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
