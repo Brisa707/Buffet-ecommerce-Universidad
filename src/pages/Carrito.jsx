@@ -3,19 +3,21 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { AiOutlineClose } from "react-icons/ai";
 import "../styles/Carrito.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+
 
 function Carrito({ onClose }) {
   const navigate = useNavigate();
   const [step, setStep] = useState("carrito"); // "carrito", "confirmar", "gracias"
 
-// Datos simulados
-const [carrito, setCarrito] = useState([
+  // Datos simulados
+  const [carrito, setCarrito] = useState([
     { id: 1, nombre: "Café + 2 medialunas", precio: 2000, img: "https://via.placeholder.com/80", cantidad: 1 },
     { id: 2, nombre: "Sándwich de jamón y queso", precio: 2500, img: "https://via.placeholder.com/80", cantidad: 1 },
     { id: 3, nombre: "Hamburguesa + papas", precio: 3500, img: "https://via.placeholder.com/80", cantidad: 1 }
   ]);
 
-const actualizarCantidad = (id, operacion) => {
+  const actualizarCantidad = (id, operacion) => {
     setCarrito((prev) =>
       prev
         .map((item) =>
@@ -51,7 +53,13 @@ const actualizarCantidad = (id, operacion) => {
             <>
               <div className="carrito-header">
                 {/* Flecha solo mobile */}
-                <button className="carrito-back" onClick={() => navigate(-1)}>←</button>
+                <button
+                  className="back-button"
+                  type="button"
+                  onClick={() => navigate(-1)}
+                >
+                  <AiOutlineArrowLeft size={20} />
+                </button>
                 <h2 className="carrito-titulo">Carrito</h2>
               </div>
 
@@ -117,8 +125,19 @@ const actualizarCantidad = (id, operacion) => {
           {step === "confirmar" && (
             <>
               <div className="carrito-header">
-                <button className="carrito-back" onClick={() => setStep("carrito")}>←</button>
-                <button className="carrito-back-desktop"  onClick={() => setStep("carrito")}>←</button>
+                <button
+                  className="carrito-back"
+                  onClick={() => setStep("carrito")}
+                >
+                  <AiOutlineArrowLeft size={20} />
+                </button>
+
+                <button
+                  className="carrito-back-desktop"
+                  onClick={() => setStep("carrito")}
+                >
+                  <AiOutlineArrowLeft size={20} />
+                </button>
                 <h2 className="carrito-titulo">Confirmar Compra</h2>
               </div>
 

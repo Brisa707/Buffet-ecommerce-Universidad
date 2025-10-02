@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiOutlineClose } from "react-icons/ai";
 import { FaBoxOpen, FaUserCircle } from "react-icons/fa";
-import { FiShoppingBag, FiLogOut, FiChevronDown } from "react-icons/fi";
+import { FiShoppingBag, FiLogOut, FiMail, FiChevronDown } from "react-icons/fi";
 import { MdLocalGroceryStore } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FiMail } from "react-icons/fi";
-import Carrito from "../pages/Carrito";
+
+import Carrito from "../pages/Carrito"; // 👈 Import del carrito
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -25,59 +25,60 @@ const Navbar = () => {
       <div className="nav-container">
         {/* LOGO */}
         <div className="logo">
-          <img src="/Logo-buffet.png" alt="Logo buffet UNaB" className="logo" />
+          <a href="http://localhost:5173/home">
+            <img src="/Logo-buffet.png" alt="Logo buffet UNaB" />
+          </a>
         </div>
+
 
         {/* BUSCADOR */}
         <div className="search-box">
-          <input type="text" placeholder="Buscar..." />
+          <input type="text" placeholder=" Buscar..." />
         </div>
 
-        <div className="nav-right">
-          {/* CARRITO MOBILE */}
-          <div className="cart-icon">
-            <NavLink to="/carrito" onClick={() => setShowNav(false)}>
-              <MdLocalGroceryStore className="nav-icon-cart" />
-            </NavLink>
-          </div>
-
-          {/* HAMBURGER */}
-          <div className="menu-icon" onClick={toggleNav}>
-            {showNav ? <span>✖</span> : <GiHamburgerMenu size={24} />}
-          </div>
+        {/* HAMBURGER */}
+        <div className="menu-icon" onClick={toggleNav}>
+          {showNav ? <AiOutlineClose size={24} /> : <GiHamburgerMenu size={24} />}
         </div>
 
-        {/* SIDEBAR MENU (MOBILE) */}
-        <div className={`nav-sidebar ${showNav ? "active" : ""}`}>
+        {/* CARRITO MOBILE (redirige a /carrito) */}
+        <div className="cart-icon mobile-cart">
+          <NavLink to="/carrito" onClick={() => setShowNav(false)}>
+            <MdLocalGroceryStore className="nav-icon-cart" />
+          </NavLink>
+        </div>
+
+        {/* NAV LINKS MOBILE */}
+        <div className={`nav-elements ${showNav ? "active" : ""}`}>
           <ul>
             <li>
-              <NavLink to="/home" onClick={toggleNav}>
+              <NavLink to="/home" onClick={() => setShowNav(false)}>
                 <AiFillHome className="nav-icon" /> Inicio
               </NavLink>
             </li>
             <li>
-              <NavLink to="/productos" onClick={toggleNav}>
+              <NavLink to="/productos" onClick={() => setShowNav(false)}>
                 <FaBoxOpen className="nav-icon" /> Productos
               </NavLink>
             </li>
             <li>
-              <NavLink to="/contacto" onClick={toggleNav}>
+              <NavLink to="/contacto" onClick={() => setShowNav(false)}>
                 <FiMail className="nav-icon" /> Contacto
               </NavLink>
             </li>
             <li>
-              <NavLink to="/pedidos" onClick={toggleNav}>
+              <NavLink to="/pedidos" onClick={() => setShowNav(false)}>
                 <FiShoppingBag className="nav-icon" /> Mis pedidos
               </NavLink>
             </li>
             <li>
-              <NavLink to="/perfil" onClick={toggleNav}>
+              <NavLink to="/perfil" onClick={() => setShowNav(false)}>
                 <FaUserCircle className="nav-icon" /> Mi cuenta
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" onClick={toggleNav}>
-                <FiLogOut className="nav-icon" /> Cerrar sesión
+              <NavLink to="/" onClick={() => setShowNav(false)}>
+                <FiLogOut className="nav-icon" /> Cerrar Sesión
               </NavLink>
             </li>
           </ul>
@@ -102,9 +103,8 @@ const Navbar = () => {
               </NavLink>
             </li>
           </ul>
-
           <ul className="right-icons">
-            {/* CARRITO SOLO DESKTOP */}
+            {/* Carrito Desktop:*/}
             <li onClick={() => setIsCartOpen((prev) => !prev)}>
               <MdLocalGroceryStore className="nav-icon-cart" />
             </li>
@@ -146,4 +146,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

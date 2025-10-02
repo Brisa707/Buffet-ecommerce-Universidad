@@ -2,6 +2,10 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../styles/Detalle.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Footer from "../components/Footer";
+
+
 
 const Detalle = () => {
   const navigate = useNavigate();
@@ -20,7 +24,13 @@ const Detalle = () => {
       <div className="pedidoDetalle-container">
         <div className="pedidoDetalle-card">
           <div className="pedidoDetalle-header">
-            <button className="pedidoDetalle-back" onClick={() => navigate(-1)}>←</button>
+            <button
+                        className="back-button"
+                        type="button"
+                        onClick={() => navigate(-1)}
+                    >
+                        <AiOutlineArrowLeft size={20} />
+                    </button>
             <h2 className="pedidoDetalle-title">Detalle pedido #{id}</h2>
           </div>
 
@@ -48,6 +58,7 @@ const Detalle = () => {
           </button>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
