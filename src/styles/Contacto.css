@@ -1,13 +1,9 @@
-:root {
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-}
-
 .contact-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; 
-    margin-top: 3.5rem;
+    min-height: 100vh;
+    margin-top: 3.125rem;
+    margin-bottom: 1rem;
     padding: 1rem 2rem;
     box-sizing: border-box;
 }
@@ -40,9 +36,9 @@
 }
 
 .whatsapp-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
 }
 
 .whatsapp-button {

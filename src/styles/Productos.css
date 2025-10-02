@@ -1,11 +1,11 @@
 .productos-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
-    margin-top: 3.5rem;
-    margin-bottom: 1rem;
-    padding: 1rem 2rem;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-top: 3.125rem;
+  margin-bottom: 1rem;
+  padding: 0 0;
+  box-sizing: border-box;
 }
 
 /* Header */
@@ -13,8 +13,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
+ padding: 1rem 2rem 0.5rem 2rem;}
 
 .productos-back {
   background: none;
@@ -27,9 +26,9 @@
 }
 
 .productos-titulo {
-    font-size: 1.375rem;
-    margin: 0;
-    font-weight: 600;
+  font-size: 1.375rem;
+  margin: 0;
+  font-weight: 600;
 }
 
 /* Categorías */
@@ -37,11 +36,12 @@
   display: flex;
   justify-content: flex-start;
   gap: 0.6rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   overflow-x: auto;
   white-space: nowrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  padding: 1rem 2rem;
 }
 
 .productos-categorias::-webkit-scrollbar {
@@ -53,7 +53,7 @@
   min-width: 80px;
   background: #fff;
   border: 2px solid #004080;
-  border-radius: 30px;
+  border-radius: 34px;
   padding: 0.4rem 0.6rem;
   font-size: 0.85rem;
   text-align: center;
@@ -74,99 +74,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1.2rem;
-}
-
-/* Cards de productos */
-.producto-card {
-  background: #E5F5FF;
-  border-radius: 14px;
-  padding: 1rem;
-  text-align: center;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 280px;
-}
-
-.producto-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.producto-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 0.6rem;
-  margin-bottom: 0.8rem;
-  cursor: pointer;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.07);
-}
-
-.producto-img:hover {
-  transform: scale(1.02);
-  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.14);
-
-}
-
-/* Nombre del producto */
-.producto-card h3 {
-  font-size: 0.9rem;
-  font-weight: 300;
-  margin: 0.1rem 0;
-  line-height: 1.2;
-  min-height: 2.6em;
-}
-
-.producto-precio {
-  font-weight: bold;
-  color: #01538D;
-  margin: 0.4rem 0;
-  font-size: 1rem;
-}
-
-/* Botón */
-.btn-add {
-  margin-top: auto;
-  background: #01538D;
-  color: white;
-  padding: 4px 6px !important;
-  border: none;
-  border-radius: 30px !important;
-  cursor: pointer;
-  font-size: 0.7rem !important;
-  font-weight: 400;
-}
-
-.btn-add:hover {
-  background: #002b59;
-  transform: scale(1.05);
+  padding: 0rem 2rem;
 }
 
 /* Responsive Mobile */
 @media (max-width: 900px) {
-  .productos-card {
-    background: transparent;
-    box-shadow: none;
-    padding: 0.8rem;
-    max-width: 1000px;
-  }
-
   .productos-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 1rem;
-  }
-
-  .producto-card {
-    max-width: 500px;
-    min-height: 100px;
-    padding: 0.8rem;
-    border-radius: 20px;
-  }
-
-  .producto-card img {
-    height: 85px;
   }
 
   .categoria-card {
@@ -185,15 +100,6 @@
     justify-content: center;
   }
 
-  .producto-card {
-    width: 260px;
-    min-height: 280px;
-  }
-
-  .producto-card img {
-    height: 160px;
-  }
-
   /* categorías */
   .productos-categorias {
     justify-content: center;
@@ -204,6 +110,42 @@
 }
 
 /* pequeñas correcciones visuales */
-.producto-card h3 {
-  line-height: 1.1;
+.producto-card h3 { line-height: 1.1; }
+
+.mensaje-carrito {
+  background: #004080;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: fadeInOut 2s ease;
 }
+
+/* Animación */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

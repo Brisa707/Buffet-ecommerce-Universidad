@@ -1,0 +1,135 @@
+.perfil-container {
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  min-height: calc(100vh - 16px);
+  /* 100% alto de pantalla menos el footer */
+  margin-top: 3.125rem;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+}
+
+.perfil-card {
+  background: white;
+  border-radius: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.perfil-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.perfil-titulo {
+  font-size: 1.375rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.perfil-input-card {
+  background: #dcebf5;
+  border-radius: 15px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.perfil-input-card label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: black;
+}
+
+.perfil-input-card input {
+  padding: 10px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.perfil-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.perfil-boton {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.perfil-boton.guardar {
+  background: #01538D;
+  color: white;
+}
+
+.perfil-boton.cancelar {
+  background: white;
+  color: #01538D;
+  border: 2px solid #01538D;
+}
+
+.perfil-boton:hover {
+  transform: scale(1.05);
+}
+
+.perfil-boton.guardar:hover {
+  background: #002b59;
+}
+
+.perfil-boton.cancelar:hover {
+  background: #dcebf5;
+}
+
+/* Responsive para mobile */
+@media (max-width: 600px) {
+  .perfil-card {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .perfil-titulo {
+    font-size: 1.375rem;
+  }
+
+  .perfil-input-card {
+    padding: 0.8rem;
+  }
+
+  .perfil-input-card input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .perfil-actions {
+    flex-direction: column;
+  }
+
+  .perfil-boton {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}

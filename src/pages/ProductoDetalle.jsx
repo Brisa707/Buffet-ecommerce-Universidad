@@ -53,11 +53,14 @@ function ProductoDetalle() {
       <div className="detalle-wrapper">
         <div className="detalle-card">
           {/* Header con botón atrás */}
-          <div className="productos-header">
-            <button className="productos-back" onClick={() => navigate(-1)}>
+          <div className="detalle-header">
+            <button
+              className="detalle-back"
+              type="button"
+              onClick={() => navigate(-1)}
+            >
               <AiOutlineArrowLeft size={20} />
             </button>
-            <h2 className="productos-titulo">Productos</h2>
           </div>
 
 
@@ -78,7 +81,7 @@ function ProductoDetalle() {
               <span>{cantidad}</span>
               <button onClick={() => actualizarCantidad(1)}>+</button>
             </div>
-            <button className="btn-add" onClick={handleAddToCart}>
+            <button className="detalle-btn-add" onClick={handleAddToCart}>
               + Añadir
             </button>
           </div>
