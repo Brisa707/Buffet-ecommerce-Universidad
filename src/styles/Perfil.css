@@ -1,66 +1,63 @@
 .perfil-container {
   font-family: 'Poppins', sans-serif;
   background-color: white;
-  padding: 2rem 1rem;
-  min-height: 100vh;
+  min-height: calc(100vh - 16px);
+  /* 100% alto de pantalla menos el footer */
+  margin-top: 3.125rem;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
 }
 
 .perfil-card {
   background: white;
   border-radius: 16px;
-  padding: 2rem;
   max-width: 600px;
   margin: 0 auto;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
 }
 
 .perfil-header {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 1.5rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .perfil-back {
   background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
-  color: #004080;
-}
-.perfil-back:hover {
-  transform: translateX(-3px);
+  color: black;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .perfil-titulo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #004080;
+  font-size: 1.375rem;
   margin: 0;
+  font-weight: 600;
 }
 
 .perfil-input-card {
   background: #dcebf5;
-  border: 1px solid #cbd5e1;
-  border-radius: 12px;
-  padding: 1rem;
+  border-radius: 15px;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.8rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .perfil-input-card label {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #004080;
+  color: black;
 }
 
 .perfil-input-card input {
   padding: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 30px;
   outline: none;
   font-size: 1rem;
 }
@@ -76,21 +73,22 @@
   flex: 1;
   padding: 10px 0;
   border: none;
-  border-radius: 12px;
+  border-radius: 30px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .perfil-boton.guardar {
-  background: #004080;
+  background: #01538D;
   color: white;
 }
 
 .perfil-boton.cancelar {
-  background: #ddd;
-  color: #333;
+  background: white;
+  color: #01538D;
+  border: 2px solid #01538D;
 }
 
 .perfil-boton:hover {
@@ -102,19 +100,19 @@
 }
 
 .perfil-boton.cancelar:hover {
-  background: #bbb;
+  background: #dcebf5;
 }
 
 /* Responsive para mobile */
 @media (max-width: 600px) {
   .perfil-card {
-    background: none;   
-    box-shadow: none;   
-    padding: 0;  
+    background: none;
+    box-shadow: none;
+    padding: 0;
   }
 
   .perfil-titulo {
-    font-size: 1.3rem;
+    font-size: 1.375rem;
   }
 
   .perfil-input-card {
@@ -135,5 +133,3 @@
     font-size: 0.95rem;
   }
 }
-
-

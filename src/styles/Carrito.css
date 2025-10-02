@@ -1,11 +1,11 @@
 .carrito-container {
-  font-family: 'Poppins', sans-serif;
   background-color: white;
-  padding: 2rem 1rem;
+  padding: 1rem 2rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 3.125rem;
 }
 
 .carrito-card {
@@ -30,16 +30,17 @@
 .carrito-back {
   background: none;
   border: none;
-  font-size: 1.3rem;
   cursor: pointer;
-  color: #004080;
+  color: black;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .carrito-titulo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #004080;
+  font-size: 1.375rem;
   margin: 0;
+  font-weight: 600;
 }
 
 .carrito-item {
@@ -50,12 +51,11 @@
   border: 1.8px solid #01538D;
   border-radius: 20px;
   padding: 1rem;
-  margin-bottom: 0.8rem; 
-  background: #f9fbff;
+  margin-bottom: 0.8rem;
 }
 
 .carrito-item img {
-  width: 95px;   
+  width: 95px;
   height: 95px;
   border-radius: 10px;
   object-fit: cover;
@@ -66,7 +66,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  min-width: 0; 
+  min-width: 0;
 }
 
 .carrito-nombre {
@@ -74,8 +74,8 @@
   font-size: 1rem;
   margin: 0;
   line-height: 1.2;
-  max-width: 70%; 
-  word-wrap: break-word; 
+  max-width: 70%;
+  word-wrap: break-word;
   white-space: normal;
 }
 
@@ -88,7 +88,7 @@
 
 .carrito-precio {
   font-size: 1.1rem;
-  color: #004080;
+  color: #01538D;
   font-weight: 800;
   margin: 0;
 }
@@ -100,7 +100,7 @@
 }
 
 .carrito-cantidad button {
-  background: #004080;
+  background: #01538D;
   color: white;
   border: none;
   border-radius: 6px;
@@ -110,8 +110,9 @@
   cursor: pointer;
   font-size: 1rem;
 }
+
 .carrito-cantidad button:hover {
-  background: #002b59;
+  background: #01538D;
 }
 
 .carrito-cantidad span {
@@ -129,9 +130,10 @@
   background: transparent;
   border: none;
   font-size: 1rem;
-  color: #777;
+  color: black;
   cursor: pointer;
 }
+
 .btn-remove:hover {
   color: #000;
 }
@@ -140,23 +142,25 @@
 .carrito-total-container {
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
   font-weight: bold;
   font-size: 1.2rem;
-  margin: 1rem 0 0.5rem 0; 
+  margin: 1rem 0 0.5rem 0;
 }
 
 .btn-checkout {
-  background: #004080;
+  background: #01538D;
   color: white;
-  padding: 9px;
+  padding: 6px;
   width: 100%;
   border: none;
   border-radius: 20px;
   font-size: 1.0rem;
   cursor: pointer;
   font-weight: 600;
+  font-family: 'Poppins', sans-serif;
 }
+
 .btn-checkout:hover {
   background: #002b59;
 }
@@ -182,9 +186,9 @@
 }
 
 .carrito-vacio-icon {
-  width: 60px;      
+  width: 60px;
   height: 70px;
-  color: #004080;
+  color: #01538D;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -199,7 +203,7 @@
 .carrito-vacio-texto {
   font-size: 1.0rem;
   font-weight: 500;
-  color: #333;
+  color: black;
 }
 
 .vacio-boton {
@@ -207,7 +211,7 @@
   min-width: 150px;
   padding: 9px 17px;
   font-size: 0.95rem;
-  border-radius: 14px;
+  border-radius: 30px;
   align-self: center;
   margin-top: auto;
 }
@@ -251,7 +255,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 70vh; 
+  min-height: 70vh;
   gap: 1.2rem;
 }
 
@@ -281,13 +285,13 @@
   }
 
   .carrito-item img {
-    width: 80px;  
+    width: 80px;
     height: 80px;
   }
 
   .carrito-nombre {
     font-size: 0.95rem;
-    max-width: 65%; 
+    max-width: 65%;
   }
 
   .carrito-precio {
@@ -307,10 +311,10 @@
 
   .btn-checkout {
     font-size: 1rem;
-    padding: 10px;
+    padding: 7px;
   }
 
-  .carrito-back-desktop { 
+  .carrito-back-desktop {
     display: none;
   }
 
@@ -326,14 +330,15 @@
     top: 3.1rem;
     right: 0;
     width: 480px;
-    height: calc(100vh - 3.1rem); 
+    height: calc(100vh - 3.1rem);
     background: #fff;
     box-shadow: -3px 0 10px rgba(0, 0, 0, 0.15);
-    padding: 2rem 1.2rem;
+    padding: 0.5rem 1.2rem;
     overflow-y: auto;
     z-index: 1600;
     display: flex;
     flex-direction: column;
+    margin-top: 0;
   }
 
   .cart-overlay {
@@ -341,9 +346,9 @@
     top: 3.1rem;
     left: 0;
     width: 100%;
-    height: calc(100vh - 3.1rem); 
+    height: calc(100vh - 3.1rem);
     background: rgba(0, 0, 0, 0.1);
-    z-index: 1500; 
+    z-index: 1500;
   }
 
   .carrito-card {
@@ -358,10 +363,11 @@
   .carrito-back-desktop {
     background: none;
     border: none;
-    font-size: 1.3rem;
     cursor: pointer;
-    color: #004080;
-    display: none; 
+    color: black;
+    padding: 0;
+    display: flex;
+    align-items: center;
   }
 
   .carrito-back-desktop {
@@ -377,8 +383,8 @@
     font-size: 1.5rem;
     cursor: pointer;
     align-self: flex-end;
-    margin-bottom: 1rem;
     color: #004080;
     display: block;
+    margin-top: 0.5rem;
   }
 }

@@ -1,13 +1,147 @@
-html, body, #root {
-  height: 100%;
-  margin: 0;
-}
-
 .home-container {
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  /* evita scroll horizontal */
+}
+
+.productos-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-top: 3.125rem;
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
 }
 
 .home-container main {
   flex: 1;
 }
 
+.banner-section {
+  background: url('/src/assets/Banner.webp') center/cover no-repeat;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 1.5rem;
+  color: white;
+  overflow: hidden;
+}
+
+.banner-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.banner-section>* {
+  position: relative;
+  z-index: 1;
+}
+
+.banner-content {
+  padding: 2rem 3rem;
+  text-align: center;
+}
+
+.banner-btn {
+  padding: 0.5rem 2rem;
+  background: #01538D;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.banner-btn:hover {
+  background: #0056b3;
+}
+
+.home-categorias-section {
+  padding: 1rem 0 1rem 2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.home-categorias-section h2 {
+  font-size: 1.375rem;
+  margin: 0;
+  padding-bottom: 1rem;
+  font-weight: 600;
+}
+
+.home-categorias-list {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.home-categorias-list::-webkit-scrollbar {
+  display: none;
+}
+
+.home-categoria-card {
+  flex: 0 0 auto;
+}
+
+.home-categoria-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.home-categoria-icon {
+  width: 80px;
+  height: 80px;
+  background-color: #D1E1EB;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.home-categoria-icon img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.home-categoria-card span {
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+}
+
+.home-categoria-card:hover {
+  transform: translateY(-5px);
+}
+
+.promociones-section {
+  padding: 0 2rem 1rem 2rem;
+}
+
+.promociones-section h2 {
+  font-size: 1.375rem;
+  margin: 0;
+  padding-bottom: 1rem;
+  font-weight: 600;
+}
+
+.promociones-productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+
+}

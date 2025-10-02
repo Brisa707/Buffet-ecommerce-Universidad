@@ -3,6 +3,8 @@
   background-color: white;
   padding: 2rem 1rem;
   min-height: 100vh;
+  margin-top: 3.125rem;
+  padding: 1rem 2rem;
 }
 
 .pedidos-card {
@@ -24,16 +26,17 @@
 .pedidos-back {
   background: none;
   border: none;
-  font-size: 1.3rem;
   cursor: pointer;
-  color: #004080;
+  color: black;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .pedidos-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #004080;
+  font-size: 1.375rem;
   margin: 0;
+  font-weight: 600;
 }
 
 .pedido-item {
@@ -71,7 +74,7 @@
 .pedido-total {
   font-weight: 600;
   font-size: 0.95rem;
-  color: #004080;
+  color: #01538D;
 }
 
 .pedidos-right {
@@ -104,14 +107,15 @@
 }
 
 .btn-detalle {
-  background: #004080;
+  background: #01538D;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 30px;
   padding: 0.6rem 1.2rem;
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btn-detalle:hover {
@@ -121,23 +125,23 @@
 /* Responsive Mobile */
 @media (max-width: 600px) {
   .pedidos-card {
-    background: none;   
-    box-shadow: none;   
-    padding: 0;         
+    background: none;
+    box-shadow: none;
+    padding: 0;
   }
 
   .pedido-item {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid #01538D; 
+    border-bottom: 1px solid #01538D;
     gap: 1rem;
   }
 
   .pedido-info {
-    flex: 1; 
+    flex: 1;
   }
 
   .pedido-numero {
@@ -154,7 +158,7 @@
 
   .pedido-right {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: flex-end;
     gap: 0.5rem;
   }
@@ -167,11 +171,8 @@
   }
 
   .btn-detalle {
-    padding: 0.4rem 0.8rem;
+    padding: 0.3rem 0.8rem;
     font-size: 0.8rem;
-    border-radius: 8px;
+    border-radius: 30px;
   }
 }
-
-
-

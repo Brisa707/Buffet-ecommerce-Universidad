@@ -1,8 +1,6 @@
 .qr-container {
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at top, rgba(255,255,255,0.2) 0%, transparent 40%),
-              linear-gradient(to bottom, #4884d2 1px, #4383d6 80px, #ffffff 100%);
-  padding: 2rem 1rem;
+  margin-top: 3.125rem;
+  padding: 1rem 2rem;
   min-height: 100vh;
 }
 
@@ -18,25 +16,23 @@
 .qr-header {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1rem;
+  gap: 0.75rem;
 }
 
 .qr-back {
   background: none;
   border: none;
-  font-size: 1.3rem;
   cursor: pointer;
-  color: #004080;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  color: black;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .qr-titulo {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #004080;
+  font-size: 1.375rem;
   margin: 0;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  font-weight: 600;
 }
 
 .qr-content {
@@ -51,13 +47,13 @@
   font-size: 1rem;
   color: #030202;
   font-weight: 500;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Mobile */
 @media (max-width: 600px) {
   .qr-card {
-    background: none;   
+    background: none;
     box-shadow: none;
     border-radius: 0;
     padding: 0;
@@ -65,7 +61,7 @@
   }
 
   .qr-content {
-    margin-top: 5rem; 
+    margin-top: 1rem;
   }
 
   .qr-content p {
@@ -75,8 +71,6 @@
   .qr-content canvas {
     width: 270px !important;
     height: 270px !important;
-    box-shadow: 0px 6px 18px rgba(0,0,0,0.6);
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.6);
   }
 }
-
-
