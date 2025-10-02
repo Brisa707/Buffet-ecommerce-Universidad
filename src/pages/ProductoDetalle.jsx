@@ -2,6 +2,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/ProductoDetalle.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Footer from "../components/Footer";
+
+
 
 function ProductoDetalle() {
   const { id } = useParams();
@@ -49,9 +53,13 @@ function ProductoDetalle() {
       <div className="detalle-wrapper">
         <div className="detalle-card">
           {/* Header con botón atrás */}
-          <div className="detalle-header">
-            <button className="detalle-back" onClick={() => navigate(-1)}>←</button>
+          <div className="productos-header">
+            <button className="productos-back" onClick={() => navigate(-1)}>
+              <AiOutlineArrowLeft size={20} />
+            </button>
+            <h2 className="productos-titulo">Productos</h2>
           </div>
+
 
           {/* Imagen */}
           <img src={producto.img} className="detalle-img" />
@@ -76,6 +84,7 @@ function ProductoDetalle() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

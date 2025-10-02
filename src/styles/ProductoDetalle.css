@@ -1,13 +1,15 @@
+:root {
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
 .detalle-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: radial-gradient(circle at top, rgba(255,255,255,0.2) 0%, transparent 40%),
-              linear-gradient(to bottom, #4884d2 1px, #4383d6 80px, #ffffff 100%);
   padding: 2rem 1rem;
   height: 100vh;
   overflow: hidden;
-  font-family: Georgia, 'Times New Roman', Times, serif; 
 }
 
 .detalle-card {
@@ -38,11 +40,11 @@
 .detalle-back {
   background: none;
   border: none;
-  font-size: 1.7rem;        
   cursor: pointer;
-  color: #004080;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3); 
+  color: black;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 /* Imagen */

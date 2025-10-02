@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/Productos.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Footer from "../components/Footer";
+
+
 
 function Productos() {
   const navigate = useNavigate();
@@ -60,7 +64,9 @@ function Productos() {
       <div className="productos-wrapper">
         {/* Header */}
         <div className="productos-header">
-          <button className="productos-back" onClick={() => navigate(-1)}>←</button>
+          <button className="productos-back" onClick={() => navigate(-1)}>
+            <AiOutlineArrowLeft size={20} />
+          </button>
           <h2 className="productos-titulo">Productos</h2>
         </div>
 
@@ -91,6 +97,7 @@ function Productos() {
           </div>
         </section>
       </div>
+      <Footer />
     </>
   );
 }
