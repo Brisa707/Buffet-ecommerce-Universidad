@@ -1,63 +1,68 @@
 .productos-wrapper {
-  font-family: 'Poppins', sans-serif;
-  background-color: white;
-  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-top: 3.125rem;
+  margin-bottom: 1rem;
+  padding: 0 0;
+  box-sizing: border-box;
 }
 
 /* Header */
 .productos-header {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.2rem;
-}
+  gap: 0.75rem;
+ padding: 1rem 2rem 0.5rem 2rem;}
 
 .productos-back {
   background: none;
   border: none;
-  font-size: 1.3rem;
   cursor: pointer;
-  color: #004080;
-  font-weight: bold;
+  color: black;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .productos-titulo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #004080;
+  font-size: 1.375rem;
   margin: 0;
+  font-weight: 600;
 }
 
 /* Categorías */
 .productos-categorias {
   display: flex;
-  justify-content: flex-start;   
+  justify-content: flex-start;
   gap: 0.6rem;
-  margin-bottom: 1.5rem;
-  overflow-x: auto;              
-  white-space: nowrap;           
-  -ms-overflow-style: none;      
-  scrollbar-width: none;         
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 1rem 2rem;
 }
 
 .productos-categorias::-webkit-scrollbar {
-  display: none;                 
+  display: none;
 }
 
 .categoria-card {
-  flex: none;                    
+  flex: none;
   min-width: 80px;
   background: #fff;
   border: 2px solid #004080;
-  border-radius: 10px;
+  border-radius: 30px;
   padding: 0.4rem 0.6rem;
   font-size: 0.85rem;
   text-align: center;
   font-weight: 500;
   cursor: pointer;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
 }
+
 .categoria-card:hover,
 .categoria-card.activa {
   background: #004080;
@@ -69,123 +74,30 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1.2rem;
-}
-
-/* Cards de productos */
-.producto-card {
-  background: #e9f5ff;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.16);
-  padding: 1rem;
-  text-align: center;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 280px; 
-}
-.producto-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
-
-.producto-card img {
-  width: 100%;
-  height: 150px;   
-  object-fit: cover;
-  border-radius: 0.6rem;
-  margin-bottom: 0.8rem;
-  cursor: pointer;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.07);
-}
-
-.producto-img:hover {
-  transform: scale(1.02);
-  box-shadow: 0px 6px 16px rgba(0,0,0,0.14);
-
-}
-
-/* Nombre del producto */
-.producto-card h3 {
-  font-size: 0.9rem;
-  font-weight: 300;
-  margin: 0.1rem 0;
-  line-height: 1.2;
-  min-height: 2.6em; 
-}
-
-.producto-precio {
-  font-weight: bold;
-  color: #004080;
-  margin: 0.4rem 0;
-  font-size: 1rem;
-}
-
-/* Botón */
-.btn-add {
-  margin-top: auto;
-  background: #004080;
-  color: white;
-  padding: 4px 6px !important;   
-  border: none;
-  border-radius: 30px !important; 
-  cursor: pointer;
-  font-size: 0.7rem !important;   
-  font-weight: 400;
-  transition: background 0.3s, transform 0.3s ease;
-}
-.btn-add:hover {
-  background: #002b59;
-  transform: scale(1.05);
+  padding: 0rem 2rem;
 }
 
 /* Responsive Mobile */
 @media (max-width: 900px) {
-  .productos-card {
-    background: transparent;   
-    box-shadow: none;
-    padding: 0.8rem;
-    max-width: 1000px;
-  }
-
   .productos-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 1rem;
-  }
-
-  .producto-card {
-    max-width: 500px;
-    min-height: 100px;
-    padding: 0.8rem;
-    border-radius: 20px;
-  }
-
-  .producto-card img {
-    height: 85px; 
   }
 
   .categoria-card {
     min-width: 84px;
     padding: 0.35rem 0.5rem;
     font-size: 0.82rem;
+    box-shadow: none;
   }
 }
 
 /* Desktop amplio */
 @media (min-width: 1100px) {
   .productos-grid {
-    grid-template-columns: repeat(4, 290px); 
+    grid-template-columns: repeat(4, 290px);
     gap: 1.2rem;
-    justify-content: center; 
-  }
-
-  .producto-card {
-    width: 260px;   
-    min-height: 280px;
-  }
-
-  .producto-card img {
-    height: 160px; 
+    justify-content: center;
   }
 
   /* categorías */
@@ -196,23 +108,3 @@
     flex-wrap: wrap;
   }
 }
-
-/* pequeñas correcciones visuales */
-.producto-card h3 { line-height: 1.1; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

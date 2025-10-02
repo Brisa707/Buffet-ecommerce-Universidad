@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ProductCard from "../components/ProductCard"; // Importar
 import "../styles/Productos.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 function Productos() {
   const navigate = useNavigate();
@@ -15,7 +18,6 @@ function Productos() {
     { id: "postres", nombre: "Postres" },
   ];
 
-  // Datos simulados
   const productosData = [
     { id: 1, nombre: "Café + 2 medialunas", precio: 2000, categoria: "bebidas", img: "/assets/cafe-medialunas.png" },
     { id: 2, nombre: "Sándwich de jamón y queso", precio: 2500, categoria: "sandwiches", img: "/assets/sandwich.png" },
@@ -23,8 +25,6 @@ function Productos() {
     { id: 4, nombre: "Flan con dulce", precio: 1500, categoria: "postres", img: "/assets/flan.png" },
     { id: 5, nombre: "Café con leche", precio: 1800, categoria: "bebidas", img: "/assets/cafe.png" },
     { id: 6, nombre: "Brownie", precio: 1200, categoria: "postres", img: "/assets/brownie.png" },
-
-    /* Segunda fila */
     { id: 7, nombre: "Té con limón", precio: 1700, categoria: "bebidas", img: "/assets/te.png" },
     { id: 8, nombre: "Pizza individual", precio: 3000, categoria: "snacks", img: "/assets/pizza.png" },
     { id: 9, nombre: "Ensalada fresca", precio: 2800, categoria: "snacks", img: "/assets/ensalada.png" },
@@ -60,7 +60,9 @@ function Productos() {
       <div className="productos-wrapper">
         {/* Header */}
         <div className="productos-header">
-          <button className="productos-back" onClick={() => navigate(-1)}>←</button>
+          <button className="productos-back" onClick={() => navigate(-1)}>
+            <AiOutlineArrowLeft size={20} />
+          </button>
           <h2 className="productos-titulo">Productos</h2>
         </div>
 
@@ -81,25 +83,14 @@ function Productos() {
         <section>
           <div className="productos-grid">
             {productosFiltrados.map((prod) => (
-              <div key={prod.id} className="producto-card">
-                <img src={prod.img} onClick={() => navigate(`/producto/${prod.id}`)} />
-                <h3>{prod.nombre}</h3>
-                <p className="producto-precio">${prod.precio.toLocaleString()}</p>
-                <button className="btn-add" onClick={() => handleAddToCart(prod)}>+ Añadir</button>
-              </div>
+              <ProductCard key={prod.id} producto={prod} onAddToCart={handleAddToCart} />
             ))}
           </div>
         </section>
       </div>
+      <Footer />
     </>
   );
 }
 
 export default Productos;
-
-
-
-
-
-
-
