@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 import "../styles/Productos.css";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+
 
 function Productos() {
   const navigate = useNavigate();
@@ -18,18 +20,90 @@ function Productos() {
   ];
 
   const productosData = [
-    { id: 1, nombre: "Café + 2 medialunas", precio: 2000, categoria: "bebidas", img: "/assets/cafe-medialunas.png" },
-    { id: 2, nombre: "Sándwich de jamón y queso", precio: 2500, categoria: "sandwiches", img: "/assets/sandwich.png" },
-    { id: 3, nombre: "Hamburguesa + papas", precio: 3500, categoria: "sandwiches", img: "/assets/hamburguesa-papas.png" },
-    { id: 4, nombre: "Flan con dulce", precio: 1500, categoria: "postres", img: "/assets/flan.png" },
-    { id: 5, nombre: "Café con leche", precio: 1800, categoria: "bebidas", img: "/assets/cafe.png" },
-    { id: 6, nombre: "Brownie", precio: 1200, categoria: "postres", img: "/assets/brownie.png" },
-    { id: 7, nombre: "Té con limón", precio: 1700, categoria: "bebidas", img: "/assets/te.png" },
-    { id: 8, nombre: "Pizza individual", precio: 3000, categoria: "snacks", img: "/assets/pizza.png" },
-    { id: 9, nombre: "Ensalada fresca", precio: 2800, categoria: "snacks", img: "/assets/ensalada.png" },
-    { id: 10, nombre: "Helado", precio: 1600, categoria: "postres", img: "/assets/helado.png" },
-    { id: 11, nombre: "Chocolate", precio: 900, categoria: "golosinas", img: "/assets/chocolate.png" },
-    { id: 12, nombre: "Caramelos surtidos", precio: 600, categoria: "golosinas", img: "/assets/caramelos.png" },
+    {
+      id: 1,
+      nombre: "Café + 2 medialunas",
+      precio: 2000,
+      categoria: "bebidas",
+      img: "/assets/cafe-medialunas.png",
+    },
+    {
+      id: 2,
+      nombre: "Sándwich de jamón y queso",
+      precio: 2500,
+      categoria: "sandwiches",
+      img: "/assets/sandwich.png",
+    },
+    {
+      id: 3,
+      nombre: "Hamburguesa + papas",
+      precio: 3500,
+      categoria: "sandwiches",
+      img: "/assets/hamburguesa-papas.png",
+    },
+    {
+      id: 4,
+      nombre: "Flan con dulce",
+      precio: 1500,
+      categoria: "postres",
+      img: "/assets/flan.png",
+    },
+    {
+      id: 5,
+      nombre: "Café con leche",
+      precio: 1800,
+      categoria: "bebidas",
+      img: "/assets/cafe.png",
+    },
+    {
+      id: 6,
+      nombre: "Brownie",
+      precio: 1200,
+      categoria: "postres",
+      img: "/assets/brownie.png",
+    },
+    {
+      id: 7,
+      nombre: "Té con limón",
+      precio: 1700,
+      categoria: "bebidas",
+      img: "/assets/te.png",
+    },
+    {
+      id: 8,
+      nombre: "Pizza individual",
+      precio: 3000,
+      categoria: "snacks",
+      img: "/assets/pizza.png",
+    },
+    {
+      id: 9,
+      nombre: "Ensalada fresca",
+      precio: 2800,
+      categoria: "snacks",
+      img: "/assets/ensalada.png",
+    },
+    {
+      id: 10,
+      nombre: "Helado",
+      precio: 1600,
+      categoria: "postres",
+      img: "/assets/helado.png",
+    },
+    {
+      id: 11,
+      nombre: "Chocolate",
+      precio: 900,
+      categoria: "golosinas",
+      img: "/assets/chocolate.png",
+    },
+    {
+      id: 12,
+      nombre: "Caramelos surtidos",
+      precio: 600,
+      categoria: "golosinas",
+      img: "/assets/caramelos.png",
+    },
   ];
 
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("all");
@@ -81,14 +155,22 @@ function Productos() {
             <h3>Contacto</h3>
             <p>📍 Blas Parera 132, Burzaco</p>
             <p>WhatsApp: +54 11 1234-5678</p>
-            <a href="https://maps.google.com" target="_blank" rel="noreferrer">Ver en mapa</a>
+            <a href="https://maps.google.com" target="_blank" rel="noreferrer">
+              Ver en mapa
+            </a>
           </div>
         </aside>
 
         {/* Centro */}
         <div className="productos-wrapper">
           <div className="productos-header">
-            <button className="productos-back" onClick={() => navigate(-1)}>←</button>
+            <button
+              className="detalle-back"
+              type="button"
+              onClick={() => navigate(-1)}
+            >
+              <AiOutlineArrowLeft size={20} />
+            </button>
             <h2 className="productos-titulo">Productos</h2>
           </div>
 
@@ -98,8 +180,11 @@ function Productos() {
             {categorias.map((cat) => (
               <div
                 key={cat.id}
-                className={`categoria-card ${categoriaSeleccionada === cat.id ? "activa" : ""}`}
-                onClick={() => setCategoriaSeleccionada(cat.id)} >
+                className={`categoria-card ${
+                  categoriaSeleccionada === cat.id ? "activa" : ""
+                }`}
+                onClick={() => setCategoriaSeleccionada(cat.id)}
+              >
                 {cat.nombre}
               </div>
             ))}
@@ -142,8 +227,12 @@ function Productos() {
 
           <div className="sidebar-card">
             <h3> Te recomendamos</h3>
-            <p>Si pediste <b>Hamburguesa</b>, añadí <b>Papas grandes</b></p>
-            <p>Si pediste <b>Café con medialuna</b>, probá <b>Brownie</b></p>
+            <p>
+              Si pediste <b>Hamburguesa</b>, añadí <b>Papas grandes</b>
+            </p>
+            <p>
+              Si pediste <b>Café con medialuna</b>, probá <b>Brownie</b>
+            </p>
           </div>
         </aside>
       </div>
@@ -153,5 +242,3 @@ function Productos() {
 }
 
 export default Productos;
-
-
