@@ -9,14 +9,15 @@ function ProductCard({ producto, onAddToCart }) {
     <div className="producto-card">
       <img
         src={producto.img}
-        alt={producto.nombre}
         onClick={() => navigate(`/producto/${producto.id}`)}
       />
       <h3>{producto.nombre}</h3>
       <p className="producto-precio">${producto.precio.toLocaleString()}</p>
-      <button className="btn-add" onClick={() => onAddToCart(producto)}>
-        + Añadir
-      </button>
+      {onAddToCart && (
+        <button className="btn-add" onClick={() => onAddToCart(producto)}>
+          + Añadir
+        </button>
+      )}
     </div>
   );
 }
