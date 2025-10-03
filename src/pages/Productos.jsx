@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 import "../styles/Productos.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-
 
 function Productos() {
   const navigate = useNavigate();
@@ -19,95 +18,24 @@ function Productos() {
     { id: "postres", nombre: "Postres" },
   ];
 
-  const productosData = [
-    {
-      id: 1,
-      nombre: "Café + 2 medialunas",
-      precio: 2000,
-      categoria: "bebidas",
-      img: "/assets/cafe-medialunas.png",
-    },
-    {
-      id: 2,
-      nombre: "Sándwich de jamón y queso",
-      precio: 2500,
-      categoria: "sandwiches",
-      img: "/assets/sandwich.png",
-    },
-    {
-      id: 3,
-      nombre: "Hamburguesa + papas",
-      precio: 3500,
-      categoria: "sandwiches",
-      img: "/assets/hamburguesa-papas.png",
-    },
-    {
-      id: 4,
-      nombre: "Flan con dulce",
-      precio: 1500,
-      categoria: "postres",
-      img: "/assets/flan.png",
-    },
-    {
-      id: 5,
-      nombre: "Café con leche",
-      precio: 1800,
-      categoria: "bebidas",
-      img: "/assets/cafe.png",
-    },
-    {
-      id: 6,
-      nombre: "Brownie",
-      precio: 1200,
-      categoria: "postres",
-      img: "/assets/brownie.png",
-    },
-    {
-      id: 7,
-      nombre: "Té con limón",
-      precio: 1700,
-      categoria: "bebidas",
-      img: "/assets/te.png",
-    },
-    {
-      id: 8,
-      nombre: "Pizza individual",
-      precio: 3000,
-      categoria: "snacks",
-      img: "/assets/pizza.png",
-    },
-    {
-      id: 9,
-      nombre: "Ensalada fresca",
-      precio: 2800,
-      categoria: "snacks",
-      img: "/assets/ensalada.png",
-    },
-    {
-      id: 10,
-      nombre: "Helado",
-      precio: 1600,
-      categoria: "postres",
-      img: "/assets/helado.png",
-    },
-    {
-      id: 11,
-      nombre: "Chocolate",
-      precio: 900,
-      categoria: "golosinas",
-      img: "/assets/chocolate.png",
-    },
-    {
-      id: 12,
-      nombre: "Caramelos surtidos",
-      precio: 600,
-      categoria: "golosinas",
-      img: "/assets/caramelos.png",
-    },
-  ];
-
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("all");
+  const [productosData, setProductosData] = useState([]);
   const [mensaje, setMensaje] = useState("");
+
+  // Traer productos del backend
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/productos");
+        const data = await res.json();
+        setProductosData(data);
+      } catch (error) {
+        console.error("Error al traer productos:", error);
+      }
+    };
+
+    fetchProductos();
+  }, []);
 
   const productosFiltrados =
     categoriaSeleccionada === "all"

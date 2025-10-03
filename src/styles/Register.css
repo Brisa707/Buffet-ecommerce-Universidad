@@ -15,7 +15,7 @@
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 1.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
 .register-logo-container {
@@ -77,9 +77,18 @@
   background-color: #0056b3;
 }
 
+.register-error {
+  color: red;
+  margin: 5px 0;
+}
+
+.register-success {
+  color: green;
+  margin: 5px 0;
+}
 
 /* Tablet */
-@media (min-width: 48rem) { 
+@media (min-width: 48rem) {
   .register-card {
     padding: 2.5rem;
   }
@@ -89,23 +98,23 @@
   }
 
   .register-btn {
-    font-size: 1rem; 
-    padding: 0.75rem 2.5rem; 
+    font-size: 1rem;
+    padding: 0.75rem 2.5rem;
   }
 }
 
 /* Escritorio */
-@media (min-width: 64rem) { 
+@media (min-width: 64rem) {
   .register-card {
     padding: 3rem 4rem;
   }
 
   .register-title {
-    font-size: 1.875rem; 
+    font-size: 1.875rem;
   }
 
   .register-btn {
-    font-size: 1.0625rem; 
-    padding: 0.875rem 3rem; 
+    font-size: 1.0625rem;
+    padding: 0.875rem 3rem;
   }
 }
