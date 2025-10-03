@@ -48,8 +48,8 @@ function Home() {
           <div className="banner-card">
             <img src="/src/assets/CardImage1.png" alt="Promo del día" />
             <div className="banner-text">
-              <h3>Promo del día</h3>
-              <p>Pedí desde tu aula</p>
+              <h3>Pedí desde tu aula</h3>
+              <p>Sin filas, sin esperas</p>
               <button className="btn-secondary" onClick={() => navigate("/productos")}> Ver productos</button>
             </div>
           </div>
@@ -75,8 +75,8 @@ function Home() {
           <div className="banner-card">
             <img src="/src/assets/CardImage4.png" alt="Desayuno" />
             <div className="banner-text">
-              <h3>Un Desayuno Perfecto</h3>
-              <p>Para tu mañana</p>
+              <h3>Refresca tu día</h3>
+              <p>Variedad de bebidas para elegir</p>
               <button className="btn-secondary"onClick={() => navigate("/productos")}> Ver más</button>
             </div>
           </div>
