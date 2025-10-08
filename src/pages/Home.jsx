@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Home() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Home() {
     { id: 3, nombre: "Hamburguesa + papas", precio: 3500, categoria: "sandwiches", img: "/assets/hamburguesa-papas.png" },
     { id: 4, nombre: "Ensalada fresca", precio: 2100, categoria: "snacks", img: "/assets/ensalada.png" },
     { id: 5, nombre: "Brownie", precio: 1200, categoria: "postres", img: "/assets/brownie.png" },
-    { id: 5, nombre: "Chocolate", precio: 1200, categoria: "golosinas", img: "/assets/Chocolate.png" }
+    { id: 6, nombre: "Chocolate", precio: 1200, categoria: "golosinas", img: "/assets/Chocolate.png" }
   ];
 
   // Función para añadir productos (Promociones)
@@ -29,18 +30,92 @@ function Home() {
     console.log("Añadido al carrito:", producto);
   };
 
+  // Carrusel automático del Hero
+  useEffect(() => {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".hero-slide");
+    const dots = document.querySelectorAll(".dot");
+
+    const showSlide = (n) => {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        dots[i].classList.remove("active");
+        if (i === n) {
+          slide.classList.add("active");
+          dots[i].classList.add("active");
+        }
+      });
+    };
+
+    const nextSlide = () => {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    };
+
+    const prevSlide = () => {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      showSlide(slideIndex);
+    };
+
+    const interval = setInterval(nextSlide, 5000);
+
+    document.querySelector(".hero-next").onclick = nextSlide;
+    document.querySelector(".hero-prev").onclick = prevSlide;
+    dots.forEach((dot, i) => (dot.onclick = () => showSlide((slideIndex = i))));
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <Navbar />
       <main className="home-container">
 
-        {/* Hero */}
-        <section className="hero">
-          <h1>Buffet UNaB</h1>
-          <p>Disfrutá de la mejor comida con variedad y calidad</p>
-          <button className="btn-primary" onClick={() => navigate("/productos")}>
-            Ver productos
-          </button>
+        {/* Hero Carrusel */}
+        <section className="hero-carousel">
+          <div className="hero-slide active">
+            <div className="hero-content">
+              <h1>Buffet UNaB</h1>
+              <p>Disfrutá de la mejor comida con variedad y calidad</p>
+              <button className="btn-primary" onClick={() => navigate("/productos")}>
+                Ver productos
+              </button>
+            </div>
+            <img src="/src/assets/Hero1.png" alt="Buffet UNaB" />
+          </div>
+
+          <div className="hero-slide">
+            <div className="hero-content">
+              <h1>Sabores que te acompañan</h1>
+              <p>Desde el desayuno hasta la merienda</p>
+              <button className="btn-primary" onClick={() => navigate("/productos")}>
+                Ver menú
+              </button>
+            </div>
+            <img src="/src/assets/Hero2.png" alt="Sabores" />
+          </div>
+
+          <div className="hero-slide">
+            <div className="hero-content">
+              <h1>Pedidos rápidos</h1>
+              <p>Hacé tu pedido sin filas ni esperas</p>
+              <button className="btn-primary" onClick={() => navigate("/productos")}>
+                Pedir ahora
+              </button>
+            </div>
+            <img src="/src/assets/Hero3.png" alt="Pedidos rápidos" />
+          </div>
+
+          {/* Flechas */}
+          <button className="hero-prev">&#10094;</button>
+          <button className="hero-next">&#10095;</button>
+
+          {/* Indicadores */}
+          <div className="hero-dots">
+            <span className="dot active"></span>
+            <span className="dot"></span>
+            <span className="dot"></span>
+          </div>
         </section>
 
         {/* Banners */}
@@ -59,7 +134,7 @@ function Home() {
             <div className="banner-text">
               <h3>Un Desayuno Perfecto</h3>
               <p>Para tu mañana</p>
-              <button className="btn-secondary"onClick={() => navigate("/productos")}> Ver más</button>
+              <button className="btn-secondary" onClick={() => navigate("/productos")}> Ver más</button>
             </div>
           </div>
 
@@ -73,11 +148,11 @@ function Home() {
           </div>
 
           <div className="banner-card">
-            <img src="/src/assets/CardImage4.png" alt="Desayuno" />
+            <img src="/src/assets/CardImage4.png" alt="Bebidas" />
             <div className="banner-text">
               <h3>Refresca tu día</h3>
               <p>Variedad de bebidas para elegir</p>
-              <button className="btn-secondary"onClick={() => navigate("/productos")}> Ver más</button>
+              <button className="btn-secondary" onClick={() => navigate("/productos")}> Ver más</button>
             </div>
           </div>
         </section>
@@ -103,7 +178,7 @@ function Home() {
 
         {/* Promociones */}
         <section className="promociones-section">
-          <h2>Promociones </h2>
+          <h2>Promociones</h2>
           <div className="promociones-productos-grid">
             {promociones.map((promo) => (
               <ProductCard key={promo.id} producto={promo} onAddToCart={handleAddToCart} /> 
@@ -117,3 +192,4 @@ function Home() {
 }
 
 export default Home;
+
