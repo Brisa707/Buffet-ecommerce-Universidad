@@ -1,19 +1,26 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Contacto from "./pages/Contacto";
-import Productos from "./pages/Productos";
-import ProductoDetalle from "./pages/ProductoDetalle"; 
-import Carrito from "./pages/Carrito";
-import Pedidos from "./pages/Pedidos";
-import Detalle from "./pages/Detalle";
-import QRPage from "./pages/QRPage";
-import Perfil from "./pages/Perfil";
+import Home from "./pages/user/Home";
+import Register from "./pages/user/Register";
+import Contacto from "./pages/user/Contacto";
+import Productos from "./pages/user/Productos";
+import ProductoDetalle from "./pages/user/ProductoDetalle"; 
+import Carrito from "./pages/user/Carrito";
+import Pedidos from "./pages/user/Pedidos";
+import Detalle from "./pages/user/Detalle";
+import QRPage from "./pages/user/QRPage";
+import Perfil from "./pages/user/Perfil";
+import Navbar from './components/navbar/Navbar.jsx';
+import Footer from './components/footer/Footer.jsx';
 
-function App() {
+function AppLayout() {
+  const location = useLocation();
+
+  const hideNavFooter = location.pathname === "/" || location.pathname === "/register";
+
   return (
-    <BrowserRouter>
+    <>
+      {!hideNavFooter && <Navbar />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
@@ -27,8 +34,18 @@ function App() {
         <Route path="/qr/:id" element={<QRPage />} />
         <Route path="/perfil" element={<Perfil />} />
       </Routes>
+      {!hideNavFooter && <Footer />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppLayout />
     </BrowserRouter>
   );
 }
 
 export default App;
+
