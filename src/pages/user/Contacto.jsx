@@ -1,7 +1,5 @@
 import React from "react";
-import "../styles/Contacto.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import "../../styles/Contacto.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +10,6 @@ const Contacto = () => {
 
     return (
         <>
-            <Navbar />
             <main className="contact-container">
                 <div className="contact-header">
                     <button
@@ -58,7 +55,6 @@ const Contacto = () => {
                     ></iframe>
                 </section>
             </main>
-            <Footer />
         </>
     );
 };

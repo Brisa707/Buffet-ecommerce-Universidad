@@ -1,7 +1,5 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import ProductCard from "../components/ProductCard";
-import "../styles/Home.css";
+import ProductCard from "../../components/productCard/ProductCard";
+import "../../styles/Home.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -68,7 +66,6 @@ function Home() {
 
   return (
     <>
-      <Navbar />
       <main className="home-container">
 
         {/* Hero Carrusel */}
@@ -186,7 +183,6 @@ function Home() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

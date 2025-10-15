@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 import Logo from "../assets/Logo-buffet.png";
+import { API_URL } from "../config/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -14,11 +15,11 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");   // Limpiar mensajes anteriores
+    setError("");  
     setSuccess("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/usuarios/login", {
+      const response = await fetch(`${API_URL}/usuarios/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -31,7 +32,7 @@ function Login() {
         localStorage.setItem("token", data.token);
         setTimeout(() => {
           navigate("/home");
-        }, 1000); // Espera 1 segundo antes de redirigir
+        }, 1000);
       } else {
         setError(data.mensaje || "Error al iniciar sesión");
       }

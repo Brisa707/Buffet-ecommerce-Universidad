@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../styles/Navbar.css";
+import "./Navbar.css";
 
 import { AiFillHome, AiOutlineClose } from "react-icons/ai";
 import { FaBoxOpen, FaUserCircle } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { FiShoppingBag, FiLogOut, FiMail, FiChevronDown } from "react-icons/fi";
 import { MdLocalGroceryStore } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import Carrito from "../pages/Carrito"; // 👈 Import del carrito
+import Carrito from "../../pages/user/Carrito"; // 👈 Import del carrito
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
