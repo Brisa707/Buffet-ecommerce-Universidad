@@ -54,7 +54,7 @@ function Carrito({ onClose }) {
               <div className="carrito-header">
                 {/* Flecha solo mobile */}
                 <button
-                  className="back-button"
+                  className="carrito-back"
                   type="button"
                   onClick={() => navigate(-1)}
                 >
