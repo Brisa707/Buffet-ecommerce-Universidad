@@ -128,7 +128,6 @@
   .pedidoDetalle-item {
     display: flex;
     flex-direction: row;
-    /* Apila imagen + info */
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
@@ -156,5 +155,97 @@
   .btn-qr {
     font-size: 0.9rem;
     padding: 0.6rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .pedidoDetalle-container {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding: 6rem 4rem 4rem;
+  }
+
+  .pedidoDetalle-header {
+    position: absolute;
+    top: 5rem;
+    left: 1.4rem;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0;
+  }
+
+  .pedidoDetalle-card {
+    background: none;
+    box-shadow: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .pedidoDetalle-item {
+    border: 1.9px solid #01538D;
+    border-radius: 20px;
+    padding: 2.0rem 2.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .pedidoDetalle-item img {
+    width: 180px;
+    height: 180px;
+    border-radius: 14px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.07);
+  }
+
+  .pedidoDetalle-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 0.7rem;
+  }
+
+  .pedidoDetalle-nombre {
+    font-weight: 700;
+    font-size: 1.40rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .pedidoDetalle-precio {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .pedidoDetalle-cantidad {
+    font-size: 1.2rem;
+  }
+
+  .pedidoDetalle-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.40rem;
+    font-weight: 700;
+    margin-top: 2rem;
+  }
+
+  .pedidoDetalle-total-precio {
+    font-size: 1.5rem;
+  }
+
+  .btn-qr {
+    padding: 1.1rem 0;
+    width: 500px;
+    border: none;
+    border-radius: 40px;
+    font-size: 140;
+    cursor: pointer;
+    font-weight: 600;
+    margin: 1.8rem auto 0;
+    display: block;
+    text-align: center;
   }
 }

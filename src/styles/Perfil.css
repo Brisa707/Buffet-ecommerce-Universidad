@@ -133,3 +133,61 @@
     font-size: 0.95rem;
   }
 }
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .perfil-container {
+    min-height: 100vh;
+    padding: 7rem 4rem 3rem;
+  }
+
+  .perfil-card {
+    background: none;
+    border: none;
+    box-shadow: none;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .perfil-header {
+    position: absolute;
+    top: 5rem;
+    left: 1.5rem;
+    font-weight: 700;
+  }
+
+  .perfil-titulo {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .perfil-input-card {
+    border-radius: 14px;
+    padding: 2rem;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .perfil-input-card label {
+    font-size: 1.1rem;
+  }
+
+  .perfil-input-card input {
+    font-size: 1.1rem;
+    padding: 12px 18px;
+  }
+
+  .perfil-actions {
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .perfil-boton {
+    font-size: 1.1rem;
+    padding: 0.9rem 2.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+    width: 220px;
+  }
+}

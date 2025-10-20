@@ -74,3 +74,53 @@
     box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.6);
   }
 }
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .qr-container {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding: 7rem 4rem 3rem;
+  }
+
+  .qr-card {
+    background: none;
+    border: none;
+    box-shadow: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .qr-header {
+    position: absolute;
+    top: 4.9rem;
+    left: 1.4rem;
+    font-weight: 700;
+  }
+
+  .qr-titulo {
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+
+  .qr-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 2rem;
+  }
+
+  .qr-content p {
+    font-size: 1.9rem;
+    font-weight: 600;
+    text-shadow: none;
+  }
+
+  .qr-content canvas {
+    width: 390px !important;
+    height: 390px !important;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.60);
+  }
+}
