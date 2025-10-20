@@ -4,33 +4,142 @@ import Navbar from "../../components/navbar/Navbar";
 import { AiOutlineClose } from "react-icons/ai";
 import "../../styles/Carrito.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { API_URL } from "../../config/api";
 
 
 function Carrito({ onClose }) {
   const navigate = useNavigate();
   const [step, setStep] = useState("carrito"); // "carrito", "confirmar", "gracias"
 
-  // Datos simulados
-  const [carrito, setCarrito] = useState([
-    { id: 1, nombre: "Café + 2 medialunas", precio: 2000, img: "https://via.placeholder.com/80", cantidad: 1 },
-    { id: 2, nombre: "Sándwich de jamón y queso", precio: 2500, img: "https://via.placeholder.com/80", cantidad: 1 },
-    { id: 3, nombre: "Hamburguesa + papas", precio: 3500, img: "https://via.placeholder.com/80", cantidad: 1 }
-  ]);
+  const [carrito, setCarrito] = useState([]);
+
+  // Cargar carrito desde backend si hay token; si no, desde localStorage
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch(`${API_URL}/carrito`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      .then(async res => {
+        if (!res.ok) throw new Error('No se pudo obtener el carrito');
+        return res.json();
+      })
+      .then(data => {
+        const mapped = data.map(item => ({
+          id: item.id_producto,
+          nombre: item.nombre,
+          precio: item.precio,
+          cantidad: item.cantidad,
+          img: item.img || 'https://via.placeholder.com/80'
+        }));
+        setCarrito(mapped);
+      })
+      .catch(err => console.error('Error cargando carrito:', err));
+    } else {
+      const local = JSON.parse(localStorage.getItem('carrito')) || [];
+      setCarrito(local);
+    }
+
+    // Listener para actualizaciones del carrito desde otras pestañas/compnentes
+    const onCartUpdated = () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        fetch(`${API_URL}/carrito`, { headers: { 'Authorization': `Bearer ${token}` } })
+          .then(async res => {
+            if (!res.ok) throw new Error('No se pudo obtener el carrito');
+            return res.json();
+          })
+          .then(data => {
+            const mapped = data.map(item => ({
+              id: item.id_producto,
+              nombre: item.nombre,
+              precio: item.precio,
+              cantidad: item.cantidad,
+              img: item.img || 'https://via.placeholder.com/80'
+            }));
+            setCarrito(mapped);
+          })
+          .catch(err => console.error('Error cargando carrito (evento):', err));
+      } else {
+        const local = JSON.parse(localStorage.getItem('carrito')) || [];
+        setCarrito(local);
+      }
+    };
+
+    window.addEventListener('cartUpdated', onCartUpdated);
+    return () => window.removeEventListener('cartUpdated', onCartUpdated);
+  }, []);
 
   const actualizarCantidad = (id, operacion) => {
-    setCarrito((prev) =>
-      prev
-        .map((item) =>
-          item.id === id
-            ? { ...item, cantidad: item.cantidad + operacion }
-            : item
-        )
-        .filter((item) => item.cantidad > 0)
-    );
+    const token = localStorage.getItem('token');
+    if (token) {
+      const item = carrito.find(i => i.id === id);
+      if (!item) return;
+      const nuevaCantidad = item.cantidad + operacion;
+
+      if (nuevaCantidad <= 0) {
+        // eliminar en backend
+  fetch(`${API_URL}/carrito/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        .then(async res => {
+          if (!res.ok) throw new Error('Error eliminando');
+          setCarrito(prev => prev.filter(p => p.id !== id));
+        })
+        .catch(err => console.error('Error eliminando del carrito:', err));
+        return;
+      }
+
+  fetch(`${API_URL}/carrito/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ cantidad: nuevaCantidad })
+      })
+      .then(async res => {
+        if (!res.ok) {
+          const e = await res.json().catch(() => ({}));
+          throw new Error(e.mensaje || 'Error actualizando cantidad');
+        }
+  setCarrito(prev => prev.map(p => p.id === id ? { ...p, cantidad: nuevaCantidad } : p));
+  try { window.dispatchEvent(new CustomEvent('cartUpdated')); } catch (e) {}
+      })
+      .catch(err => console.error('Error actualizando cantidad:', err));
+    } else {
+      setCarrito(prev => {
+        const updated = prev
+          .map(item => item.id === id ? { ...item, cantidad: item.cantidad + operacion } : item)
+          .filter(item => item.cantidad > 0);
+        localStorage.setItem('carrito', JSON.stringify(updated));
+        return updated;
+      });
+    }
   };
 
   const eliminarProducto = (id) => {
-    setCarrito((prev) => prev.filter((item) => item.id !== id));
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch(`${API_URL}/carrito/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      .then(async res => {
+        if (!res.ok) {
+          const e = await res.json().catch(() => ({}));
+          throw new Error(e.mensaje || 'Error eliminando');
+        }
+  setCarrito(prev => prev.filter(item => item.id !== id));
+  try { window.dispatchEvent(new CustomEvent('cartUpdated')); } catch (e) {}
+      })
+      .catch(err => console.error('Error eliminando del carrito:', err));
+    } else {
+      setCarrito(prev => {
+  const updated = prev.filter(item => item.id !== id);
+  localStorage.setItem('carrito', JSON.stringify(updated));
+  try { window.dispatchEvent(new CustomEvent('cartUpdated')); } catch (e) {}
+  return updated;
+      });
+    }
   };
 
   const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);

@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
 import "../../styles/Productos.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { API_URL } from "../../config/api";
+
 
 function Productos() {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function Productos() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/productos");
+  const res = await fetch(`${API_URL}/productos`);
         const data = await res.json();
         setProductosData(data);
       } catch (error) {
@@ -41,19 +43,61 @@ function Productos() {
       : productosData.filter((p) => p.categoria === categoriaSeleccionada);
 
   const handleAddToCart = (producto) => {
-    const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
-    const existe = carritoActual.find((p) => p.id === producto.id);
+    const token = localStorage.getItem('token');
 
-    if (existe) {
-      existe.cantidad += 1;
+    if (token) {
+  fetch(`${API_URL}/carrito`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ id_producto: producto.id, cantidad: 1 })
+      })
+      .then(async res => {
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.mensaje || 'Error agregando al carrito');
+        }
+        return res.json();
+      })
+      .then(() => {
+        setMensaje(`${producto.nombre} añadido al carrito`);
+        // Notificar a otros componentes (ej. Carrito abierto) que el carrito cambió
+        try {
+          window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { id: producto.id } }));
+        } catch (e) {
+          // noop
+        }
+        setTimeout(() => setMensaje(''), 2000);
+      })
+      .catch(err => {
+        console.error('Error agregando al carrito:', err);
+        setMensaje('Error al agregar al carrito');
+        setTimeout(() => setMensaje(''), 2000);
+      });
     } else {
-      carritoActual.push({ ...producto, cantidad: 1 });
+      const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+      const existe = carritoActual.find((p) => p.id === producto.id);
+
+      if (existe) {
+        existe.cantidad += 1;
+      } else {
+        carritoActual.push({ ...producto, cantidad: 1 });
+      }
+
+      localStorage.setItem("carrito", JSON.stringify(carritoActual));
+
+      // Notificar a otros componentes que el carrito cambió (modo local)
+      try {
+        window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { id: producto.id } }));
+      } catch (e) {
+        // noop
+      }
+
+      setMensaje(`${producto.nombre} añadido al carrito`);
+      setTimeout(() => setMensaje(""), 2000);
     }
-
-    localStorage.setItem("carrito", JSON.stringify(carritoActual));
-
-    setMensaje(` ${producto.nombre} añadido al carrito`);
-    setTimeout(() => setMensaje(""), 2000);
   };
 
   return (
