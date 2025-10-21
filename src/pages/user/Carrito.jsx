@@ -12,14 +12,17 @@ function Carrito({ onClose }) {
   const [step, setStep] = useState("carrito"); // "carrito", "confirmar", "gracias"
 
   const [carrito, setCarrito] = useState([]);
+  const [numeroPedido, setNumeroPedido] = useState(null);
 
-  // Cargar carrito desde backend si hay token; si no, desde localStorage
+  // Cargar carrito desde backend (se requiere token)
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      fetch(`${API_URL}/carrito`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    fetch(`${API_URL}/carrito`, { headers: { 'Authorization': `Bearer ${token}` } })
       .then(async res => {
         if (!res.ok) throw new Error('No se pudo obtener el carrito');
         return res.json();
@@ -35,35 +38,27 @@ function Carrito({ onClose }) {
         setCarrito(mapped);
       })
       .catch(err => console.error('Error cargando carrito:', err));
-    } else {
-      const local = JSON.parse(localStorage.getItem('carrito')) || [];
-      setCarrito(local);
-    }
 
-    // Listener para actualizaciones del carrito desde otras pestañas/compnentes
+    // Listener para actualizaciones del carrito desde otras pestañas/componentes
     const onCartUpdated = () => {
       const token = localStorage.getItem('token');
-      if (token) {
-        fetch(`${API_URL}/carrito`, { headers: { 'Authorization': `Bearer ${token}` } })
-          .then(async res => {
-            if (!res.ok) throw new Error('No se pudo obtener el carrito');
-            return res.json();
-          })
-          .then(data => {
-            const mapped = data.map(item => ({
-              id: item.id_producto,
-              nombre: item.nombre,
-              precio: item.precio,
-              cantidad: item.cantidad,
-              img: item.img || 'https://via.placeholder.com/80'
-            }));
-            setCarrito(mapped);
-          })
-          .catch(err => console.error('Error cargando carrito (evento):', err));
-      } else {
-        const local = JSON.parse(localStorage.getItem('carrito')) || [];
-        setCarrito(local);
-      }
+      if (!token) return;
+      fetch(`${API_URL}/carrito`, { headers: { 'Authorization': `Bearer ${token}` } })
+        .then(async res => {
+          if (!res.ok) throw new Error('No se pudo obtener el carrito');
+          return res.json();
+        })
+        .then(data => {
+          const mapped = data.map(item => ({
+            id: item.id_producto,
+            nombre: item.nombre,
+            precio: item.precio,
+            cantidad: item.cantidad,
+            img: item.img || 'https://via.placeholder.com/80'
+          }));
+          setCarrito(mapped);
+        })
+        .catch(err => console.error('Error cargando carrito (evento):', err));
     };
 
     window.addEventListener('cartUpdated', onCartUpdated);
@@ -143,6 +138,39 @@ function Carrito({ onClose }) {
   };
 
   const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+
+  // Generar pedido: intenta llamar al backend, si falla crea pedido local en localStorage
+  const handleConfirmarPedido = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return navigate('/login');
+
+    try {
+      const res = await fetch(`${API_URL}/pedido/pedido`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({})
+      });
+
+      if (!res.ok) {
+        const e = await res.json().catch(() => ({}));
+        throw new Error(e.mensaje || 'Error al crear el pedido en backend');
+      }
+
+      const data = await res.json().catch(() => ({}));
+      const numero = data.numero_pedido || (`BACK-${Date.now()}`);
+      // Limpiar carrito local y notificar
+      localStorage.removeItem('carrito');
+      setCarrito([]);
+      try { window.dispatchEvent(new CustomEvent('cartUpdated')); } catch(e){}
+  // Mostrar pantalla de gracias con número de pedido
+  setNumeroPedido(numero);
+  setStep('gracias');
+    } catch (err) {
+      console.error('Error creando pedido en backend:', err);
+      // Mostrar error al usuario
+      alert('No se pudo generar el pedido. Intenta de nuevo o contacta al administrador.');
+    }
+  };
 
   return (
     <>
@@ -269,7 +297,7 @@ function Carrito({ onClose }) {
                 <p>${total}</p>
               </div>
 
-              <button className="btn-checkout" onClick={() => setStep("gracias")}>
+              <button className="btn-checkout" onClick={handleConfirmarPedido}>
                 Confirmar Pedido
               </button>
             </>
@@ -281,6 +309,13 @@ function Carrito({ onClose }) {
               <h2 className="gracias-titulo">¡Gracias por tu compra!</h2>
               <p className="gracias-texto">
                 Tu pedido está siendo procesado.
+                {numeroPedido && (
+                  <>
+                    <br />
+                    Pedido creado: <strong>{numeroPedido}</strong>
+                  </>
+                )}
+                <br />
                 Te avisaremos cuando esté listo.
               </p>
               <div className="gracias-botones">

@@ -77,26 +77,8 @@ function Productos() {
         setTimeout(() => setMensaje(''), 2000);
       });
     } else {
-      const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
-      const existe = carritoActual.find((p) => p.id === producto.id);
-
-      if (existe) {
-        existe.cantidad += 1;
-      } else {
-        carritoActual.push({ ...producto, cantidad: 1 });
-      }
-
-      localStorage.setItem("carrito", JSON.stringify(carritoActual));
-
-      // Notificar a otros componentes que el carrito cambió (modo local)
-      try {
-        window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { id: producto.id } }));
-      } catch (e) {
-        // noop
-      }
-
-      setMensaje(`${producto.nombre} añadido al carrito`);
-      setTimeout(() => setMensaje(""), 2000);
+      // No hay usuarios anónimos: redirigir a login
+      window.location.href = '/login';
     }
   };
 
