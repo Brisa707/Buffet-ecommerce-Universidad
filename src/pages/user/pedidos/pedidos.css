@@ -1,0 +1,237 @@
+.pedidos-container {
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  margin-top: 3.125rem;
+  padding: 1rem 2rem;
+}
+
+.pedidos-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.9rem;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pedidos-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.pedidos-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.pedidos-title {
+  font-size: 1.375rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.pedido-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1.8px solid #01538D;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #f9fbff;
+  transition: transform 0.3s ease;
+}
+
+.pedido-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pedido-info {
+    flex: 1;
+}
+
+.pedido-numero {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.pedido-fecha {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.pedido-total {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #01538D;
+}
+
+.pedido-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.pedido-estado {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.pedido-estado.entregado {
+  background: #e0f7e9;
+  color: #2e7d32;
+}
+
+.pedido-estado.pendiente {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.pedido-estado.cancelado {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.btn-detalle {
+  background: #01538D;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-detalle:hover {
+  background: #002b59;
+}
+
+/* Responsive Mobile */
+@media (max-width: 600px) {
+  .pedidos-card {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .pedido-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 20px;
+    border-bottom: 1.9px solid #01538D;
+    gap: 1rem;
+  }
+
+  .pedido-info {
+    flex: 1;
+  }
+
+  .pedido-numero {
+    font-size: 1rem;
+  }
+
+  .pedido-fecha {
+    font-size: 0.85rem;
+  }
+
+  .pedido-total {
+    font-size: 0.9rem;
+  }
+
+  .pedido-estado {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .btn-detalle {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 30px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .pedidos-container {
+    max-width: 1100px;
+    margin: 10rem auto 4rem auto;
+    padding: 0 2rem;
+    background: none;
+  }
+
+  .pedidos-card {
+    background: none;
+    box-shadow: none;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .pedidos-header {
+    position: absolute;
+    top: 5rem;
+    left: 1.5rem;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .pedidos-title {
+    font-size: 1.7rem;
+  }
+
+  .pedido-item {
+    border: 1.9px solid #01538D;
+    border-radius: 16px;
+    padding: 1.5rem 1.8rem;
+    background: #f9fbff;
+    min-height: 160px;
+  }
+
+   .pedido-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-left: 1.2rem;
+  }
+
+  .pedido-numero {
+    font-size: 1.25rem;
+  }
+
+  .pedido-fecha {
+    font-size: 1rem;
+  }
+
+  .pedido-total {
+    font-size: 1.1rem;
+  }
+
+  .pedido-estado {
+    font-size: 0.95rem;
+    padding: 5px 10px;
+  }
+
+  .btn-detalle {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.3rem;
+  }
+}
