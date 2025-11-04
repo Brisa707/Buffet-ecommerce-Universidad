@@ -1,51 +1,41 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Login from "./pages/Login";
-import Home from "./pages/user/Home";
-import Register from "./pages/user/Register";
-import Contacto from "./pages/user/Contacto";
-import Productos from "./pages/user/Productos";
-import ProductoDetalle from "./pages/user/ProductoDetalle"; 
-import Carrito from "./pages/user/Carrito";
-import Pedidos from "./pages/user/Pedidos";
-import Detalle from "./pages/user/Detalle";
-import QRPage from "./pages/user/QRPage";
-import Perfil from "./pages/user/Perfil";
-import Navbar from './components/navbar/Navbar.jsx';
-import Footer from './components/footer/Footer.jsx';
-
-function AppLayout() {
-  const location = useLocation();
-
-  const hideNavFooter = location.pathname === "/" || location.pathname === "/register";
-
-  return (
-    <>
-      {!hideNavFooter && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/contacto" element={<Contacto />} />
-        <Route path="/productos" element={<Productos />} />
-        <Route path="/producto/:id" element={<ProductoDetalle />} />
-        <Route path="/carrito" element={<Carrito />} />
-        <Route path="/pedidos" element={<Pedidos />} />
-        <Route path="/detalle/:id" element={<Detalle />} />
-        <Route path="/qr/:id" element={<QRPage />} />
-        <Route path="/perfil" element={<Perfil />} />
-      </Routes>
-      {!hideNavFooter && <Footer />}
-    </>
-  );
-}
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminLayout from "./layout/admin-layout";
+import UserLayout from "./layout/user-layout";
+import AdminRoutes from "./routes/admin-routes";
+import UserRoutes from "./routes/user-routes";
+import Login from "@pages/login";
+import Register from "@pages/user/registro/registro";
 
 function App() {
   return (
     <BrowserRouter>
-      <AppLayout />
+      <Routes>
+        {/* Rutas públicas */}
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Rutas de usuario sin prefijo */}
+        <Route
+          path="/*"
+          element={
+            <UserLayout>
+              <UserRoutes />
+            </UserLayout>
+          }
+        />
+
+        {/* Rutas de admin con layout */}
+        <Route
+          path="/admin/*"
+          element={
+            <AdminLayout>
+              <AdminRoutes />
+            </AdminLayout>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-
