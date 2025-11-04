@@ -1,0 +1,221 @@
+.admin-usuarios-container {
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 50px;
+}
+
+.admin-usuarios-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-usuarios-titulo {
+  font-size: 1.5rem;
+  color: #01538D;
+}
+
+.admin-usuarios-agregar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #01538D;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.admin-usuarios-agregar:hover {
+  background-color: #013c6a;
+}
+
+.admin-usuarios-tabla-wrapper {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+.admin-usuarios-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.admin-usuarios-tabla th,
+.admin-usuarios-tabla td {
+  padding: 8px 6px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-usuarios-tabla th {
+  background-color: #01538d;
+  color: white;
+  font-weight: 600;
+}
+
+.admin-usuarios-tabla tr:hover {
+  background-color: #f2f8fc;
+}
+
+.admin-usuarios-boton {
+  border: none;
+  padding: 8px 8px;
+  margin-right: 6px;
+  border-radius: 100px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.admin-usuarios-boton.editar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.admin-usuarios-boton.editar:hover {
+  background-color: #3b8d3e;
+}
+
+.admin-usuarios-boton.eliminar {
+  background-color: #f44336;
+  color: white;
+}
+
+.admin-usuarios-boton.eliminar:hover {
+  background-color: #c7382e;
+}
+
+.admin-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.admin-popup {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 80%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.admin-popup-acciones {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-popup-acciones .confirmar,
+.admin-popup-acciones .cancelar {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  cursor: pointer;
+  color: white;
+}
+
+.admin-popup-acciones .confirmar {
+  background-color: #f44336;
+}
+
+.admin-popup-acciones .cancelar {
+  background-color: #6c757d;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .admin-usuarios-container {
+    margin-top: 30px;
+    padding: 24px;
+  }
+
+  .admin-usuarios-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .admin-usuarios-titulo {
+    font-size: 1.8rem;
+  }
+
+  .admin-usuarios-tabla {
+    font-size: 1rem;
+  }
+
+  .admin-usuarios-boton {
+    font-size: 0.9rem;
+    padding: 10px 10px;
+  }
+
+  .admin-popup {
+    max-width: 400px;
+    padding: 2rem;
+  }
+
+  .admin-popup-acciones {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .admin-usuarios-container {
+    margin-top: 0;
+    padding: 24px;
+  }
+
+  .admin-usuarios-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .admin-usuarios-titulo {
+    font-size: 1.8rem;
+  }
+
+  .admin-usuarios-tabla {
+    font-size: 1rem;
+  }
+
+  .admin-usuarios-boton {
+    font-size: 0.9rem;
+    padding: 10px 10px;
+  }
+
+  .admin-popup {
+    max-width: 400px;
+    padding: 2rem;
+  }
+
+  .admin-popup-acciones {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

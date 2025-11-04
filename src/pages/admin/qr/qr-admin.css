@@ -1,0 +1,110 @@
+.admin-qr-container {
+    padding: 24px;
+    margin-top: 50px;
+}
+
+.admin-qr-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.admin-qr-titulo {
+    font-size: 1.5rem;
+    color: #01538D;
+}
+
+.admin-qr-descripcion {
+    font-size: 1rem;
+}
+
+.admin-qr-scanner-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.admin-qr-scanner {
+    height: 200px;
+    background-color: #eaeaea;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 0.95rem;
+}
+
+.admin-qr-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.admin-qr-input {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.admin-qr-boton {
+    background-color: #01538D;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    width: 100%;
+    max-width: 200px;
+}
+
+.admin-qr-boton:hover {
+    background-color: #013c6a;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .admin-qr-container {
+        margin-top: 30px;
+    }
+
+    .admin-qr-titulo {
+        font-size: 1.8rem;
+    }
+
+    .admin-qr-boton {
+        width: 50%;
+    }
+
+    .admin-qr-scanner-wrapper {
+        width: 50%;
+        margin: 30px auto;
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+    .admin-qr-container {
+        margin-top: 0;
+    }
+
+    .admin-qr-titulo {
+        font-size: 1.8rem;
+    }
+
+    .admin-qr-boton {
+        width: 50%;
+    }
+
+    .admin-qr-scanner-wrapper {
+        width: 50%;
+        margin: 30px auto;
+    }
+}

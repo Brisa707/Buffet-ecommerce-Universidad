@@ -1,0 +1,130 @@
+.dashboard-container {
+  padding: 24px;
+  margin-top: 50px;
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  color: #01538D;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card h3 {
+  font-size: 1rem;
+  color: #01538D;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.status-list,
+.top-products-list {
+  list-style: none;
+  padding: 0;
+}
+
+.status-list li,
+.top-products-list li {
+  padding: 1px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.recent-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.recent-orders-table th,
+.recent-orders-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.recent-orders-table th {
+  background-color: #01538D;
+  color: white;
+}
+
+.dashboard-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  font-size: 1.2rem;
+  color: #01538D;
+  font-weight: 600;
+  gap: 10px;
+}
+
+.dashboard-loading::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 3px solid #01538D;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dashboard-container {
+    margin-top: 30px;
+  }
+
+  .dashboard-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .dashboard-container {
+    margin-top: 0;
+  }
+
+  .dashboard-title {
+    font-size: 1.8rem;
+  }
+
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .dashboard-left {
+    display: flex;
+    flex-direction: column;
+  }
+}

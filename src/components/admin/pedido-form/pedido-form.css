@@ -1,0 +1,148 @@
+.admin-pedidos-form-container {
+  padding: 15px;
+  margin: 80px auto 10px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 2px solid #01538D;
+  box-shadow: 0 0 10px rgba(1, 83, 141, 0.2);
+  width: 90%;
+  box-sizing: border-box;
+}
+
+.admin-pedidos-form h2 {
+  font-size: 1.4rem;
+  color: #01538D;
+  text-align: left;
+}
+
+.admin-pedidos-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-pedidos-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: black;
+  font-size: 0.95rem;
+}
+
+.admin-pedidos-form input,
+.admin-pedidos-form select,
+.admin-pedidos-form textarea {
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.admin-pedidos-form input:focus,
+.admin-pedidos-form select:focus,
+.admin-pedidos-form textarea:focus {
+  border-color: #01538D;
+  outline: none;
+  box-shadow: 0 0 3px rgba(1, 83, 141, 0.4);
+}
+
+.admin-pedidos-form-acciones {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.admin-pedidos-form-acciones button {
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.admin-pedidos-form-acciones button[type="submit"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #01538D;
+  color: white;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.admin-pedidos-form-acciones button[type="submit"]:hover {
+  background-color: white;
+  color: #01538D;
+  border: solid 1px #01538D;
+}
+
+.admin-pedidos-form-acciones button[type="button"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  color: #01538D;
+  border: solid 1px #01538D;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.admin-pedidos-form-acciones button[type="button"]:hover {
+  background-color: #01538D;
+  color: white;
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .admin-pedidos-form-container {
+    max-width: 100%;
+    margin-top: 80px;
+  }
+
+  .admin-pedidos-form h2 {
+    font-size: 1.8rem;
+  }
+
+  .admin-pedidos-form-acciones {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .admin-pedidos-form-acciones button {
+    width: auto;
+    padding: 10px 30px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .admin-pedidos-form-container {
+    max-width: 90%;
+    margin-top: 20px;
+  }
+
+  .admin-pedidos-form h2 {
+    font-size: 1.8rem;
+  }
+
+  .admin-pedidos-form-acciones {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .admin-pedidos-form-acciones button {
+    width: auto;
+    padding: 10px 30px;
+  }
+}
