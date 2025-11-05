@@ -6,6 +6,8 @@ export default function UsuarioForm({ usuario, setUsuario, onSubmit, title }) {
     setUsuario((prev) => ({ ...prev, [name]: value }));
   };
 
+  const esCreacion = title.toLowerCase().includes("crear");
+
   return (
     <div className="admin-usuarios-form-container">
       <form onSubmit={onSubmit} className="admin-usuarios-form">
@@ -33,28 +35,10 @@ export default function UsuarioForm({ usuario, setUsuario, onSubmit, title }) {
         </label>
 
         <label>
-          Teléfono:
-          <input
-            name="telefono"
-            value={usuario.telefono || ""}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          Dirección:
-          <input
-            name="direccion"
-            value={usuario.direccion || ""}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
           Rol:
           <select
-            name="role"
-            value={usuario.role || ""}
+            name="rol"
+            value={usuario.rol || ""}
             onChange={handleChange}
             required
           >
@@ -71,7 +55,12 @@ export default function UsuarioForm({ usuario, setUsuario, onSubmit, title }) {
             type="password"
             value={usuario.password || ""}
             onChange={handleChange}
-            required
+            placeholder={
+              esCreacion
+                ? "Ingresá una contraseña"
+                : "Dejar en blanco para no cambiar"
+            }
+            required={esCreacion}
           />
         </label>
 
@@ -85,4 +74,3 @@ export default function UsuarioForm({ usuario, setUsuario, onSubmit, title }) {
     </div>
   );
 }
-

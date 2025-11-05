@@ -1,49 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "@config/api";
 import "./usuario-admin.css";
 
 export default function UsuariosAdmin() {
   const navigate = useNavigate();
-  const [usuarios, setUsuarios] = useState([
-    {
-      id: 1,
-      nombre: "Juan Pérez",
-      email: "juanperez@example.com",
-      telefono: "1123456789",
-      direccion: "Av. Corrientes 1234",
-      role: "user",
-    },
-    {
-      id: 2,
-      nombre: "María Gómez",
-      email: "mariagomez@example.com",
-      telefono: "1134567890",
-      direccion: "Calle San Martín 567",
-      role: "admin",
-    },
-    {
-      id: 3,
-      nombre: "Carlos López",
-      email: "carloslopez@example.com",
-      telefono: "1145678901",
-      direccion: "Av. Belgrano 890",
-      role: "user",
-    },
-  ]);
-
+  const [usuarios, setUsuarios] = useState([]);
   const [usuarioAEliminar, setUsuarioAEliminar] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const confirmarEliminacion = () => {
-    setUsuarios((prev) =>
-      prev.filter((usuario) => usuario.id !== usuarioAEliminar.id)
-    );
+  useEffect(() => {
+    const fetchUsuarios = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Token no disponible");
+
+        const res = await fetch(`${API_URL}/usuarios`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) {
+          if (res.status === 401) {
+            throw new Error("No autorizado. Iniciá sesión como admin.");
+          }
+          throw new Error("Error al obtener usuarios");
+        }
+
+        const data = await res.json();
+        setUsuarios(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsuarios();
+  }, []);
+
+  const confirmarEliminacion = async () => {
+    if (!usuarioAEliminar) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${API_URL}/usuarios/${usuarioAEliminar.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.ok) {
+        setUsuarios((prev) => prev.filter((u) => u.id !== usuarioAEliminar.id));
+      } else {
+        const errorData = await res.json();
+        console.error("Error al eliminar usuario:", errorData.mensaje);
+        alert(errorData.mensaje || "No se pudo eliminar el usuario");
+      }
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
+      alert("Error de red al intentar eliminar el usuario");
+    }
+
     setUsuarioAEliminar(null);
   };
 
-  const cancelarEliminacion = () => {
-    setUsuarioAEliminar(null);
-  };
+  const cancelarEliminacion = () => setUsuarioAEliminar(null);
+
+  if (loading) return <p className="cargando">Cargando usuarios...</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="admin-usuarios-container">
@@ -63,38 +92,42 @@ export default function UsuariosAdmin() {
             <tr>
               <th>Nombre</th>
               <th>Email</th>
-              <th>Teléfono</th>
-              <th>Dirección</th>
               <th>Rol</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {usuarios.map((usuario) => (
-              <tr key={usuario.id}>
-                <td>{usuario.nombre}</td>
-                <td>{usuario.email}</td>
-                <td>{usuario.telefono}</td>
-                <td>{usuario.direccion}</td>
-                <td>{usuario.role}</td>
-                <td>
-                  <button
-                    className="admin-usuarios-boton editar"
-                    onClick={() =>
-                      navigate(`/admin/usuarios/editar/${usuario.id}`)
-                    }
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    className="admin-usuarios-boton eliminar"
-                    onClick={() => setUsuarioAEliminar(usuario)}
-                  >
-                    <FaTrash />
-                  </button>
+            {usuarios.length > 0 ? (
+              usuarios.map((usuario) => (
+                <tr key={usuario.id}>
+                  <td>{usuario.nombre}</td>
+                  <td>{usuario.email}</td>
+                  <td>{usuario.rol}</td>
+                  <td>
+                    <button
+                      className="admin-usuarios-boton editar"
+                      onClick={() =>
+                        navigate(`/admin/usuarios/editar/${usuario.id}`)
+                      }
+                    >
+                      <FaEdit />
+                    </button>
+                    <button
+                      className="admin-usuarios-boton eliminar"
+                      onClick={() => setUsuarioAEliminar(usuario)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" style={{ textAlign: "center" }}>
+                  No hay usuarios disponibles.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
