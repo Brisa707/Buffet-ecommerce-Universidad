@@ -1,46 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "@config/api";
 import "./productos-admin.css";
 
 export default function ProductosAdmin() {
   const navigate = useNavigate();
-  const [productos, setProductos] = useState([
-    {
-      id: 1,
-      imagen: "https://via.placeholder.com/60",
-      nombre: "Hambuerguesa Clásica",
-      stock: 12,
-      precio: 10,
-    },
-    {
-      id: 2,
-      imagen: "https://via.placeholder.com/60",
-      nombre: "Sandwich de Pollo",
-      stock: 5,
-      precio: 50,
-    },
-    {
-      id: 3,
-      imagen: "https://via.placeholder.com/60",
-      nombre: "Ensalada César",
-      stock: 5,
-      precio: 10,
-    },
-  ]);
-
+  const [productos, setProductos] = useState([]);
   const [productoAEliminar, setProductoAEliminar] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const confirmarEliminacion = () => {
-    setProductos((prev) =>
-      prev.filter((producto) => producto.id !== productoAEliminar.id)
-    );
+  // Cargar productos desde el backend
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const res = await fetch(`${API_URL}/productos`);
+        if (!res.ok) throw new Error("Error al obtener productos");
+        const data = await res.json();
+        setProductos(data);
+      } catch (err) {
+        setError("No se pudieron cargar los productos");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductos();
+  }, []);
+
+  // Confirmar eliminación
+  const confirmarEliminacion = async () => {
+    if (!productoAEliminar) return;
+
+    try {
+      const res = await fetch(`${API_URL}/productos/${productoAEliminar.id}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        setProductos((prev) =>
+          prev.filter((p) => p.id !== productoAEliminar.id)
+        );
+      } else {
+        console.error("Error al eliminar el producto");
+      }
+    } catch (error) {
+      console.error("Error al eliminar producto:", error);
+    }
+
     setProductoAEliminar(null);
   };
 
-  const cancelarEliminacion = () => {
-    setProductoAEliminar(null);
-  };
+  const cancelarEliminacion = () => setProductoAEliminar(null);
+
+  if (loading) {
+    return <p className="cargando">Cargando productos...</p>;
+  }
+
+  if (error) {
+    return <p className="error">{error}</p>;
+  }
 
   return (
     <div className="admin-productos-container">
@@ -58,44 +78,46 @@ export default function ProductosAdmin() {
         <table className="admin-productos-tabla">
           <thead>
             <tr>
-              <th>Imagen</th>
               <th>Nombre</th>
+              <th>Descripción</th>
               <th>Stock</th>
               <th>Precio</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {productos.map((producto) => (
-              <tr key={producto.id}>
-                <td>
-                  <img
-                    src={producto.imagen}
-                    alt={producto.nombre}
-                    className="admin-productos-imagen"
-                  />
-                </td>
-                <td>{producto.nombre}</td>
-                <td>{producto.stock}</td>
-                <td>${producto.precio.toFixed(2)}</td>
-                <td>
-                  <button
-                    className="admin-productos-boton editar"
-                    onClick={() =>
-                      navigate(`/admin/productos/editar/${producto.id}`)
-                    }
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    className="admin-productos-boton eliminar"
-                    onClick={() => setProductoAEliminar(producto)}
-                  >
-                    <FaTrash />
-                  </button>
+            {productos.length > 0 ? (
+              productos.map((producto) => (
+                <tr key={producto.id}>
+                  <td>{producto.nombre}</td>
+                  <td>{producto.descripcion || "—"}</td>
+                  <td>{producto.stock}</td>
+                  <td>${Number(producto.precio).toFixed(2)}</td>
+                  <td>
+                    <button
+                      className="admin-productos-boton editar"
+                      onClick={() =>
+                        navigate(`/admin/productos/editar/${producto.id}`)
+                      }
+                    >
+                      <FaEdit />
+                    </button>
+                    <button
+                      className="admin-productos-boton eliminar"
+                      onClick={() => setProductoAEliminar(producto)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" style={{ textAlign: "center" }}>
+                  No hay productos disponibles.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -120,4 +142,3 @@ export default function ProductosAdmin() {
     </div>
   );
 }
-

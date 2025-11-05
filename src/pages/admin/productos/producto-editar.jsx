@@ -1,48 +1,70 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_URL } from "@config/api";
 import ProductoForm from "@admincomponents/producto-form/producto-form";
 
 export default function ProductoEditar() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulación de fetch de productos
-    const productosMock = [
-      {
-        id: "1",
-        nombre: "Hamburguesa Clásica",
-        descripcion: "Hamburguesa con queso, lechuga y tomate",
-        precio: 10,
-        categoria: "sandwiches",
-        imagen: "",
-        stock: 12,
-      },
-      {
-        id: "2",
-        nombre: "Sandwich de Pollo",
-        descripcion: "Pollo grillado con lechuga y tomate",
-        precio: 50,
-        categoria: "sandwiches",
-        imagen: "",
-        stock: 5,
-      },
-    ];
+    const fetchProducto = async () => {
+      try {
+        const res = await fetch(`${API_URL}/productos/${id}`);
+        if (!res.ok) throw new Error("No se pudo obtener el producto");
+        const data = await res.json();
+        setProducto(data);
+      } catch (error) {
+        console.error("Error al cargar producto:", error.message);
+        alert("Error al cargar el producto");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const productoEncontrado = productosMock.find(
-      (producto) => producto.id === id
-    );
-    setProducto(productoEncontrado);
+    fetchProducto();
   }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Editando producto:", producto);
-    navigate("/admin/productos");
+
+    try {
+      const token = localStorage.getItem("token");
+      const body = {
+        nombre: producto.nombre,
+        descripcion: producto.descripcion,
+        precio: parseFloat(producto.precio),
+        stock: parseInt(producto.stock),
+        categoria: producto.categoria,
+      };
+
+      const res = await fetch(`${API_URL}/productos/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.mensaje || "Error al editar producto");
+      }
+
+      const actualizado = await res.json();
+      console.log("Producto actualizado:", actualizado);
+      navigate("/admin/productos");
+    } catch (error) {
+      console.error("Error al editar producto:", error.message);
+      alert(error.message);
+    }
   };
 
-  if (!producto) return <p>Cargando producto...</p>;
+  if (loading) return <p>Cargando producto...</p>;
+  if (!producto) return <p>Producto no encontrado</p>;
 
   return (
     <ProductoForm
