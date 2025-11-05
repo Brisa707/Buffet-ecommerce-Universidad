@@ -7,7 +7,6 @@ import { API_URL } from "@config/api";
 function Login() {
   const navigate = useNavigate();
 
-  // Estados para inputs, error y éxito
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,23 +14,29 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");  
+    setError("");
     setSuccess("");
 
     try {
       const response = await fetch(`${API_URL}/usuarios/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess("Login exitoso"); 
+        setSuccess("Login exitoso");
         localStorage.setItem("token", data.token);
+        localStorage.setItem("usuario", JSON.stringify(data.usuario));
+
         setTimeout(() => {
-          navigate("/home");
+          if (data.usuario.rol === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/home");
+          }
         }, 1000);
       } else {
         setError(data.mensaje || "Error al iniciar sesión");
@@ -49,15 +54,12 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
-        {/* Logo */}
         <div className="login-logo-container">
           <img src={Logo} alt="Logo buffet UNaB" className="login-logo" />
         </div>
 
-        {/* Título */}
         <h4 className="login-title">Iniciar Sesión</h4>
 
-        {/* Formulario */}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="email">Correo electrónico</label>
@@ -85,7 +87,6 @@ function Login() {
             />
           </div>
 
-          {/* Mensajes */}
           {error && <p className="login-error">{error}</p>}
           {success && <p className="login-success">{success}</p>}
 
@@ -94,7 +95,6 @@ function Login() {
           </button>
         </form>
 
-        {/* Extras */}
         <div className="extras">
           <button className="forgot-password" type="button">
             ¿Olvidaste tu contraseña?

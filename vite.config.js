@@ -11,6 +11,7 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@adminpages': path.resolve(__dirname, 'src/pages/admin'),
       '@userpages': path.resolve(__dirname, 'src/pages/user'),
+      '@components': path.resolve(__dirname, 'src/components'),
       '@admincomponents': path.resolve(__dirname, 'src/components/admin'),
       '@usercomponents': path.resolve(__dirname, 'src/components/user'),
       '@common': path.resolve(__dirname, 'src/components/common'),

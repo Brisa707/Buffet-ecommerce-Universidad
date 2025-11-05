@@ -5,6 +5,7 @@ import AdminRoutes from "./routes/admin-routes";
 import UserRoutes from "./routes/user-routes";
 import Login from "@pages/login";
 import Register from "@pages/user/registro/registro";
+import ProtectedRoute from "@components/protected-route";
 
 function App() {
   return (
@@ -14,23 +15,27 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Rutas de usuario sin prefijo */}
+        {/* Rutas de usuario protegidas */}
         <Route
           path="/*"
           element={
-            <UserLayout>
-              <UserRoutes />
-            </UserLayout>
+            <ProtectedRoute>
+              <UserLayout>
+                <UserRoutes />
+              </UserLayout>
+            </ProtectedRoute>
           }
         />
 
-        {/* Rutas de admin con layout */}
+        {/* Rutas de admin protegidas */}
         <Route
           path="/admin/*"
           element={
-            <AdminLayout>
-              <AdminRoutes />
-            </AdminLayout>
+            <ProtectedRoute requiredRole="admin">
+              <AdminLayout>
+                <AdminRoutes />
+              </AdminLayout>
+            </ProtectedRoute>
           }
         />
       </Routes>
