@@ -9,8 +9,7 @@ function Perfil() {
   const [perfil, setPerfil] = useState({
     nombre: "",
     email: "",
-    telefono: "",
-    direccion: ""
+    password: ""
   });
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
@@ -20,7 +19,7 @@ function Perfil() {
   useEffect(() => {
     const fetchPerfil = async () => {
       try {
-        const res = await fetch(`${API_URL}/profile`, {
+        const res = await fetch(`${API_URL}/usuarios/perfil`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -28,9 +27,9 @@ function Perfil() {
 
         const data = await res.json();
 
-        if (!res.ok) throw new Error(data.message || "Error al obtener perfil");
+        if (!res.ok) throw new Error(data.mensaje || "Error al obtener perfil");
 
-        setPerfil(data.user);
+        setPerfil({ ...data, password: "" });
       } catch (err) {
         setError(err.message);
       }
@@ -45,25 +44,33 @@ function Perfil() {
 
   const handleGuardar = async () => {
     try {
-      const res = await fetch(`${API_URL}/profile`, {
+      const body = {
+        nombre: perfil.nombre,
+        email: perfil.email
+      };
+
+      if (perfil.password && perfil.password.trim() !== "") {
+        body.password = perfil.password;
+      }
+
+      const res = await fetch(`${API_URL}/usuarios/perfil`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({
-          nombre: perfil.nombre,
-          telefono: perfil.telefono,
-          direccion: perfil.direccion
-        })
+        body: JSON.stringify(body)
       });
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.message || "Error al actualizar perfil");
+      if (!res.ok) throw new Error(data.mensaje || "Error al actualizar perfil");
 
       setMensaje("Perfil actualizado exitosamente");
       setTimeout(() => setMensaje(""), 3000);
+
+      const usuario = JSON.parse(localStorage.getItem("usuario"));
+      localStorage.setItem("usuario", JSON.stringify({ ...usuario, nombre: perfil.nombre }));
     } catch (err) {
       setError(err.message);
     }
@@ -98,6 +105,7 @@ function Perfil() {
             <label>Correo electrónico</label>
             <input
               type="email"
+              name="email"
               value={perfil.email}
               disabled
               placeholder="correo@ejemplo.com"
@@ -105,24 +113,13 @@ function Perfil() {
           </div>
 
           <div className="perfil-input-card">
-            <label>Teléfono</label>
+            <label>Contraseña nueva</label>
             <input
-              type="text"
-              name="telefono"
-              value={perfil.telefono || ""}
+              type="password"
+              name="password"
+              value={perfil.password}
               onChange={handleChange}
-              placeholder="Ej: 1123456789"
-            />
-          </div>
-
-          <div className="perfil-input-card">
-            <label>Dirección</label>
-            <input
-              type="text"
-              name="direccion"
-              value={perfil.direccion || ""}
-              onChange={handleChange}
-              placeholder="Ej: Av. Siempre Viva 123"
+              placeholder="********"
             />
           </div>
         </div>
