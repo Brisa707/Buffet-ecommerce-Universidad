@@ -144,7 +144,7 @@ function Carrito({ onClose }) {
     if (!token) return navigate('/login');
 
     try {
-      const res = await fetch(`${API_URL}/pedido/pedido`, {
+      const res = await fetch(`${API_URL}/pedidos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({})

@@ -1,36 +1,40 @@
-import { useState } from "react";
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "@config/api";
 import "./pedidos-admin.css";
 
 export default function PedidosAdmin() {
   const navigate = useNavigate();
-  const [pedidos, setPedidos] = useState([
-    {
-      id: 1,
-      numeroPedido: "PED0001",
-      usuario: { nombre: "Juan Pérez", email: "juanperez@example.com" },
-      total: 4500,
-      estado: "pendiente",
-      metodoPago: "efectivo",
-      creado: "2025-10-25",
-    },
-    {
-      id: 2,
-      numeroPedido: "PED0002",
-      usuario: { nombre: "María Gómez", email: "mariagomez@example.com" },
-      total: 3200,
-      estado: "entregado",
-      metodoPago: "tarjeta",
-      creado: "2025-10-26",
-    },
-  ]);
-
+  const [pedidos, setPedidos] = useState([]);
   const [pedidoAEliminar, setPedidoAEliminar] = useState(null);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    fetch(`${API_URL}/pedidos`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => setPedidos(data))
+      .catch(() => console.error("Error al cargar pedidos"));
+  }, []);
+
   const confirmarEliminacion = () => {
-    setPedidos((prev) => prev.filter((pedido) => pedido.id !== pedidoAEliminar.id));
-    setPedidoAEliminar(null);
+    const token = localStorage.getItem("token");
+
+    fetch(`${API_URL}/pedidos/${pedidoAEliminar.id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setPedidos((prev) =>
+          prev.filter((pedido) => pedido.id !== pedidoAEliminar.id)
+        );
+        setPedidoAEliminar(null);
+      })
+      .catch(() => console.error("Error al eliminar pedido"));
   };
 
   const cancelarEliminacion = () => {
@@ -41,12 +45,6 @@ export default function PedidosAdmin() {
     <div className="admin-pedidos-container">
       <div className="admin-pedidos-header">
         <h1 className="admin-pedidos-titulo">Pedidos</h1>
-        <button
-          className="admin-pedidos-agregar"
-          onClick={() => navigate("/admin/pedidos/agregar")}
-        >
-          <FaPlus /> Agregar pedido
-        </button>
       </div>
 
       <div className="admin-pedidos-tabla-wrapper">
@@ -54,11 +52,9 @@ export default function PedidosAdmin() {
           <thead>
             <tr>
               <th>N° Pedido</th>
-              <th>Cliente</th>
-              <th>Email</th>
+              <th>ID Usuario</th>
               <th>Total</th>
               <th>Estado</th>
-              <th>Pago</th>
               <th>Fecha</th>
               <th>Acciones</th>
             </tr>
@@ -66,17 +62,26 @@ export default function PedidosAdmin() {
           <tbody>
             {pedidos.map((pedido) => (
               <tr key={pedido.id}>
-                <td>{pedido.numeroPedido}</td>
-                <td>{pedido.usuario.nombre}</td>
-                <td>{pedido.usuario.email}</td>
-                <td>${pedido.total}</td>
+                <td>{pedido.numero_pedido}</td>
+                <td>{pedido.usuario_id}</td>
+                <td>
+                  $
+                  {Number(pedido.total || 0).toLocaleString("es-AR", {
+                    minimumFractionDigits: 2,
+                  })}
+                </td>
                 <td>{pedido.estado}</td>
-                <td>{pedido.metodoPago}</td>
-                <td>{pedido.creado}</td>
+                <td>
+                  {pedido.fecha
+                    ? new Date(pedido.fecha).toLocaleDateString()
+                    : "—"}
+                </td>
                 <td>
                   <button
                     className="admin-pedidos-boton editar"
-                    onClick={() => navigate(`/admin/pedidos/editar/${pedido.id}`)}
+                    onClick={() =>
+                      navigate(`/admin/pedidos/editar/${pedido.id}`)
+                    }
                   >
                     <FaEdit />
                   </button>
@@ -97,7 +102,8 @@ export default function PedidosAdmin() {
         <div className="admin-popup-overlay">
           <div className="admin-popup">
             <p>
-              ¿Deseás eliminar el pedido <strong>{pedidoAEliminar.numeroPedido}</strong>?
+              ¿Deseás eliminar el pedido{" "}
+              <strong>{pedidoAEliminar.numero_pedido}</strong>?
             </p>
             <div className="admin-popup-acciones">
               <button className="confirmar" onClick={confirmarEliminacion}>

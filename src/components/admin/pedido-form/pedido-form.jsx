@@ -37,8 +37,6 @@ export default function PedidoForm({
           <select name="estado" required>
             <option value="">Seleccionar</option>
             <option value="pendiente">Pendiente</option>
-            <option value="confirmado">Confirmado</option>
-            <option value="preparando">Preparando</option>
             <option value="listo">Listo</option>
             <option value="entregado">Entregado</option>
             <option value="cancelado">Cancelado</option>
