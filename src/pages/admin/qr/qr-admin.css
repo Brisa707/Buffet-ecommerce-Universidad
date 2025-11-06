@@ -69,6 +69,13 @@
     background-color: #013c6a;
 }
 
+.admin-qr-resultado {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+
 /* Tablet styles */
 @media (min-width: 768px) and (max-width: 1023px) {
     .admin-qr-container {
@@ -84,8 +91,27 @@
     }
 
     .admin-qr-scanner-wrapper {
-        width: 50%;
         margin: 30px auto;
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        margin: 0 auto 20px auto;
+    }
+
+    .admin-qr-scanner {
+        width: 100%;
+        max-width: 400px;
+        height: 300px;
+        margin-bottom: 20px;
+        background: none;
+        border: none;
+        border-radius: 0;
     }
 }
 
@@ -104,7 +130,27 @@
     }
 
     .admin-qr-scanner-wrapper {
-        width: 50%;
         margin: 30px auto;
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        margin: 0 auto 20px auto;
     }
+
+    .admin-qr-scanner {
+        width: 100%;
+        max-width: 400px;
+        height: 300px;
+        margin-bottom: 20px;
+        background: none;
+        border: none;
+        border-radius: 0;
+    }
+
 }
