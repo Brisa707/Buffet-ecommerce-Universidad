@@ -1,7 +1,10 @@
 .qr-container {
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
   margin-top: 3.125rem;
   padding: 1rem 2rem;
-  min-height: 100vh;
+  min-height: calc(90vh - 64px);
+  padding-bottom: 9px;
 }
 
 .qr-card {
@@ -23,7 +26,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: black;
+  color: #004080;
   padding: 0;
   display: flex;
   align-items: center;
@@ -33,6 +36,7 @@
   font-size: 1.375rem;
   margin: 0;
   font-weight: 600;
+  color: #004080;
 }
 
 .qr-content {
@@ -100,7 +104,57 @@
   }
 
   .qr-titulo {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+
+  .qr-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 2rem;
+  }
+
+  .qr-content p {
+    font-size: 1.9rem;
+    font-weight: 600;
+    text-shadow: none;
+  }
+
+  .qr-content canvas {
+    width: 390px !important;
+    height: 390px !important;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.60);
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1023px) {
+   .qr-container {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding: 7rem 4rem 3rem;
+  }
+
+  .qr-card {
+    background: none;
+    border: none;
+    box-shadow: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .qr-header {
+    position: absolute;
+    top: 4.9rem;
+    left: 1.4rem;
+    font-weight: 700;
+  }
+
+  .qr-titulo {
+    font-size: 1.7rem;
     font-weight: 700;
   }
 
