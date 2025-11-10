@@ -78,12 +78,18 @@ function Perfil() {
 
   return (
     <div className="perfil-container">
-      <div className="perfil-card">
-        <div className="perfil-header">
+      <div className="perfil-header">
           <button className="perfil-back" onClick={() => navigate(-1)}>
             <AiOutlineArrowLeft size={20} />
           </button>
           <h2 className="perfil-titulo">Mi Cuenta</h2>
+        </div>
+        <div className="perfil-card">
+          <h3 className="perfil-subtitulo">Editar perfil</h3>
+          
+        <div className="perfil-bienvenida">
+          <h3>¡Hola!</h3>
+          <p>Desde aquí podés editar tu información personal y mantener tu cuenta actualizada.</p>
         </div>
 
         {error && <p className="error">{error}</p>}
