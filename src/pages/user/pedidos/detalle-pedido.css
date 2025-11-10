@@ -1,9 +1,21 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+main, 
 .pedidoDetalle-container {
   font-family: 'Poppins', sans-serif;
   background-color: white;
-  padding: 1rem 2rem;
-  min-height: 100vh;
   margin-top: 3.125rem;
+  padding: 1rem 2rem;
+  min-height: calc(100vh - 100px);
+  padding-bottom: 0px; 
+  min-height: auto !important;
+  height: auto !important;
+  padding-bottom: 10 !important;
+  margin-bottom: 0 !important;
 }
 
 .pedidoDetalle-card {
@@ -22,20 +34,21 @@
   margin-bottom: 1rem;
 }
 
-.pedidoDetalle-back {
+.back-button {
   background: none;
   border: none;
   cursor: pointer;
-  color: black;
+  color: #004080;
   padding: 0;
   display: flex;
   align-items: center;
 }
 
 .pedidoDetalle-title {
-  font-size: 1.375rem;
+  font-size: 1.357rem;
   margin: 0;
   font-weight: 600;
+  color: #004080;
 }
 
 .pedidoDetalle-item {
@@ -117,8 +130,12 @@
   background: #002b59;
 }
 
-/* Mobile */
+/* Responsive Mobile */
 @media (max-width: 600px) {
+.pedidoDetalle-container{
+  padding-bottom: 12rem; 
+}
+
   .pedidoDetalle-card {
     background: none;
     box-shadow: none;
@@ -163,7 +180,7 @@
   .pedidoDetalle-container {
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
-    padding: 6rem 5rem 4rem;
+    padding: 6rem 4rem 4rem;
   }
 
   .pedidoDetalle-header {
@@ -175,10 +192,16 @@
     margin: 0;
   }
 
+  .pedidoDetalle-title {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 600;
+}
+
   .pedidoDetalle-card {
     background: none;
     box-shadow: none;
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0;
   }
@@ -194,7 +217,7 @@
   }
 
   .pedidoDetalle-item img {
-    width: 190px;
+    width: 180px;
     height: 180px;
     border-radius: 14px;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.07);
@@ -210,7 +233,7 @@
 
   .pedidoDetalle-nombre {
     font-weight: 700;
-    font-size: 1.50rem;
+    font-size: 1.40rem;
     margin-bottom: 0.3rem;
   }
 
@@ -229,7 +252,7 @@
     align-items: center;
     font-size: 1.40rem;
     font-weight: 700;
-    margin-top: 2.1rem;
+    margin-top: 2rem;
   }
 
   .pedidoDetalle-total-precio {
@@ -250,5 +273,93 @@
   }
 }
 
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1023px) {
+.pedidoDetalle-container {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding: 6rem 4rem 4rem;
+    padding-bottom: 11rem; 
+  }
 
+  .pedidoDetalle-header {
+    position: absolute;
+    top: 5rem;
+    left: 1.4rem;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0;
+  }
 
+  .pedidoDetalle-card {
+    background: none;
+    box-shadow: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .pedidoDetalle-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .pedidoDetalle-item {
+    border-radius: 18px;
+    padding: 1.4rem;
+    margin-bottom: 1.5rem;
+    gap: 2rem;
+  }
+
+  .pedidoDetalle-item img {
+    width: 130px;
+    height: 130px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .pedidoDetalle-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 0.4rem;
+  }
+
+  .pedidoDetalle-nombre {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .pedidoDetalle-precio {
+    font-size: 1.1rem;
+  }
+
+  .pedidoDetalle-cantidad {
+    font-size: 1rem;
+  }
+
+  .pedidoDetalle-total {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pedidoDetalle-total-precio {
+    font-size: 1.35rem;
+  }
+
+  .btn-qr {
+    border-radius: 35px;
+    padding: 1rem;
+    width: 80%;
+    font-size: 1rem;
+    font-weight: 600;
+    display: block;
+    margin: 2rem auto 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+}
