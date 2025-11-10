@@ -17,6 +17,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    color: #004080;
 }
 
 .contact-header h2 {
@@ -29,7 +30,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: black;
+    color: #004080;
     padding: 0;
     display: flex;
     align-items: center;
