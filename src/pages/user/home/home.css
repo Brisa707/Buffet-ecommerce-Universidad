@@ -211,7 +211,7 @@
   margin: 1.5rem 0 1rem 0;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #000;
+  color: #004080;
   border-left: 5px solid #0073e6;
   padding-left: 8px;
   animation: slideUp 1s ease;
@@ -267,6 +267,73 @@
   color: #004c99; 
 }
 
+/* ==== Banner Buffet Principal ==== */
+.home-banner-cafe {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.banner-cafe {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.banner-cafe img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.banner-cafe:hover {
+  box-shadow: 0 6px 19px rgba(0, 0, 0, 0.2);
+}
+
+/* Texto sobre la imagen */
+.banner-cafe-text {
+  position: absolute;
+  top: 78%;
+  left: 2%;
+  transform: translateY(-50%);
+  color: white;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  max-width: 45%;
+}
+
+.banner-cafe-text h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.banner-cafe-text p {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+}
+
+.btn-banner {
+  background-color: #01538D;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  border-radius: 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-banner:hover {
+  background-color: #0073c0;
+}
+
 /* Promociones */
 .promociones-section { padding: 0 1rem 1rem 1rem; }
 .promociones-productos-grid {
@@ -289,6 +356,90 @@
 }
 .promociones-productos-grid .producto-card button:hover {
   background: #002b59;
+}
+
+/* ==== Banners Promocionales (debajo de promociones) ==== */
+.home-banners-buffet {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px;
+  margin: 60px auto;
+  flex-wrap: wrap;
+}
+
+.buffet-banner-item {
+  flex: 1;
+  min-width: 420px;
+  max-width: 700px;
+  background: linear-gradient(135deg, #004aad, #0072ff);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 120, 255, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.buffet-banner-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 40px rgba(0, 120, 255, 0.35);
+}
+
+.buffet-banner-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+.buffet-banner-text {
+  flex: 1;
+  z-index: 2;
+}
+
+.buffet-banner-text h3 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.buffet-banner-text h3 span {
+  color: #00eaff;
+}
+
+.buffet-banner-text p {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.banner-extra {
+  background-color: #00eaff;
+  color: #000;
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.buffet-banner-img {
+  flex: 0 0 120px;
+  z-index: 2;
+}
+
+.buffet-banner-img img {
+  width: 330px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
 }
 
 /* Mobile */
@@ -360,6 +511,89 @@
     width: 120px;
     height: 140px;
   }
+
+/* Banner Buffet Principal */
+  .home-banner-cafe {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .banner-cafe {
+    width: 100%;
+    max-width: 1400px;
+    border-radius: 0px;
+  }
+
+  .banner-cafe img {
+    width: 104%;
+    height: 100%;
+  }
+
+/* Texto sobre la imagen */
+  .banner-cafe-text {
+    position: absolute;
+    top: 80%;
+    left: 1%;
+  }
+
+  .banner-cafe-text h2 { display: none; }
+
+  .banner-cafe-text p { display: none; }
+
+  .btn-banner {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 14px;
+    font-size: 0.8rem;
+  }
+
+  /* Banners Promocionales */
+  .home-banners-buffet {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    margin: 30px auto;
+    flex-wrap: wrap;
+  }
+
+  .buffet-banner-item {
+    flex: 1;
+    min-width: 190px;
+    max-width: 390px;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .buffet-banner-text {
+    flex: 1;
+    z-index: 2;
+  }
+
+  .buffet-banner-text h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .buffet-banner-text p {
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .banner-extra {
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 0.5rem;
+    font-weight: 600;
+  }
+
+  .buffet-banner-img img {
+    width: 200px;
+  }
+  .grid-banner { display: none; }
+  
 }  
 
 /* Desktop */
