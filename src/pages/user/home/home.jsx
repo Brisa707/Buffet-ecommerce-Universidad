@@ -169,6 +169,20 @@ function Home() {
           </div>
         </section>
 
+        {/* Banner Buffet */}
+        <section className="home-banner-cafe">
+          <div className="banner-cafe">
+            <img src="/src/assets/bannerBuffet.png" alt="Banner Buffet" />
+            <div className="banner-cafe-text">
+              <h2>Promociones del Buffet</h2>
+              <p>Por compras superiores a $5.000 obtené un café gratis</p>
+              <button className="btn-banner" onClick={() => navigate("/productos")}>
+                Pedir ahora
+              </button>
+            </div>
+          </div>
+        </section>
+
         {/* Promociones */}
         <section className="promociones-section">
           <h2>Promociones</h2>
@@ -176,6 +190,31 @@ function Home() {
             {promociones.map((promo) => (
               <ProductCard key={promo.id} producto={promo} onAddToCart={handleAddToCart} />
             ))}
+          </div>
+        </section>
+
+         {/* Banners Promocionales Buffet */}
+        <section className="home-banners-buffet">
+          <div className="buffet-banner-item">
+            <div className="buffet-banner-text">
+              <h3>HASTA <span>20% OFF</span></h3>
+              <p>En combos de almuerzo</p>
+              <div className="banner-extra">Con pedidos desde el aula </div>
+            </div>
+            <div className="buffet-banner-img">
+              <img src="/src/assets/banner-combo.png" alt="Combo de almuerzo" />
+            </div>
+          </div>
+
+          <div className="buffet-banner-item">
+            <div className="buffet-banner-text">
+              <h3><span>2x1</span> EN DESAYUNOS</h3>
+              <p>De 8:00 a 10:00 hs</p>
+              <div className="banner-extra">Con café o medialunas </div>
+            </div>
+            <div className="buffet-banner-img">
+              <img src="/src/assets/banner-desayuno.png" alt="Desayuno Buffet" />
+            </div>
           </div>
         </section>
       </main>
