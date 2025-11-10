@@ -26,7 +26,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: black;
+  color: #004080;
   padding: 0;
   display: flex;
   align-items: center;
@@ -35,6 +35,7 @@
 .perfil-titulo {
   font-size: 1.375rem;
   margin: 0;
+  color: #004080;
   font-weight: 600;
 }
 
@@ -73,7 +74,7 @@
   flex: 1;
   padding: 10px 0;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -106,31 +107,71 @@
 /* Responsive para mobile */
 @media (max-width: 600px) {
   .perfil-card {
-    background: none;
-    box-shadow: none;
-    padding: 0;
+    background: white;
+    border-radius: 16px;
+    border: 1.2px solid #2179b4;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 1.8rem 1.2rem;
+    width: 90%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
   }
 
   .perfil-titulo {
     font-size: 1.375rem;
   }
 
+  .perfil-subtitulo {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #01538D;
+    margin-bottom: 2rem;
+    border-bottom: 3px solid #dcebf5;
+    padding-bottom: 0.5rem;
+    }
+
+  /* Eliminamos las mini-cards */
   .perfil-input-card {
-    padding: 0.8rem;
+    background: none;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+
+  .perfil-input-card label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    display: block;
   }
 
   .perfil-input-card input {
+    width: 90%;
+    background: #dcebf5;
+    border: none;
+    border-radius: 14px;
     font-size: 0.9rem;
-    padding: 8px;
+    padding: 12px;
+    outline: none;
   }
 
   .perfil-actions {
     flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
   }
 
   .perfil-boton {
-    width: 100%;
+    width: 98%;
     font-size: 0.95rem;
+    padding: 0.8rem;
+    border-radius: 25px;
+  }
+
+  /* Ocultar texto de bienvenida */
+  .perfil-bienvenida {
+    display: none;
   }
 }
 
@@ -139,15 +180,43 @@
   .perfil-container {
     min-height: 100vh;
     padding: 7rem 4rem 3rem;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: flex-start;
+  }
+
+  .perfil-bienvenida {
+    position: absolute;
+    top: 16rem;
+    left: 6rem;
+    width: 340px;
+    font-size: 1.8rem;
+    line-height: 1.8;
+  }
+
+  .perfil-bienvenida h3 {
+    color: #01538D;
   }
 
   .perfil-card {
-    background: none;
-    border: none;
-    box-shadow: none;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0;
+    background: white; 
+    border: 2px solid #2179b4;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    max-width: 900px; 
+    width: 100%;
+    padding: 3rem;
+    margin-right: 2rem; 
+  }
+
+  /* Nuevo título dentro de la card */
+  .perfil-subtitulo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #01538D;
+    margin-bottom: 3rem;
+    border-bottom: 3px solid #dcebf5;
+    padding-bottom: 0.5rem;
   }
 
   .perfil-header {
@@ -162,25 +231,40 @@
     font-weight: 700;
   }
 
+  .perfil-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Eliminamos el estilo de mini-card individual */
   .perfil-input-card {
-    border-radius: 14px;
-    padding: 2rem;
-    gap: 1.2rem;
-    margin-bottom: 1.5rem;
+    background: none;
+    padding: 0;
+    margin: 0;
   }
 
   .perfil-input-card label {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    display: block;
   }
 
   .perfil-input-card input {
+    width: 96%;
+    background: #dcebf5;
+    border: none;
+    border-radius: 14px;
     font-size: 1.1rem;
-    padding: 12px 18px;
+    padding: 14px 18px;
+    outline: none;
   }
 
   .perfil-actions {
-    justify-content: center;
-    gap: 2rem;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    margin-top: 2rem;
   }
 
   .perfil-boton {
@@ -188,6 +272,106 @@
     padding: 0.9rem 2.5rem;
     border-radius: 40px;
     font-weight: 600;
-    width: 220px;
+    width: 200px;
   }
 }
+
+/* Responsive para tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .perfil-container {
+    min-height: 100vh;
+    padding: 7rem 4rem 3rem;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: flex-start;
+  }
+
+  .perfil-header {
+    position: absolute;
+    top: 5rem;
+    left: 1.5rem;
+    font-weight: 700;
+  }
+
+  .perfil-titulo {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .perfil-back {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #003366;
+  }
+
+  /* Card de edición */
+  .perfil-card {
+    background: white;
+    border-radius: 18px;
+    border: 2px solid #2179b4;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+    padding: 2rem 2rem;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .perfil-subtitulo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #01538D;
+    margin-bottom: 2rem;
+    border-bottom: 3px solid #dcebf5;
+    padding-bottom: 0.5rem;
+  }
+
+  .perfil-input-card {
+    background: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .perfil-input-card label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .perfil-input-card input {
+    width: 94%;
+    background: #dcebf5;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    padding: 12px 16px;
+    outline: none;
+  }
+
+  /* Botones */
+  .perfil-actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .perfil-boton {
+    flex: 1;
+    max-width: 280px;
+    font-size: 1rem;
+    border-radius: 30px;
+  }
+
+  /* Ocultar texto de bienvenida */
+  .perfil-bienvenida {
+    display: none;
+  }
+}
+
