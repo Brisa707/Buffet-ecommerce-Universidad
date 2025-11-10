@@ -21,6 +21,24 @@ function Productos() {
   const [productosData, setProductosData] = useState([]);
   const [mensaje, setMensaje] = useState("");
 
+  // Agregado: estado para filtros
+  const [mostrarFiltros, setMostrarFiltros] = useState(false);
+  const [filtros, setFiltros] = useState({
+    ofertas: false,
+    nuevos: false,
+    masvendidos: false,
+    maxPrecio: 5000,
+  });
+
+  const handleFiltroChange = (e) => {
+    const { id, checked } = e.target;
+    setFiltros((prev) => ({ ...prev, [id]: checked }));
+  };
+
+  const handlePrecioChange = (e) => {
+    setFiltros((prev) => ({ ...prev, maxPrecio: Number(e.target.value) }));
+  };
+
   // Traer productos del backend
   useEffect(() => {
     const fetchProductos = async () => {
@@ -36,10 +54,16 @@ function Productos() {
     fetchProductos();
   }, []);
 
-  const productosFiltrados =
-    categoriaSeleccionada === "all"
-      ? productosData
-      : productosData.filter((p) => p.categoria === categoriaSeleccionada);
+  // Aplicar filtros además de la categoría
+  const productosFiltrados = productosData
+    .filter((p) => (categoriaSeleccionada === "all" ? true : p.categoria === categoriaSeleccionada))
+    .filter((p) => p.precio <= filtros.maxPrecio)
+    .filter((p) => {
+      if (filtros.ofertas && !p.oferta) return false;
+      if (filtros.nuevos && !p.nuevo) return false;
+      if (filtros.masvendidos && !p.masVendido) return false;
+      return true;
+    });
 
   const handleAddToCart = (producto) => {
     const token = localStorage.getItem('token');
@@ -85,31 +109,59 @@ function Productos() {
     <>
       <div className="productos-layout">
         {/* Columna izquierda */}
-        <aside className="productos-sidebar left">
-          <div className="sidebar-card">
-            <h3>Promos del día</h3>
-            <ul>
-              <li>Café + medialuna — $2000</li>
-              <li>Hamburguesa + papas — $3500</li>
-            </ul>
-            <button className="btn-promo">Paga con QR y obtené 10% OFF</button>
-          </div>
+        <aside className="productos-sidebar left desktop-banner">
+          <button
+            className="btn-toggle-filtros"
+            onClick={() => setMostrarFiltros(!mostrarFiltros)}
+          >
+            {mostrarFiltros ? "Cerrar Filtros ▲" : "Mostrar Filtros ▼"}
+          </button>
 
-          <div className="sidebar-card">
-            <h3>Horarios de Atención</h3>
-            <p>Lun a Vie: 08:00 – 22:00</p>
-            <p>Sábados: 09:00 – 14:00</p>
-          </div>
+          {mostrarFiltros && (
+            <div className="sidebar-card filtros-card">
+              <h3>Filtros</h3>
+              <ul>
+                <li>
+                  <input type="checkbox" id="ofertas" checked={filtros.ofertas} onChange={handleFiltroChange} />
+                  <label htmlFor="ofertas">Ofertas</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="nuevos" checked={filtros.nuevos} onChange={handleFiltroChange} />
+                  <label htmlFor="nuevos">Nuevos</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="masvendidos" checked={filtros.masvendidos} onChange={handleFiltroChange} />
+                  <label htmlFor="masvendidos">Más vendidos</label>
+                </li>
+              </ul>
 
-          <div className="sidebar-card">
-            <h3>Contacto</h3>
-            <p>📍 Blas Parera 132, Burzaco</p>
-            <p>WhatsApp: +54 11 1234-5678</p>
-            <a href="https://maps.google.com" target="_blank" rel="noreferrer">
-              Ver en mapa
-            </a>
-          </div>
-        </aside>
+              <h4>Rango de precio</h4>
+              <p>$1000 Hasta ${filtros.maxPrecio}</p>
+              <input
+                type="range"
+                min="1000"
+                max="5000"
+                step="100"
+                value={filtros.maxPrecio}
+                onChange={handlePrecioChange}
+              />
+            </div>
+          )}
+
+          {/* Banner Promocional */}
+          <div className="banner-promocional">
+           <img
+             src="/src/assets/banner-productos.png"
+             alt="Banner Buffet"
+             className="banner-promocional-img"
+          />
+            <div className="banner-contenido">
+            <h4>Buffet Universitario</h4>
+            <h2>Disfrutá lo mejor del día</h2>
+            <p>Pedí tus combos favoritos y obtené beneficios exclusivos.</p>
+           </div>
+         </div>
+       </aside>
 
         {/* Centro */}
         <div className="productos-wrapper">
@@ -142,13 +194,17 @@ function Productos() {
 
           <section>
             <div className="productos-grid">
+              {productosFiltrados.length > 0 ? (
               {productosFiltrados.map((prod) => (
                 <ProductCard
                   key={prod.id}
                   producto={prod}
                   onAddToCart={handleAddToCart}
                 />
-              ))}
+              ))
+            ) : (
+                <p className="sin-resultados">No hay productos que coincidan con los filtros seleccionados.</p>
+              )}
             </div>
           </section>
         </div>
@@ -156,16 +212,16 @@ function Productos() {
         {/* Columna derecha */}
         <aside className="productos-sidebar right">
           <div className="sidebar-card">
-            <h3>⭐ Top Ventas</h3>
+            <h3>★ Top Ventas</h3>
             <p>Hamburguesa + papas — $3500</p>
             <p>Café + 2 medialunas — $2000</p>
             <button className="btn-promo">+ Añadir</button>
           </div>
 
           <div className="sidebar-card">
-            <h3>🆕 Novedades</h3>
-            <p>Ensalada fresca</p>
-            <p>Pizza individual</p>
+            <h3>Horarios de Atención</h3>
+            <p>Lun a Vie: 08:00 – 22:00</p>
+            <p>Sábados: 09:00 – 14:00</p>
           </div>
 
           <div className="sidebar-card">
@@ -177,12 +233,8 @@ function Productos() {
 
           <div className="sidebar-card">
             <h3> Te recomendamos</h3>
-            <p>
-              Si pediste <b>Hamburguesa</b>, añadí <b>Papas grandes</b>
-            </p>
-            <p>
-              Si pediste <b>Café con medialuna</b>, probá <b>Brownie</b>
-            </p>
+            <p>Si pediste <b>Hamburguesa</b>, añadí <b>Papas grandes</b></p>
+            <p>Si pediste <b>Café con medialuna</b>, probá <b>Brownie</b></p>
           </div>
         </aside>
       </div>
