@@ -12,11 +12,12 @@
   margin-bottom: 1.2rem;
 }
 
-.productos-back {
+.detalle-back {
   background: none;
   border: none;
   cursor: pointer;
-  color: black;
+  font-size: 1.9rem;
+  color: #004080;
   padding: 0;
   display: flex;
   align-items: center;
@@ -25,7 +26,8 @@
 .productos-titulo {
   font-size: 1.375rem;
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
+  color: #004080;
 }
 
 /* Categorías */
@@ -74,38 +76,29 @@
 
 /* Responsive Mobile */
 @media (max-width: 900px) {
-
-  .productos-wrapper {
-    padding: 0;
-  }
-
   .productos-header {
     position: relative;
-    margin-bottom: 0.5rem;
-    top: 3rem;
+    margin-bottom: 1rem;
+    top: 2.7rem;
     left: auto;
     font-size: 1.3rem;
-    padding: 1rem 2rem;
   }
-
   .productos-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 1rem;
-    margin-top: 0;
-    padding: 0 2rem 1rem 2rem;
+    margin-top: 0
   }
-
-  .productos-categorias {
-    padding: 1rem 0 0rem 2rem;
-
+  .productos-layout {
+    min-height: calc(110vh - 100px); 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
-
   .categoria-card {
     min-width: 84px;
     padding: 0.35rem 0.5rem;
     font-size: 0.82rem;
-    margin-top: 1.5rem;
-    box-shadow: none;
+    margin-top: 2.9rem
   }
 
   .productos-sidebar {
@@ -120,7 +113,6 @@
     gap: 1.2rem;
     justify-content: center;
   }
-
   .productos-categorias {
     justify-content: center;
     overflow-x: visible;
@@ -128,15 +120,14 @@
     flex-wrap: wrap;
     margin-top: 8rem;
   }
-
   .productos-layout {
     display: grid;
+    min-height: calc(148vh - 100px); 
     grid-template-columns: 290px 1fr 290px;
     gap: 1.5rem;
     align-items: start;
     position: relative;
   }
-
   .productos-header {
     position: absolute;
     top: 4.9rem;
@@ -145,45 +136,43 @@
     font-weight: 700;
   }
 
+  .productos-titulo {
+  font-size: 1.8rem;
+  }
+
   .productos-sidebar {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.9rem;
     margin-top: 13rem;
-    padding-left: 0.9rem;
-    padding-right: 0.9rem;
+    padding-left: 0.7rem;
+    padding-right: 0.2rem;
   }
-
-  /* Ajuste para separar del borde */
+   /* Ajuste para separar del borde */
   .productos-sidebar.left {
-    margin-left: 1rem;
+    margin-left: 1rem;  
   }
-
   .productos-sidebar.right {
-    margin-right: 1rem;
+    margin-right: 0.9rem; 
   }
-
   .sidebar-card {
     background: #f5f9ff;
     border-radius: 12px;
     padding: 1rem;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
   }
-
   .sidebar-card h3 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: #004080;
   }
-
   .sidebar-card p,
   .sidebar-card li {
     font-size: 0.9rem;
     margin: 0.3rem 0;
     color: #333;
   }
-
   .btn-promo {
     margin-top: 0.8rem;
     width: 100%;
@@ -197,9 +186,239 @@
     font-weight: 500;
     transition: background 0.3s;
   }
+  .btn-promo:hover { background: #002b59; }
 
-  .btn-promo:hover {
-    background: #002b59;
+/* Banner Izquierdo */
+  .banner-promocional {
+  position: relative;
+  width: 106%;
+  height: 600px;
+  border-radius: 18px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.banner-promocional::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(70, 118, 221, 0.991) 0%,
+    rgba(181, 225, 250, 0.741) 40%,
+    rgba(53, 79, 135, 0.99) 100%
+  );
+  z-index: 1;
+}
+
+.banner-promocional-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.85);
+}
+
+  .banner-contenido {
+    position: relative;
+    color: rgb(255, 255, 255);
+    padding: 1.5rem;
+    z-index: 2;
+    max-width: 85%;
+  }
+
+  .banner-contenido h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    color: #0d5388;
+  }
+
+  .banner-contenido h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+
+  .banner-contenido p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+/* Estilos refinados para los filtros */
+.sidebar-card input[type="checkbox"] {
+  accent-color: #01538D;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.sidebar-card input[type="checkbox"]:hover {
+  transform: scale(1.1);
+}
+
+/* Subtítulo 'Rango de precio' */
+.sidebar-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #004080;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Texto de rango */
+.sidebar-card .rango-texto {
+  color: #01538D;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Barra de rango (input range) azul con estilo redondeado */
+.sidebar-card input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #004080, #69a4ff);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  transition: background 0.3s ease;
+}
+
+.sidebar-card input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #004080;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.sidebar-card input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: #01538D;
+}
+
+/* Título principal del card ("Filtros") */
+.sidebar-card h3 {
+  color: #002b59;
+  border-bottom: 2px solid #01538D;
+  padding-bottom: 0.4rem;
+}
+
+/* Botón de cierre con tono azul */
+.btn-toggle-filtros {
+  background: #e7f0ff;
+  color: #004080;
+}
+
+.btn-toggle-filtros:hover {
+  background: #d4e6ff;
+}
+
+/* Botón para mostrar/ocultar filtros */
+.btn-toggle-filtros {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: #f5f9ff;
+  border: none;
+  border-radius: 40px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #002b59;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  transition: all 0.25s ease;
+  margin-bottom: 0.8rem;
+}
+
+.btn-toggle-filtros:hover {
+  background: #e7f0ff;
+  transform: scale(1.05);
+}
+}
+
+/* Responsive para tablets */
+@media (min-width: 901px) and (max-width: 1099px) {
+  .productos-wrapper {
+    padding: 5rem 1.5rem;
+  }
+
+  .productos-layout {
+    min-height: calc(120vh - 200px); 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Header */
+  .productos-header {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+  }
+
+  .productos-back {
+    font-size: 1.9rem;
+  }
+
+  .productos-titulo {
+    font-size: 1.8rem;
+  }
+
+  /* Categorías */
+  .productos-categorias {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .categoria-card {
+    min-width: 100px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 30px;
+  }
+
+  /* Grid de productos */
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.3rem;
+    justify-content: center;
+  }
+
+  /* Sidebar oculta */
+  .productos-sidebar {
+    display: none;
+  }
+
+  /* Banner promocional */
+  .banner-promocional {
+    display: none;
   }
 }
 
