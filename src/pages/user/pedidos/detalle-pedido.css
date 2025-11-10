@@ -1,3 +1,12 @@
+.pedidoDetalle-container {
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  margin-top: 3.125rem;
+  padding: 1rem 2rem;
+  min-height: calc(100vh - 100px);
+  padding-bottom: 0px; 
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -6,12 +15,6 @@ html, body {
 
 main, 
 .pedidoDetalle-container {
-  font-family: 'Poppins', sans-serif;
-  background-color: white;
-  margin-top: 3.125rem;
-  padding: 1rem 2rem;
-  min-height: calc(100vh - 100px);
-  padding-bottom: 0px; 
   min-height: auto !important;
   height: auto !important;
   padding-bottom: 10 !important;
