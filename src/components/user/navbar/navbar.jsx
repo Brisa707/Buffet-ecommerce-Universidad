@@ -37,7 +37,11 @@ const Navbar = () => {
           <NavLink to="/home">
             <img src="/Logo-buffet.png" alt="Logo buffet UNaB" />
           </NavLink>
+
+          <div className="logo-text">
+          <h2>Buffet UNaB</h2>
         </div>
+      </div>
 
         {/* BUSCADOR */}
         <form className="search-box" onSubmit={handleBuscar}>
@@ -63,6 +67,10 @@ const Navbar = () => {
           <NavLink to="/carrito" onClick={() => setShowNav(false)}>
             <MdLocalGroceryStore className="nav-icon-cart" />
           </NavLink>
+
+          <div className="mobile-icon">
+            <Notificaciones />
+          </div>
         </div>
 
         {/* NAV LINKS MOBILE */}
@@ -118,6 +126,11 @@ const Navbar = () => {
             {/* Carrito Desktop */}
             <li onClick={() => setIsCartOpen((prev) => !prev)}>
               <MdLocalGroceryStore className="nav-icon-cart" />
+            </li>
+
+            {/* Notificaciones */}
+            <li>
+              <Notificaciones />
             </li>
 
             <li
