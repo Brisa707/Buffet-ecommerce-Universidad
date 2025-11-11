@@ -48,7 +48,11 @@ const Detalle = () => {
 
         {productos.map((p) => (
           <div className="pedidoDetalle-item" key={p.id}>
-            <img src={"https://via.placeholder.com/80"} alt={p.nombre} />
+            <img
+              src={p.imagen_url || "https://via.placeholder.com/80"}
+              alt={p.nombre}
+              className="pedidoDetalle-img"
+            />
             <div className="pedidoDetalle-info">
               <p className="pedidoDetalle-nombre">{p.nombre}</p>
               <p className="pedidoDetalle-precio">

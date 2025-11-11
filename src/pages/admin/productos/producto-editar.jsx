@@ -6,16 +6,34 @@ import ProductoForm from "@admincomponents/producto-form/producto-form";
 export default function ProductoEditar() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [producto, setProducto] = useState(null);
+  const [producto, setProducto] = useState({
+    nombre: "",
+    descripcion: "",
+    precio: "",
+    stock: "",
+    categoria: "",
+    activo: true,
+    imagen_url: ""
+  });
   const [loading, setLoading] = useState(true);
 
+  // Traer producto por ID
   useEffect(() => {
     const fetchProducto = async () => {
       try {
         const res = await fetch(`${API_URL}/productos/${id}`);
         if (!res.ok) throw new Error("No se pudo obtener el producto");
         const data = await res.json();
-        setProducto(data);
+
+        setProducto({
+          nombre: data.nombre || "",
+          descripcion: data.descripcion || "",
+          precio: data.precio || "",
+          stock: data.stock || "",
+          categoria: data.categoria || "",
+          activo: data.activo ?? true,
+          imagen_url: data.imagen_url || ""
+        });
       } catch (error) {
         console.error("Error al cargar producto:", error.message);
         alert("Error al cargar el producto");
@@ -27,18 +45,42 @@ export default function ProductoEditar() {
     fetchProducto();
   }, [id]);
 
+  // Guardar cambios
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const token = localStorage.getItem("token");
+
+      // Si hay nueva imagen seleccionada, primero subirla
+      let imagen_url = producto.imagen_url;
+      if (producto.imagen) {
+        const formData = new FormData();
+        formData.append("imagen", producto.imagen);
+
+        const uploadRes = await fetch(`${API_URL}/upload`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        });
+
+        if (!uploadRes.ok) {
+          const err = await uploadRes.json().catch(() => ({}));
+          throw new Error(err.mensaje || "Error al subir imagen");
+        }
+
+        const uploadData = await uploadRes.json();
+        imagen_url = uploadData.url;
+      }
+
       const body = {
         nombre: producto.nombre,
         descripcion: producto.descripcion,
         precio: parseFloat(producto.precio),
         stock: parseInt(producto.stock),
         categoria: producto.categoria,
-        activo: producto.activo, 
+        activo: producto.activo,
+        imagen_url
       };
 
       const res = await fetch(`${API_URL}/productos/${id}`, {

@@ -20,13 +20,30 @@ export default function ProductoCrear() {
 
     try {
       const token = localStorage.getItem("token");
+
+      let imagen_url = null;
+      if (producto.imagen) {
+        const formData = new FormData();
+        formData.append("imagen", producto.imagen);
+
+        const uploadRes = await fetch(`${API_URL}/upload`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        });
+
+        const uploadData = await uploadRes.json();
+        imagen_url = uploadData.url;
+      }
+
       const body = {
         nombre: producto.nombre,
         descripcion: producto.descripcion,
         precio: parseFloat(producto.precio),
         stock: parseInt(producto.stock),
         categoria: producto.categoria,
-        activo: producto.activo, 
+        activo: producto.activo,
+        imagen_url,
       };
 
       const response = await fetch(`${API_URL}/productos`, {

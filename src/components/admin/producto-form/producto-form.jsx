@@ -90,7 +90,6 @@ export default function ProductoForm({ producto, setProducto, onSubmit, title })
           />
         </label>
 
-        {/* Nuevo campo Activo */}
         <label>
           Activo:
           <input
