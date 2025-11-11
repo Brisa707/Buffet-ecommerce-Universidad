@@ -1,0 +1,176 @@
+.notificaciones-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 8px;
+}
+
+.icono-campana {
+  position: relative;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.contador {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: rgb(4, 19, 157);
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.lista-notificaciones {
+  position: absolute;
+  top: 2.9rem;
+  right: 0;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 280px;
+  border-radius: 6px;
+  padding: 0.5rem;
+  z-index: 2000;
+}
+
+.notificacion-item {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  color: black;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.notificacion-item:hover {
+  background-color: #f2f2f2;
+}
+
+.notificacion-item.leida {
+  color: gray;
+  background-color: #fafafa;
+}
+
+.sin-notificaciones {
+  text-align: center;
+  font-size: 0.9rem;
+  color: gray;
+  padding: 0.5rem 0;
+}
+
+.notificaciones-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e0e0e0;
+  padding: 0.5rem 0.75rem;
+  background-color: #f8f9fa;
+}
+
+.notificaciones-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.icono-marcar-todo {
+  font-size: 1.2rem;
+  color: #01538D;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.icono-marcar-todo:hover {
+  color: #008cff;
+}
+
+.notificacion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notificacion-item:hover {
+  background-color: #eef6ff;
+}
+
+.texto-notificacion {
+  flex: 1;
+  margin-right: 10px;
+  
+}
+
+.icono-eliminar {
+  font-size: 0.8rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.icono-eliminar:hover {
+  color: #01538D;
+}
+
+.btn-simular {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  background-color: #01538D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.btn-simular:hover {
+  background-color: #023b65;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  /* Contenedor que agrupa carrito y notificaciones */
+  .mobile-cart {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* separa carrito y campana */
+    margin-left: 2px;
+  }
+
+  /* Separación entre menú hamburguesa y el grupo de iconos */
+  .menu-icon {
+    margin-right: 1px; /* aleja un poco el menú del resto */
+  }
+
+  .notificaciones-container {
+    position: relative;
+    left: 0px;
+    top: -2px; /* probá entre -2px y -5px según cómo se vea */
+  }
+
+  .notificaciones-container .contador {
+    top: -1px;
+    right: -2px;
+    width: 15px;
+    height: 15px;
+    font-size: 0.65rem;
+  }
+}
+
+
+
