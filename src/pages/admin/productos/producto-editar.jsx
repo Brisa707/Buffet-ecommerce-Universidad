@@ -38,6 +38,7 @@ export default function ProductoEditar() {
         precio: parseFloat(producto.precio),
         stock: parseInt(producto.stock),
         categoria: producto.categoria,
+        activo: producto.activo, 
       };
 
       const res = await fetch(`${API_URL}/productos/${id}`, {

@@ -12,19 +12,21 @@ export default function ProductoCrear() {
     categoria: "",
     stock: "",
     imagen: null,
+    activo: true,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem("token"); 
+      const token = localStorage.getItem("token");
       const body = {
         nombre: producto.nombre,
         descripcion: producto.descripcion,
         precio: parseFloat(producto.precio),
         stock: parseInt(producto.stock),
         categoria: producto.categoria,
+        activo: producto.activo, 
       };
 
       const response = await fetch(`${API_URL}/productos`, {

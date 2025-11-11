@@ -2,8 +2,17 @@ import "./producto-form.css";
 
 export default function ProductoForm({ producto, setProducto, onSubmit, title }) {
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
-    const val = type === "file" ? files[0] : value;
+    const { name, value, type, checked, files } = e.target;
+    let val;
+
+    if (type === "file") {
+      val = files[0];
+    } else if (type === "checkbox") {
+      val = checked;
+    } else {
+      val = value;
+    }
+
     setProducto((prev) => ({ ...prev, [name]: val }));
   };
 
@@ -77,6 +86,17 @@ export default function ProductoForm({ producto, setProducto, onSubmit, title })
             name="imagen"
             type="file"
             accept="image/*"
+            onChange={handleChange}
+          />
+        </label>
+
+        {/* Nuevo campo Activo */}
+        <label>
+          Activo:
+          <input
+            name="activo"
+            type="checkbox"
+            checked={producto.activo ?? true}
             onChange={handleChange}
           />
         </label>

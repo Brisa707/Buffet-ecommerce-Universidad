@@ -10,8 +10,9 @@ export default function ProductosAdmin() {
   const [productoAEliminar, setProductoAEliminar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [mensaje, setMensaje] = useState("");
 
-  // Cargar productos desde el backend
+  // Cargar productos activos
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -29,24 +30,38 @@ export default function ProductosAdmin() {
     fetchProductos();
   }, []);
 
-  // Confirmar eliminación
+  // Confirmar eliminación lógica
   const confirmarEliminacion = async () => {
     if (!productoAEliminar) return;
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("Debes iniciar sesión como administrador");
+      return;
+    }
+
     try {
       const res = await fetch(`${API_URL}/productos/${productoAEliminar.id}`, {
-        method: "DELETE",
+        method: "DELETE", // sigue siendo DELETE, pero backend hace UPDATE activo=false
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
       });
 
       if (res.ok) {
         setProductos((prev) =>
           prev.filter((p) => p.id !== productoAEliminar.id)
         );
+        setMensaje("Producto eliminado correctamente");
+        setTimeout(() => setMensaje(""), 2000);
       } else {
-        console.error("Error al eliminar el producto");
+        const err = await res.json().catch(() => ({}));
+        setError(err.mensaje || "Error al eliminar el producto");
       }
     } catch (error) {
       console.error("Error al eliminar producto:", error);
+      setError("Error al eliminar producto");
     }
 
     setProductoAEliminar(null);
@@ -54,13 +69,8 @@ export default function ProductosAdmin() {
 
   const cancelarEliminacion = () => setProductoAEliminar(null);
 
-  if (loading) {
-    return <p className="cargando">Cargando productos...</p>;
-  }
-
-  if (error) {
-    return <p className="error">{error}</p>;
-  }
+  if (loading) return <p className="cargando">Cargando productos...</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="admin-productos-container">
@@ -73,6 +83,8 @@ export default function ProductosAdmin() {
           <FaPlus /> Agregar producto
         </button>
       </div>
+
+      {mensaje && <div className="mensaje-exito">{mensaje}</div>}
 
       <div className="admin-productos-tabla-wrapper">
         <table className="admin-productos-tabla">

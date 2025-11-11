@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ProductCard from "@usercomponents/product-card/product-card";
-import './productos.css';
+import "./productos.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { API_URL } from "@config/api";
 
@@ -43,7 +43,7 @@ function Productos() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-  const res = await fetch(`${API_URL}/productos`);
+        const res = await fetch(`${API_URL}/productos`);
         const data = await res.json();
         setProductosData(data);
       } catch (error) {
@@ -56,7 +56,11 @@ function Productos() {
 
   // Aplicar filtros además de la categoría
   const productosFiltrados = productosData
-    .filter((p) => (categoriaSeleccionada === "all" ? true : p.categoria === categoriaSeleccionada))
+    .filter((p) =>
+      categoriaSeleccionada === "all"
+        ? true
+        : p.categoria === categoriaSeleccionada
+    )
     .filter((p) => p.precio <= filtros.maxPrecio)
     .filter((p) => {
       if (filtros.ofertas && !p.oferta) return false;
@@ -66,42 +70,44 @@ function Productos() {
     });
 
   const handleAddToCart = (producto) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (token) {
-  fetch(`${API_URL}/carrito`, {
-        method: 'POST',
+      fetch(`${API_URL}/carrito`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id_producto: producto.id, cantidad: 1 })
+        body: JSON.stringify({ id_producto: producto.id, cantidad: 1 }),
       })
-      .then(async res => {
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}));
-          throw new Error(err.mensaje || 'Error agregando al carrito');
-        }
-        return res.json();
-      })
-      .then(() => {
-        setMensaje(`${producto.nombre} añadido al carrito`);
-        // Notificar a otros componentes (ej. Carrito abierto) que el carrito cambió
-        try {
-          window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { id: producto.id } }));
-        } catch (e) {
-          // noop
-        }
-        setTimeout(() => setMensaje(''), 2000);
-      })
-      .catch(err => {
-        console.error('Error agregando al carrito:', err);
-        setMensaje('Error al agregar al carrito');
-        setTimeout(() => setMensaje(''), 2000);
-      });
+        .then(async (res) => {
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            throw new Error(err.mensaje || "Error agregando al carrito");
+          }
+          return res.json();
+        })
+        .then(() => {
+          setMensaje(`${producto.nombre} añadido al carrito`);
+          // Notificar a otros componentes (ej. Carrito abierto) que el carrito cambió
+          try {
+            window.dispatchEvent(
+              new CustomEvent("cartUpdated", { detail: { id: producto.id } })
+            );
+          } catch (e) {
+            // noop
+          }
+          setTimeout(() => setMensaje(""), 2000);
+        })
+        .catch((err) => {
+          console.error("Error agregando al carrito:", err);
+          setMensaje("Error al agregar al carrito");
+          setTimeout(() => setMensaje(""), 2000);
+        });
     } else {
       // No hay usuarios anónimos: redirigir a login
-      window.location.href = '/login';
+      window.location.href = "/login";
     }
   };
 
@@ -122,15 +128,30 @@ function Productos() {
               <h3>Filtros</h3>
               <ul>
                 <li>
-                  <input type="checkbox" id="ofertas" checked={filtros.ofertas} onChange={handleFiltroChange} />
+                  <input
+                    type="checkbox"
+                    id="ofertas"
+                    checked={filtros.ofertas}
+                    onChange={handleFiltroChange}
+                  />
                   <label htmlFor="ofertas">Ofertas</label>
                 </li>
                 <li>
-                  <input type="checkbox" id="nuevos" checked={filtros.nuevos} onChange={handleFiltroChange} />
+                  <input
+                    type="checkbox"
+                    id="nuevos"
+                    checked={filtros.nuevos}
+                    onChange={handleFiltroChange}
+                  />
                   <label htmlFor="nuevos">Nuevos</label>
                 </li>
                 <li>
-                  <input type="checkbox" id="masvendidos" checked={filtros.masvendidos} onChange={handleFiltroChange} />
+                  <input
+                    type="checkbox"
+                    id="masvendidos"
+                    checked={filtros.masvendidos}
+                    onChange={handleFiltroChange}
+                  />
                   <label htmlFor="masvendidos">Más vendidos</label>
                 </li>
               </ul>
@@ -150,18 +171,18 @@ function Productos() {
 
           {/* Banner Promocional */}
           <div className="banner-promocional">
-           <img
-             src="/src/assets/banner-productos.png"
-             alt="Banner Buffet"
-             className="banner-promocional-img"
-          />
+            <img
+              src="/src/assets/banner-productos.png"
+              alt="Banner Buffet"
+              className="banner-promocional-img"
+            />
             <div className="banner-contenido">
-            <h4>Buffet Universitario</h4>
-            <h2>Disfrutá lo mejor del día</h2>
-            <p>Pedí tus combos favoritos y obtené beneficios exclusivos.</p>
-           </div>
-         </div>
-       </aside>
+              <h4>Buffet Universitario</h4>
+              <h2>Disfrutá lo mejor del día</h2>
+              <p>Pedí tus combos favoritos y obtené beneficios exclusivos.</p>
+            </div>
+          </div>
+        </aside>
 
         {/* Centro */}
         <div className="productos-wrapper">
@@ -195,15 +216,17 @@ function Productos() {
           <section>
             <div className="productos-grid">
               {productosFiltrados.length > 0 ? (
-              {productosFiltrados.map((prod) => (
-                <ProductCard
-                  key={prod.id}
-                  producto={prod}
-                  onAddToCart={handleAddToCart}
-                />
-              ))
-            ) : (
-                <p className="sin-resultados">No hay productos que coincidan con los filtros seleccionados.</p>
+                productosFiltrados.map((prod) => (
+                  <ProductCard
+                    key={prod.id}
+                    producto={prod}
+                    onAddToCart={handleAddToCart}
+                  />
+                ))
+              ) : (
+                <p className="sin-resultados">
+                  No hay productos que coincidan con los filtros seleccionados.
+                </p>
               )}
             </div>
           </section>
@@ -233,8 +256,12 @@ function Productos() {
 
           <div className="sidebar-card">
             <h3> Te recomendamos</h3>
-            <p>Si pediste <b>Hamburguesa</b>, añadí <b>Papas grandes</b></p>
-            <p>Si pediste <b>Café con medialuna</b>, probá <b>Brownie</b></p>
+            <p>
+              Si pediste <b>Hamburguesa</b>, añadí <b>Papas grandes</b>
+            </p>
+            <p>
+              Si pediste <b>Café con medialuna</b>, probá <b>Brownie</b>
+            </p>
           </div>
         </aside>
       </div>
