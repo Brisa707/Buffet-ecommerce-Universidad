@@ -3,7 +3,7 @@ import { FaBell, FaTimes } from "react-icons/fa";
 import { FiCheck } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/Notificaciones.css";
+import "./Notificaciones.css";
 
 const Notificaciones = () => {
   const [notificaciones, setNotificaciones] = useState([
