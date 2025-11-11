@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ProductCard from "@usercomponents/product-card/product-card";
 import "./productos.css";
@@ -7,6 +7,9 @@ import { API_URL } from "@config/api";
 
 function Productos() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const search = params.get("search") || "";
 
   const categorias = [
     { id: "all", nombre: "Todo" },
@@ -21,7 +24,6 @@ function Productos() {
   const [productosData, setProductosData] = useState([]);
   const [mensaje, setMensaje] = useState("");
 
-  // Agregado: estado para filtros
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
   const [filtros, setFiltros] = useState({
     ofertas: false,
@@ -39,7 +41,6 @@ function Productos() {
     setFiltros((prev) => ({ ...prev, maxPrecio: Number(e.target.value) }));
   };
 
-  // Traer productos del backend
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -50,11 +51,9 @@ function Productos() {
         console.error("Error al traer productos:", error);
       }
     };
-
     fetchProductos();
   }, []);
 
-  // Aplicar filtros además de la categoría
   const productosFiltrados = productosData
     .filter((p) =>
       categoriaSeleccionada === "all"
@@ -67,11 +66,11 @@ function Productos() {
       if (filtros.nuevos && !p.nuevo) return false;
       if (filtros.masvendidos && !p.masVendido) return false;
       return true;
-    });
+    })
+    .filter((p) => p.nombre.toLowerCase().includes(search.toLowerCase()));
 
   const handleAddToCart = (producto) => {
     const token = localStorage.getItem("token");
-
     if (token) {
       fetch(`${API_URL}/carrito`, {
         method: "POST",
@@ -88,9 +87,10 @@ function Productos() {
           }
           return res.json();
         })
+
         .then(() => {
           setMensaje(`${producto.nombre} añadido al carrito`);
-          // Notificar a otros componentes (ej. Carrito abierto) que el carrito cambió
+          // Notificar a otros componentes que el carrito cambió
           try {
             window.dispatchEvent(
               new CustomEvent("cartUpdated", { detail: { id: producto.id } })
@@ -225,7 +225,7 @@ function Productos() {
                 ))
               ) : (
                 <p className="sin-resultados">
-                  No hay productos que coincidan con los filtros seleccionados.
+                  No hay productos que coincidan con los filtros o búsqueda.
                 </p>
               )}
             </div>
@@ -248,14 +248,14 @@ function Productos() {
           </div>
 
           <div className="sidebar-card">
-            <h3> Oferta Relámpago</h3>
+            <h3>Oferta Relámpago</h3>
             <p>Brownie — 20% OFF</p>
             <small>Hasta las 18:00</small>
             <button className="btn-promo">Aprovechar</button>
           </div>
 
           <div className="sidebar-card">
-            <h3> Te recomendamos</h3>
+            <h3>Te recomendamos</h3>
             <p>
               Si pediste <b>Hamburguesa</b>, añadí <b>Papas grandes</b>
             </p>

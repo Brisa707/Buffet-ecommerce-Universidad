@@ -50,7 +50,8 @@
 
 .admin-productos-tabla th,
 .admin-productos-tabla td {
-  padding: 8px 6px; /* menos padding en mobile */
+  padding: 8px 6px;
+  /* menos padding en mobile */
   border-bottom: 1px solid #ddd;
   text-align: left;
   vertical-align: middle;
@@ -150,6 +151,40 @@
   background-color: #6c757d;
 }
 
+.admin-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+}
+
+.admin-filtros input[type="text"] {
+  min-width: 40%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #01538D;
+  border-radius: 30px;
+  font-size: 0.95rem;
+}
+
+.admin-filtros select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  background: #01538D;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: white;
+}
+
+.admin-filtros label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
 /* Tablet styles */
 @media (min-width: 768px) and (max-width: 1023px) {
   .admin-productos-container {
@@ -161,7 +196,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 1px;
   }
 
   .admin-productos-titulo {
@@ -205,7 +240,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 1px;
   }
 
   .admin-productos-titulo {

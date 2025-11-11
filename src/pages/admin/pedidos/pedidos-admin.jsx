@@ -9,9 +9,12 @@ export default function PedidosAdmin() {
   const [pedidos, setPedidos] = useState([]);
   const [pedidoAEliminar, setPedidoAEliminar] = useState(null);
 
+  // Estados para búsqueda y filtros
+  const [busqueda, setBusqueda] = useState("");
+  const [estadoFiltro, setEstadoFiltro] = useState("all");
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     fetch(`${API_URL}/pedidos`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -22,7 +25,6 @@ export default function PedidosAdmin() {
 
   const confirmarEliminacion = () => {
     const token = localStorage.getItem("token");
-
     fetch(`${API_URL}/pedidos/${pedidoAEliminar.id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
@@ -37,14 +39,44 @@ export default function PedidosAdmin() {
       .catch(() => console.error("Error al eliminar pedido"));
   };
 
-  const cancelarEliminacion = () => {
-    setPedidoAEliminar(null);
-  };
+  const cancelarEliminacion = () => setPedidoAEliminar(null);
+
+  // Aplicar búsqueda y filtros
+  const pedidosFiltrados = pedidos
+    .filter((p) =>
+      p.numero_pedido.toString().includes(busqueda) ||
+      p.usuario_id.toString().includes(busqueda)
+    )
+    .filter((p) =>
+      estadoFiltro === "all"
+        ? true
+        : p.estado?.toLowerCase() === estadoFiltro.toLowerCase()
+    );
 
   return (
     <div className="admin-pedidos-container">
       <div className="admin-pedidos-header">
         <h1 className="admin-pedidos-titulo">Pedidos</h1>
+      </div>
+
+      {/* Barra de búsqueda y filtros */}
+      <div className="admin-filtros">
+        <input
+          type="text"
+          placeholder="Buscar por N° pedido o usuario..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
+
+        <select
+          value={estadoFiltro}
+          onChange={(e) => setEstadoFiltro(e.target.value)}
+        >
+          <option value="all">Todos los estados</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="enviado">Enviado</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
       </div>
 
       <div className="admin-pedidos-tabla-wrapper">
@@ -60,40 +92,48 @@ export default function PedidosAdmin() {
             </tr>
           </thead>
           <tbody>
-            {pedidos.map((pedido) => (
-              <tr key={pedido.id}>
-                <td>{pedido.numero_pedido}</td>
-                <td>{pedido.usuario_id}</td>
-                <td>
-                  $
-                  {Number(pedido.total || 0).toLocaleString("es-AR", {
-                    minimumFractionDigits: 2,
-                  })}
-                </td>
-                <td>{pedido.estado}</td>
-                <td>
-                  {pedido.fecha
-                    ? new Date(pedido.fecha).toLocaleDateString()
-                    : "—"}
-                </td>
-                <td>
-                  <button
-                    className="admin-pedidos-boton editar"
-                    onClick={() =>
-                      navigate(`/admin/pedidos/editar/${pedido.id}`)
-                    }
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    className="admin-pedidos-boton eliminar"
-                    onClick={() => setPedidoAEliminar(pedido)}
-                  >
-                    <FaTrash />
-                  </button>
+            {pedidosFiltrados.length > 0 ? (
+              pedidosFiltrados.map((pedido) => (
+                <tr key={pedido.id}>
+                  <td>{pedido.numero_pedido}</td>
+                  <td>{pedido.usuario_id}</td>
+                  <td>
+                    $
+                    {Number(pedido.total || 0).toLocaleString("es-AR", {
+                      minimumFractionDigits: 2,
+                    })}
+                  </td>
+                  <td>{pedido.estado}</td>
+                  <td>
+                    {pedido.fecha
+                      ? new Date(pedido.fecha).toLocaleDateString()
+                      : "—"}
+                  </td>
+                  <td>
+                    <button
+                      className="admin-pedidos-boton editar"
+                      onClick={() =>
+                        navigate(`/admin/pedidos/editar/${pedido.id}`)
+                      }
+                    >
+                      <FaEdit />
+                    </button>
+                    <button
+                      className="admin-pedidos-boton eliminar"
+                      onClick={() => setPedidoAEliminar(pedido)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
+                  No hay pedidos que coincidan con la búsqueda o filtros.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

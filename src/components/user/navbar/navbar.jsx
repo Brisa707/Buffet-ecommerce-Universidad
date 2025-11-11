@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import logo from "@assets/logo-buffet.png";
-import "./navbar.css";
+import { NavLink, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 import { AiFillHome, AiOutlineClose } from "react-icons/ai";
 import { FaBoxOpen, FaUserCircle } from "react-icons/fa";
@@ -14,12 +13,21 @@ import Carrito from "@userpages/carrito/carrito";
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  // Estado carrito (solo desktop)
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const [busqueda, setBusqueda] = useState("");
+  const navigate = useNavigate();
 
   const toggleNav = () => setShowNav((prev) => !prev);
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+
+  const handleBuscar = (e) => {
+    e.preventDefault();
+    if (busqueda.trim()) {
+      navigate(`/productos?search=${encodeURIComponent(busqueda.trim())}`);
+      setShowNav(false);
+    }
+  };
 
   return (
     <nav className="navbar">
@@ -27,14 +35,19 @@ const Navbar = () => {
         {/* LOGO */}
         <div className="logo">
           <NavLink to="/home">
-            <img src={logo} alt="Logo buffet UNaB" />
+            <img src="/Logo-buffet.png" alt="Logo buffet UNaB" />
           </NavLink>
         </div>
 
         {/* BUSCADOR */}
-        <div className="search-box">
-          <input type="text" placeholder=" Buscar..." />
-        </div>
+        <form className="search-box" onSubmit={handleBuscar}>
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+        </form>
 
         {/* HAMBURGER */}
         <div className="menu-icon" onClick={toggleNav}>
@@ -45,7 +58,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* CARRITO MOBILE (redirige a /carrito) */}
+        {/* CARRITO MOBILE */}
         <div className="cart-icon mobile-cart">
           <NavLink to="/carrito" onClick={() => setShowNav(false)}>
             <MdLocalGroceryStore className="nav-icon-cart" />
@@ -92,32 +105,17 @@ const Navbar = () => {
         <div className="desktop-nav">
           <ul className="right-links">
             <li>
-              <NavLink
-                to="/home"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Inicio
-              </NavLink>
+              <NavLink to="/home">Inicio</NavLink>
             </li>
             <li>
-              <NavLink
-                to="/productos"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Productos
-              </NavLink>
+              <NavLink to="/productos">Productos</NavLink>
             </li>
             <li>
-              <NavLink
-                to="/contacto"
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                Contacto
-              </NavLink>
+              <NavLink to="/contacto">Contacto</NavLink>
             </li>
           </ul>
           <ul className="right-icons">
-            {/* Carrito Desktop:*/}
+            {/* Carrito Desktop */}
             <li onClick={() => setIsCartOpen((prev) => !prev)}>
               <MdLocalGroceryStore className="nav-icon-cart" />
             </li>
@@ -131,26 +129,17 @@ const Navbar = () => {
               {dropdownOpen && (
                 <ul className="dropdown">
                   <li>
-                    <NavLink
-                      to="/pedidos"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
+                    <NavLink to="/pedidos">
                       <FiShoppingBag className="nav-icon" /> Mis pedidos
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      to="/perfil"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
+                    <NavLink to="/perfil">
                       <FaUserCircle className="nav-icon" /> Mi cuenta
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      to="/"
-                      className={({ isActive }) => (isActive ? "active" : "")}
-                    >
+                    <NavLink to="/">
                       <FiLogOut className="nav-icon" /> Cerrar sesión
                     </NavLink>
                   </li>

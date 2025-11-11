@@ -11,6 +11,10 @@ export default function UsuariosAdmin() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Estados para búsqueda y filtros
+  const [busqueda, setBusqueda] = useState("");
+  const [rolFiltro, setRolFiltro] = useState("all");
+
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
@@ -18,9 +22,7 @@ export default function UsuariosAdmin() {
         if (!token) throw new Error("Token no disponible");
 
         const res = await fetch(`${API_URL}/usuarios`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         if (!res.ok) {
@@ -44,28 +46,22 @@ export default function UsuariosAdmin() {
 
   const confirmarEliminacion = async () => {
     if (!usuarioAEliminar) return;
-
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`${API_URL}/usuarios/${usuarioAEliminar.id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (res.ok) {
         setUsuarios((prev) => prev.filter((u) => u.id !== usuarioAEliminar.id));
       } else {
         const errorData = await res.json();
-        console.error("Error al eliminar usuario:", errorData.mensaje);
         alert(errorData.mensaje || "No se pudo eliminar el usuario");
       }
     } catch (error) {
-      console.error("Error al eliminar usuario:", error);
       alert("Error de red al intentar eliminar el usuario");
     }
-
     setUsuarioAEliminar(null);
   };
 
@@ -73,6 +69,15 @@ export default function UsuariosAdmin() {
 
   if (loading) return <p className="cargando">Cargando usuarios...</p>;
   if (error) return <p className="error">{error}</p>;
+
+  // Aplicar búsqueda y filtros
+  const usuariosFiltrados = usuarios
+    .filter(
+      (u) =>
+        u.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        u.email.toLowerCase().includes(busqueda.toLowerCase())
+    )
+    .filter((u) => (rolFiltro === "all" ? true : u.rol === rolFiltro));
 
   return (
     <div className="admin-usuarios-container">
@@ -86,6 +91,25 @@ export default function UsuariosAdmin() {
         </button>
       </div>
 
+      {/* Barra de búsqueda y filtros */}
+      <div className="admin-filtros">
+        <input
+          type="text"
+          placeholder="Buscar por nombre o email..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
+
+        <select
+          value={rolFiltro}
+          onChange={(e) => setRolFiltro(e.target.value)}
+        >
+          <option value="all">Todos los roles</option>
+          <option value="admin">admin</option>
+          <option value="user">user</option>
+        </select>
+      </div>
+
       <div className="admin-usuarios-tabla-wrapper">
         <table className="admin-usuarios-tabla">
           <thead>
@@ -97,8 +121,8 @@ export default function UsuariosAdmin() {
             </tr>
           </thead>
           <tbody>
-            {usuarios.length > 0 ? (
-              usuarios.map((usuario) => (
+            {usuariosFiltrados.length > 0 ? (
+              usuariosFiltrados.map((usuario) => (
                 <tr key={usuario.id}>
                   <td>{usuario.nombre}</td>
                   <td>{usuario.email}</td>
@@ -124,7 +148,7 @@ export default function UsuariosAdmin() {
             ) : (
               <tr>
                 <td colSpan="4" style={{ textAlign: "center" }}>
-                  No hay usuarios disponibles.
+                  No hay usuarios que coincidan con la búsqueda o filtros.
                 </td>
               </tr>
             )}
