@@ -172,7 +172,7 @@ function Home() {
         {/* Banner Buffet */}
         <section className="home-banner-cafe">
           <div className="banner-cafe">
-            <img src="/src/assets/bannerBuffet.png" alt="Banner Buffet" />
+            <img src="/src/assets/home/banner-Buffet.png" alt="Banner Buffet" />
             <div className="banner-cafe-text">
               <h2>Promociones del Buffet</h2>
               <p>Por compras superiores a $5.000 obtené un café gratis</p>
@@ -202,7 +202,7 @@ function Home() {
               <div className="banner-extra">Con pedidos desde el aula </div>
             </div>
             <div className="buffet-banner-img">
-              <img src="/src/assets/banner-combo.png" alt="Combo de almuerzo" />
+              <img src="/src/assets/home/banner-combo.png" alt="Combo de almuerzo" />
             </div>
           </div>
 
@@ -213,7 +213,7 @@ function Home() {
               <div className="banner-extra">Con café o medialunas </div>
             </div>
             <div className="buffet-banner-img">
-              <img src="/src/assets/banner-desayuno.png" alt="Desayuno Buffet" />
+              <img src="/src/assets/home/banner-desayuno.png" alt="Desayuno Buffet" />
             </div>
           </div>
         </section>
