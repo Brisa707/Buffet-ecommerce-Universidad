@@ -100,6 +100,16 @@ export default function ProductoForm({ producto, setProducto, onSubmit, title })
           />
         </label>
 
+        <label>
+          Promoción:
+          <input
+            name="promocion"
+            type="checkbox"
+            checked={producto.promocion ?? false}
+            onChange={handleChange}
+          />
+        </label>
+
         <div className="admin-productos-form-acciones">
           <button type="submit">Guardar</button>
           <button type="button" onClick={() => window.history.back()}>

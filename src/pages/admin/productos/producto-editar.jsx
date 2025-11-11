@@ -13,6 +13,7 @@ export default function ProductoEditar() {
     stock: "",
     categoria: "",
     activo: true,
+    promocion: false,
     imagen_url: ""
   });
   const [loading, setLoading] = useState(true);
@@ -32,6 +33,7 @@ export default function ProductoEditar() {
           stock: data.stock || "",
           categoria: data.categoria || "",
           activo: data.activo ?? true,
+          promocion: data.promocion ?? false,
           imagen_url: data.imagen_url || ""
         });
       } catch (error) {
@@ -80,6 +82,7 @@ export default function ProductoEditar() {
         stock: parseInt(producto.stock),
         categoria: producto.categoria,
         activo: producto.activo,
+        promocion: producto.promocion ?? false,
         imagen_url
       };
 

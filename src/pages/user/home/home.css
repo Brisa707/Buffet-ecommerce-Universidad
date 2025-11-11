@@ -338,8 +338,8 @@
 .promociones-section { padding: 0 1rem 1rem 1rem; }
 .promociones-productos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 1rem;
   animation: fadeIn 1.5s ease;
 }
   .promociones-productos-grid .producto-card button {

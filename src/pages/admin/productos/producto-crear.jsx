@@ -13,6 +13,7 @@ export default function ProductoCrear() {
     stock: "",
     imagen: null,
     activo: true,
+    promocion: false,
   });
 
   const handleSubmit = async (e) => {
@@ -43,6 +44,7 @@ export default function ProductoCrear() {
         stock: parseInt(producto.stock),
         categoria: producto.categoria,
         activo: producto.activo,
+        promocion: producto.promocion ?? false,
         imagen_url,
       };
 

@@ -1,7 +1,8 @@
 import './home.css';
 import ProductCard from "@usercomponents/product-card/product-card";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { API_URL } from "@config/api";
 
 function Home() {
   const navigate = useNavigate();
@@ -14,14 +15,32 @@ function Home() {
     { id: "postres", nombre: "Postres", img: "/src/assets/categorias/cookie.png" },
   ];
 
-  const promociones = [
-    { id: 1, nombre: "Café + 2 medialunas", precio: 2000, categoria: "bebidas", img: "/assets/cafe-medialunas.png" },
-    { id: 2, nombre: "Sándwich + Coca-Cola", precio: 2500, categoria: "sandwiches", img: "/assets/sandwich-coca.png" },
-    { id: 3, nombre: "Hamburguesa + papas", precio: 3500, categoria: "sandwiches", img: "/assets/hamburguesa-papas.png" },
-    { id: 4, nombre: "Ensalada fresca", precio: 2100, categoria: "snacks", img: "/assets/ensalada.png" },
-    { id: 5, nombre: "Brownie", precio: 1200, categoria: "postres", img: "/assets/brownie.png" },
-    { id: 6, nombre: "Chocolate", precio: 1200, categoria: "golosinas", img: "/assets/chocolate.png" }
-  ];
+  const [promociones, setPromociones] = useState([]);
+  const [loadingPromos, setLoadingPromos] = useState(true);
+  const [promosError, setPromosError] = useState(null);
+
+  useEffect(() => {
+    const fetchPromos = async () => {
+      setLoadingPromos(true);
+      setPromosError(null);
+      try {
+        const res = await fetch(`${API_URL}/productos`);
+        if (!res.ok) throw new Error("Error al cargar productos");
+        const data = await res.json();
+        // Filtrar productos marcados como promocion === true
+        const promos = (data || []).filter((p) => p.promocion === true || p.promocion === 'true');
+        setPromociones(promos);
+      } catch (err) {
+        console.error("Error fetching promociones:", err);
+        setPromosError(err.message || "Error al cargar promociones");
+        setPromociones([]);
+      } finally {
+        setLoadingPromos(false);
+      }
+    };
+
+    fetchPromos();
+  }, []);
 
   // Función para añadir productos (Promociones)
   const handleAddToCart = (producto) => {
@@ -187,7 +206,12 @@ function Home() {
         <section className="promociones-section">
           <h2>Promociones</h2>
           <div className="promociones-productos-grid">
-            {promociones.map((promo) => (
+            {loadingPromos && <p>Cargando promociones...</p>}
+            {promosError && <p className="error">{promosError}</p>}
+            {!loadingPromos && !promosError && promociones.length === 0 && (
+              <p>No hay promociones disponibles por el momento.</p>
+            )}
+            {!loadingPromos && promociones.map((promo) => (
               <ProductCard key={promo.id} producto={promo} onAddToCart={handleAddToCart} />
             ))}
           </div>
