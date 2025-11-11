@@ -144,23 +144,21 @@
 
 /* Mobile */
 @media (max-width: 768px) {
-  /* Contenedor que agrupa carrito y notificaciones */
   .mobile-cart {
     display: flex;
     align-items: center;
-    gap: 8px; /* separa carrito y campana */
+    gap: 8px !important; 
     margin-left: 2px;
   }
 
-  /* Separación entre menú hamburguesa y el grupo de iconos */
   .menu-icon {
-    margin-right: 1px; /* aleja un poco el menú del resto */
+    margin-right: 1px; 
   }
 
   .notificaciones-container {
     position: relative;
     left: 0px;
-    top: -2px; /* probá entre -2px y -5px según cómo se vea */
+    top: -2px; 
   }
 
   .notificaciones-container .contador {
@@ -171,6 +169,7 @@
     font-size: 0.65rem;
   }
 }
+
 
 
 
