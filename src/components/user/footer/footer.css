@@ -1,9 +1,49 @@
 .footer {
   background-color: #01538D;
   color: white;
-  text-align: center;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
-  font-size: 0.7rem;
-  padding: 2px 0;
+  font-size: 0.78rem;
+  padding: 0.5rem 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  text-align: left;
+}
+
+.footer p {
+  margin: 0;
+  line-height: 2.3; 
+}
+
+.footer-right {
+  text-align: right;
+  font-weight: 500;
+}
+
+/* Responsive para mobile */
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    font-size: 0.60rem;
+     padding: 0.3rem 1rem;
+    gap: 0rem;
+  }
+
+  .footer-left, .footer-right {
+    text-align: center;
+  }
+  
+  .footer p {
+  margin: 0;
+  line-height: 2.0; 
+  }
 }
