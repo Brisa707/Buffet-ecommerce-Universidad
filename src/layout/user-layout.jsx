@@ -3,13 +3,11 @@ import Footer from "@usercomponents/footer/footer.jsx";
 
 function UserLayout({ children }) {
   return (
-    <>
+    <div className="app-root">
       <Navbar />
-      <main style={{ minHeight: "calc(100vh - 120px)"}}>
-        {children}
-      </main>
+      <main className="app-main">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }
 
