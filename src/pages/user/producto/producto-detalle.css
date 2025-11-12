@@ -7,11 +7,11 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
-  overflow: hidden;
+  min-height: calc(100vh - 100px); 
   margin-top: 3.125rem;
   margin-bottom: 1rem;
   padding: 1rem 2rem;
+  overflow: visible;
 }
 
 .detalle-card {
@@ -164,7 +164,7 @@
   transition: all 0.3s ease;
   width: 100%;
   letter-spacing: 0.4px !important;
-    border: 2px solid #01538D;
+  border: 2px solid #01538D;
 
 }
 
@@ -176,6 +176,12 @@
 
 /* Mobile */
 @media (max-width: 600px) {
+  .detalle-wrapper {
+    min-height: calc(89vh - 83px); 
+    overflow: visible;
+    margin-top: 3.4rem;
+  }
+   
   .detalle-card {
     background: none !important;
     box-shadow: none !important;
@@ -226,5 +232,31 @@
     font-size: 1.3rem;
     margin-top: 0;
   }
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1023px) {
+ .detalle-card {
+    max-width: 850px;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .detalle-img {
+    height: 380px;
+  }
+
+  .detalle-nombre {
+    font-size: 1.8rem;
+  }
+
+  .detalle-descripcion {
+    font-size: 1rem;
+  }
+
+  .detalle-precio {
+    font-size: 1.3rem;
+    margin-top: 0;
+  }
+}
 }
 

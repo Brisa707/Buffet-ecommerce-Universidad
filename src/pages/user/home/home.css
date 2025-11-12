@@ -687,7 +687,7 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: #000;
+    color: #004080;
     position: relative;
     border: none;           
   }
@@ -701,7 +701,7 @@
     display: block;
     width: 80px;
     height: 3px;
-    background-color:#004c99;
+    background-color:#0073e6;
     margin: 10px auto 0;
     border-radius: 2px;
   }
@@ -750,7 +750,7 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: #000;
+    color: #004080;
     position: relative;
     border: none; 
   }
@@ -764,7 +764,7 @@
     display: block;
     width: 80px;
     height: 3px;
-    background-color: #004c99;
+    background-color: #0073e6;
     margin: 10px auto 0;
     border-radius: 2px;
   }
@@ -777,5 +777,252 @@
     flex-wrap: wrap;
     margin-top: 20px;
     padding-left: 2rem;
+  }
+
+  /* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-carousel  {
+    margin-bottom: -120px; 
+    position: relative;
+    padding-bottom: 10px; 
+    z-index: 1;
+  }
+
+  .hero-content {
+    z-index: 1;
+    position: relative;
+    padding: 20px;
+    top: -45px; 
+  }
+
+  .hero-content h1 {
+    font-size: 2.0rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-prev,
+  .hero-next {
+    font-size: 1.4rem;
+    padding: 6px 0.1px;
+  }
+
+  .hero-prev { left: 12px; }
+  .hero-next { right: 4px; }
+
+  .hero-dots {
+    position: absolute;
+    bottom: 125px;
+  }
+
+  .hero-dots .dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .home-banners {
+    margin-top: 20px;  
+    position: relative;
+    z-index: 2;
+  }
+
+/* Tamaños de imágenes en cada banner */
+  .banner-card:nth-child(1) img {
+    width: 150px;
+    height: 110px;
+  }
+  .banner-card:nth-child(2) img {
+    width: 170px;
+    height: 130px;
+  }
+  .banner-card:nth-child(3) img {
+    width: 140px;
+    height: 110px;
+  }
+  .banner-card:nth-child(4) img {
+    width: 120px;
+    height: 140px;
+  }
+
+  .home-banners {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-bottom: -4px;
+    scroll-snap-type: none;
+    animation: slideLeft 1.2s ease;
+ }
+
+  .banner-card {
+    min-width: 10%;
+    max-width: 40%;
+    padding: 1.3rem;
+    border-radius: 1.4rem;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    flex-direction: row-reverse;
+    color: white;
+  }
+
+  .banner-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .banner-text p {
+    font-size: 0.8rem;
+  }
+
+ .home-categorias-section {
+    padding: 2rem 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+    margin-top: 18px;
+  }
+
+  .home-categorias-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #004080;
+    position: relative;
+    border: none;           
+  }
+
+  .home-categorias-section h2::before {
+    content: none !important; 
+  }
+
+  .home-categorias-section h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color:#0073e6;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .home-categorias-list {
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .home-categoria-card {
+    flex: 0 0 120px;
+  }
+
+  .home-categoria-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .home-categoria-icon img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .home-categoria-card span {
+    font-size: 0.9rem;
+  }
+
+  .banner-cafe {
+    max-width: 1000px;
+    border-radius: 0px;
+  }
+
+  .banner-cafe img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .banner-cafe-text {
+    top: 77%;
+    left: 3%;
+  }
+
+  .banner-cafe-text h2 { display: none; }
+
+  .banner-cafe-text p { display: none; }
+
+  .btn-banner {
+    padding: 0.6rem 1.3rem;
+    font-size: 1rem;
+  }
+
+  .promociones-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #004080;
+    position: relative;
+    border: none; 
+  }
+
+  .promociones-section h2::before {
+    content: none !important; 
+  }
+
+  .promociones-section h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #0073e6;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .promociones-productos-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .home-banners-buffet {
+    gap: 20px;
+    margin: 40px auto;
+  }
+
+  .buffet-banner-item {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    padding: 1.2rem;
+    border-radius: 16px;
+  }
+
+  .buffet-banner-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .buffet-banner-text p {
+    font-size: 0.95rem;
+  }
+
+   .banner-extra {
+    padding: 0.4rem 1rem;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .buffet-banner-img img {
+    width: 230px;
   }
 }
