@@ -3,7 +3,7 @@ import AdminLayout from "./layout/admin-layout";
 import UserLayout from "./layout/user-layout";
 import AdminRoutes from "./routes/admin-routes";
 import UserRoutes from "./routes/user-routes";
-import Login from "@pages/login";
+import Login from "@pages/login.jsx";
 import Register from "@pages/user/registro/registro";
 import ProtectedRoute from "@components/protected-route";
 
