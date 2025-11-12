@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaPlus, FaEdit, FaBan  } from "react-icons/fa"; 
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "@config/api";
 import "./pedidos-admin.css";
@@ -25,18 +25,26 @@ export default function PedidosAdmin() {
 
   const confirmarEliminacion = () => {
     const token = localStorage.getItem("token");
-    fetch(`${API_URL}/pedidos/${pedidoAEliminar.id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
+    fetch(`${API_URL}/pedidos/${pedidoAEliminar.id}/cancelar`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ estado: "Cancelado" }),
     })
       .then((res) => res.json())
       .then(() => {
         setPedidos((prev) =>
-          prev.filter((pedido) => pedido.id !== pedidoAEliminar.id)
+          prev.map((pedido) =>
+            pedido.id === pedidoAEliminar.id
+              ? { ...pedido, estado: "Cancelado" }
+              : pedido
+          )
         );
         setPedidoAEliminar(null);
       })
-      .catch(() => console.error("Error al eliminar pedido"));
+      .catch(() => console.error("Error al cancelar pedido"));
   };
 
   const cancelarEliminacion = () => setPedidoAEliminar(null);
@@ -57,6 +65,12 @@ export default function PedidosAdmin() {
     <div className="admin-pedidos-container">
       <div className="admin-pedidos-header">
         <h1 className="admin-pedidos-titulo">Pedidos</h1>
+        <button
+          className="admin-pedidos-agregar"
+          onClick={() => navigate("/admin/pedidos/agregar")}
+        >
+          <FaPlus /> Agregar pedido
+        </button>
       </div>
 
       {/* Barra de búsqueda y filtros */}
@@ -79,6 +93,7 @@ export default function PedidosAdmin() {
         </select>
       </div>
 
+      {/* Tabla de pedidos */}
       <div className="admin-pedidos-tabla-wrapper">
         <table className="admin-pedidos-tabla">
           <thead>
@@ -122,7 +137,7 @@ export default function PedidosAdmin() {
                       className="admin-pedidos-boton eliminar"
                       onClick={() => setPedidoAEliminar(pedido)}
                     >
-                      <FaTrash />
+                      <FaBan  />
                     </button>
                   </td>
                 </tr>
@@ -142,15 +157,15 @@ export default function PedidosAdmin() {
         <div className="admin-popup-overlay">
           <div className="admin-popup">
             <p>
-              ¿Deseás eliminar el pedido{" "}
+              ¿Deseás cancelar el pedido{" "}
               <strong>{pedidoAEliminar.numero_pedido}</strong>?
             </p>
             <div className="admin-popup-acciones">
               <button className="confirmar" onClick={confirmarEliminacion}>
-                Eliminar
+                Cancelar pedido
               </button>
               <button className="cancelar" onClick={cancelarEliminacion}>
-                Cancelar
+                Volver
               </button>
             </div>
           </div>

@@ -101,6 +101,50 @@
   color: white;
 }
 
+.admin-pedidos-form button.agregar-producto {
+  background-color: #4caf50; 
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-top: 10px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 20%;
+}
+
+.admin-pedidos-form button.agregar-producto:hover {
+  background-color: #45a049; 
+}
+
+.admin-pedidos-item .eliminar-item {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.admin-pedidos-item .eliminar-item:hover {
+  background-color: #c0392b;
+}
+
+.admin-pedidos-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+
 /* Tablet */
 @media (min-width: 601px) and (max-width: 1024px) {
   .admin-pedidos-form-container {
