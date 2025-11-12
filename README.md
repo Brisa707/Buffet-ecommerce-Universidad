@@ -1,4 +1,4 @@
-# Buffet-Ecommerce - Universidad
+# Buffet-Ecommerce - Universidad (repositorio Front End)
 
 ## 📌 Descripción
 Somos estudiantes de programación y ciencia de datos. Nuestro proyecto busca desarrollar una plataforma web de ecommerce para el buffet universitario.  
