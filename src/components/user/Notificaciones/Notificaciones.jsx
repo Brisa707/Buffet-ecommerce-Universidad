@@ -87,7 +87,7 @@ const Notificaciones = () => {
             className="btn-simular"
             onClick={() =>
               agregarNotificacion(
-                "Te avisaremos por WhatsApp cuando tu pedido esté listo"
+                "Te avisaremos por correo electrónico cuando tu pedido esté listo"
               )
             }
           >
@@ -102,4 +102,5 @@ const Notificaciones = () => {
 };
 
 export default Notificaciones;
+
 
