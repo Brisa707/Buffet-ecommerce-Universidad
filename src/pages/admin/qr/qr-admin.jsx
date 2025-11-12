@@ -7,9 +7,9 @@ import { API_URL } from "@config/api";
 export default function QRAdmin() {
   const qrRef = useRef(null);
   const html5QrCodeRef = useRef(null);
+  const scannerActivoRef = useRef(false);
   const [codigo, setCodigo] = useState("");
   const [resultado, setResultado] = useState("");
-  const [scannerActivo, setScannerActivo] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -34,12 +34,16 @@ export default function QRAdmin() {
                 setResultado(`Código detectado: ${decodedText}`);
                 html5QrCode
                   .stop()
-                  .then(() => setScannerActivo(false))
+                  .then(() => {
+                    scannerActivoRef.current = false;
+                  })
                   .catch(() => {});
               },
               () => {}
             )
-            .then(() => setScannerActivo(true))
+            .then(() => {
+              scannerActivoRef.current = true;
+            })
             .catch((err) => {
               setResultado("Error al iniciar la cámara");
               console.error(err);
@@ -50,11 +54,11 @@ export default function QRAdmin() {
 
     return () => {
       isMounted = false;
-      if (html5QrCodeRef.current && scannerActivo) {
+      if (html5QrCodeRef.current && scannerActivoRef.current) {
         html5QrCodeRef.current.stop().catch(() => {});
       }
     };
-  }, [scannerActivo]);
+  }, []);
 
   const handleSubmit = (e) => {
   e.preventDefault();
