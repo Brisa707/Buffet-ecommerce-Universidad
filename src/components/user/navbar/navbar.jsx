@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import Notificaciones from "@usercomponents/Notificaciones/notificaciones";
+import Notificaciones from "@usercomponents/notificaciones/notificaciones";
 
 import { AiFillHome, AiOutlineClose } from "react-icons/ai";
 import { FaBoxOpen, FaUserCircle } from "react-icons/fa";
@@ -30,6 +30,13 @@ const Navbar = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setShowNav(false);
+    navigate("/"); 
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -40,9 +47,9 @@ const Navbar = () => {
           </NavLink>
 
           <div className="logo-text">
-          <h2>Buffet UNaB</h2>
+            <h2>Buffet UNaB</h2>
+          </div>
         </div>
-      </div>
 
         {/* BUSCADOR */}
         <form className="search-box" onSubmit={handleBuscar}>
@@ -103,7 +110,13 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" onClick={() => setShowNav(false)}>
+              <NavLink
+                to="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLogout();
+                }}
+              >
                 <FiLogOut className="nav-icon" /> Cerrar Sesión
               </NavLink>
             </li>
@@ -153,8 +166,14 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/">
-                      <FiLogOut className="nav-icon" /> Cerrar sesión
+                    <NavLink
+                      to="/"
+                      onClick={(e) => {
+                        e.preventDefault(); 
+                        handleLogout();
+                      }}
+                    >
+                      <FiLogOut className="nav-icon" /> Cerrar Sesión
                     </NavLink>
                   </li>
                 </ul>
