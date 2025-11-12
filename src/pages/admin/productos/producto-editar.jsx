@@ -11,7 +11,7 @@ export default function ProductoEditar() {
     descripcion: "",
     precio: "",
     stock: "",
-    categoria: "",
+    categoria_id: "",   
     activo: true,
     promocion: false,
     imagen_url: ""
@@ -31,7 +31,7 @@ export default function ProductoEditar() {
           descripcion: data.descripcion || "",
           precio: data.precio || "",
           stock: data.stock || "",
-          categoria: data.categoria || "",
+          categoria_id: data.categoria_id || "",  
           activo: data.activo ?? true,
           promocion: data.promocion ?? false,
           imagen_url: data.imagen_url || ""
@@ -80,7 +80,7 @@ export default function ProductoEditar() {
         descripcion: producto.descripcion,
         precio: parseFloat(producto.precio),
         stock: parseInt(producto.stock),
-        categoria: producto.categoria,
+        categoria_id: parseInt(producto.categoria_id), 
         activo: producto.activo,
         promocion: producto.promocion ?? false,
         imagen_url

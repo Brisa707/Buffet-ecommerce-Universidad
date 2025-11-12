@@ -34,7 +34,7 @@
   padding: 0.5rem;
   margin-top: 0.3rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 30px;
   font-size: 0.95rem;
 }
 
@@ -64,7 +64,7 @@
   justify-content: center;
   padding: 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 30px;
   font-weight: 600;
   cursor: pointer;
   font-size: 1rem;
@@ -102,6 +102,137 @@
 .admin-productos-form-acciones button[type="button"]:hover {
   background-color: #01538D;
   color: white;
+}
+
+/* Contenedor del select con botón */
+.categoria-select-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.categoria-select-container select {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 0.95rem;
+}
+
+.btn-agregar-categoria {
+  padding: 0.5rem 0.75rem;
+  background-color: #01538D;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-agregar-categoria:hover {
+  background-color: #004570;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-contenido {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+}
+
+.modal-contenido h3 {
+  color: #01538D;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modal-contenido label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-contenido input,
+.modal-contenido textarea {
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.modal-contenido input:focus,
+.modal-contenido textarea:focus {
+  border-color: #01538D;
+  outline: none;
+  box-shadow: 0 0 3px rgba(1, 83, 141, 0.4);
+}
+
+.modal-contenido textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-acciones {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-guardar,
+.btn-cancelar {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.95rem;
+}
+
+.btn-guardar {
+  background-color: #01538D;
+  color: white;
+}
+
+.btn-guardar:hover:not(:disabled) {
+  background-color: #004570;
+}
+
+.btn-cancelar {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.btn-cancelar:hover:not(:disabled) {
+  background-color: #d0d0d0;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Tablet */

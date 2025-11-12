@@ -57,6 +57,10 @@
   vertical-align: middle;
 }
 
+.admin-productos-tabla td:nth-child(3) {
+  text-transform: capitalize;
+}
+
 .admin-productos-tabla th {
   background-color: #01538d;
   color: white;

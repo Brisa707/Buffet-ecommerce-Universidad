@@ -11,16 +11,10 @@ function Productos() {
   const params = new URLSearchParams(location.search);
   const search = params.get("search") || "";
 
-  const categorias = [
-    { id: "all", nombre: "Todo" },
-    { id: "bebidas", nombre: "Bebidas" },
-    { id: "golosinas", nombre: "Golosinas" },
-    { id: "sandwiches", nombre: "Sándwiches" },
-    { id: "snacks", nombre: "Snacks" },
-    { id: "postres", nombre: "Postres" },
-  ];
-
+  // Estado dinámico de categorías
+  const [categorias, setCategorias] = useState([{ id: "all", nombre: "Todo" }]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("all");
+
   const [productosData, setProductosData] = useState([]);
   const [mensaje, setMensaje] = useState("");
 
@@ -41,6 +35,7 @@ function Productos() {
     setFiltros((prev) => ({ ...prev, maxPrecio: Number(e.target.value) }));
   };
 
+  // Traer productos
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -54,12 +49,31 @@ function Productos() {
     fetchProductos();
   }, []);
 
+  // Traer categorías
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const res = await fetch(`${API_URL}/categorias`);
+        if (!res.ok) throw new Error("Error al traer categorías");
+        const data = await res.json();
+        // Insertar "Todo" al inicio
+        setCategorias([{ id: "all", nombre: "Todo" }, ...data]);
+      } catch (error) {
+        console.error("Error cargando categorías:", error);
+      }
+    };
+    fetchCategorias();
+  }, []);
+
+
+  // Filtrar productos
   const productosFiltrados = productosData
     .filter((p) =>
       categoriaSeleccionada === "all"
         ? true
-        : p.categoria === categoriaSeleccionada
+        : String(p.categoria_id) === categoriaSeleccionada
     )
+
     .filter((p) => p.precio <= filtros.maxPrecio)
     .filter((p) => {
       if (filtros.ofertas && !p.oferta) return false;
@@ -87,10 +101,8 @@ function Productos() {
           }
           return res.json();
         })
-
         .then(() => {
           setMensaje(`${producto.nombre} añadido al carrito`);
-          // Notificar a otros componentes que el carrito cambió
           try {
             window.dispatchEvent(
               new CustomEvent("cartUpdated", { detail: { id: producto.id } })
@@ -106,7 +118,6 @@ function Productos() {
           setTimeout(() => setMensaje(""), 2000);
         });
     } else {
-      // No hay usuarios anónimos: redirigir a login
       window.location.href = "/login";
     }
   };
@@ -206,7 +217,11 @@ function Productos() {
                 className={`categoria-card ${
                   categoriaSeleccionada === cat.id ? "activa" : ""
                 }`}
-                onClick={() => setCategoriaSeleccionada(cat.id)}
+                onClick={() =>
+                  setCategoriaSeleccionada(
+                    cat.id === "all" ? "all" : String(cat.id)
+                  )
+                }
               >
                 {cat.nombre}
               </div>

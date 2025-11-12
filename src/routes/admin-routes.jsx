@@ -10,12 +10,14 @@ import CrearUsuario from "@adminpages/usuarios/usuario-crear";
 import PedidosAdmin from "@adminpages/pedidos/pedidos-admin";
 import EditarPedido from "@adminpages/pedidos/pedido-editar";
 import CrearPedido from "@adminpages/pedidos/pedido-crear";
+import CategoriasAdmin from "@adminpages/categorias/categorias-admin";
 
 export default function AdminRoutes() {
   return (
     <Routes>
       <Route path="" element={<Dashboard />} />
       <Route path="qr" element={<QRAdmin />} />
+      <Route path="categorias" element={<CategoriasAdmin />} />
       <Route path="productos" element={<ProductosAdmin />} />
       <Route path="productos/agregar" element={<CrearProducto />} />
       <Route path="productos/editar/:id" element={<EditarProducto />} />

@@ -18,6 +18,7 @@ export default function ProductosAdmin() {
     stockBajo: false,
     maxPrecio: 10000,
   });
+  const [categorias, setCategorias] = useState([]);
 
   // Cargar productos activos
   useEffect(() => {
@@ -35,6 +36,27 @@ export default function ProductosAdmin() {
     };
     fetchProductos();
   }, []);
+
+  // Cargar categorías dinámicamente
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const res = await fetch(`${API_URL}/categorias`);
+        if (!res.ok) return;
+        const data = await res.json();
+        setCategorias(data);
+      } catch (err) {
+        console.error("Error al cargar categorías", err);
+      }
+    };
+    fetchCategorias();
+  }, []);
+
+  // Helper para mostrar nombre de categoría
+  const getCategoriaNombre = (id) => {
+    const cat = categorias.find((c) => c.id === id);
+    return cat ? cat.nombre : "—";
+  };
 
   // Confirmar eliminación lógica
   const confirmarEliminacion = async () => {
@@ -76,11 +98,11 @@ export default function ProductosAdmin() {
 
   // Búsqueda y filtros
   const productosFiltrados = productos
+    .filter((p) => p.nombre.toLowerCase().includes(busqueda.toLowerCase()))
     .filter((p) =>
-      p.nombre.toLowerCase().includes(busqueda.toLowerCase())
-    )
-    .filter((p) =>
-      categoriaFiltro === "all" ? true : p.categoria === categoriaFiltro
+      categoriaFiltro === "all"
+        ? true
+        : p.categoria_id === Number(categoriaFiltro)
     )
     .filter((p) => p.precio <= filtros.maxPrecio)
     .filter((p) => (filtros.stockBajo ? p.stock < 10 : true));
@@ -89,12 +111,21 @@ export default function ProductosAdmin() {
     <div className="admin-productos-container">
       <div className="admin-productos-header">
         <h1 className="admin-productos-titulo">Productos</h1>
-        <button
-          className="admin-productos-agregar"
-          onClick={() => navigate("/admin/productos/agregar")}
-        >
-          <FaPlus /> Agregar producto
-        </button>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <button
+            className="admin-productos-agregar"
+            onClick={() => navigate("/admin/productos/agregar")}
+          >
+            <FaPlus /> Agregar producto
+          </button>
+
+          <button
+            className="admin-productos-agregar"
+            onClick={() => navigate("/admin/categorias")}
+          >
+            Categorías
+          </button>
+        </div>
       </div>
 
       {mensaje && <div className="mensaje-exito">{mensaje}</div>}
@@ -113,11 +144,11 @@ export default function ProductosAdmin() {
           onChange={(e) => setCategoriaFiltro(e.target.value)}
         >
           <option value="all">Todas las categorías</option>
-          <option value="bebidas">Bebidas</option>
-          <option value="golosinas">Golosinas</option>
-          <option value="sandwiches">Sándwiches</option>
-          <option value="snacks">Snacks</option>
-          <option value="postres">Postres</option>
+          {categorias.map((cat) => (
+            <option key={cat.id} value={cat.id}>
+              {cat.nombre}
+            </option>
+          ))}
         </select>
 
         <label>
@@ -150,7 +181,7 @@ export default function ProductosAdmin() {
                 <tr key={producto.id}>
                   <td>{producto.nombre}</td>
                   <td>{producto.descripcion || "—"}</td>
-                  <td>{producto.categoria || "—"}</td>
+                  <td>{getCategoriaNombre(producto.categoria_id)}</td>
                   <td>{producto.stock}</td>
                   <td>${Number(producto.precio).toFixed(2)}</td>
                   <td>
