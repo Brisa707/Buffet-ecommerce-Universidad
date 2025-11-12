@@ -4,7 +4,7 @@ import { MdLocalGroceryStore } from "react-icons/md";
 import { FiShoppingBag, FiLogOut } from "react-icons/fi";
 import { FaUserCircle, FaBoxOpen } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import logo from "@assets/logo-buffet.png";
+import logo from "@assets/Logo-buffet.png";
 import "./admin-sidebar.css";
 
 export default function AdminSidebar() {

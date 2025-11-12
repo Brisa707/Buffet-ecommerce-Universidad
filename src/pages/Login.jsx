@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
-import Logo from "@assets/logo-buffet.png";
+import Logo from "@assets/Logo-buffet.png";
 import { API_URL } from "@config/api";
 
 function Login() {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Dashboard.css";
+import "./dashboard.css";
 import { API_URL } from "@config/api";
 
 export default function Dashboard() {

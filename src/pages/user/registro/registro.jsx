@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./registro.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import Logo from "@assets/logo-buffet.png";
+import Logo from "@assets/Logo-buffet.png";
 import { API_URL } from "@config/api";
 
 function Register() {
