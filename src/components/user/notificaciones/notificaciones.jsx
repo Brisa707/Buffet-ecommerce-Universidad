@@ -4,7 +4,7 @@ import { FiCheck } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./notificaciones.css";
-import { API_URL } from "@config/api"; // API_URL = process.env.VITE_API_URL
+import { API_URL } from "@config/api"; 
 
 const Notificaciones = () => {
   const [notificaciones, setNotificaciones] = useState([]);
@@ -24,7 +24,7 @@ const Notificaciones = () => {
       .then((data) => {
         setNotificaciones(data);
 
-        // 🔒 Control persistente de toasts ya mostrados
+        // Control persistente de toasts ya mostrados
         const yaMostrados = new Set(
           JSON.parse(sessionStorage.getItem("toastsMostrados") || "[]")
         );
