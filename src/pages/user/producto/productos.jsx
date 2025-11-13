@@ -183,7 +183,7 @@ function Productos() {
           {/* Banner Promocional */}
           <div className="banner-promocional">
             <img
-              src="/src/assets/banner-productos.png"
+              src="/banner-productos.png"
               alt="Banner Buffet"
               className="banner-promocional-img"
             />

@@ -1,4 +1,4 @@
-import './home.css';
+import "./home.css";
 import ProductCard from "@usercomponents/product-card/product-card";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -8,11 +8,11 @@ function Home() {
   const navigate = useNavigate();
 
   const categorias = [
-    { id: "bebidas", nombre: "Bebidas", img: "/src/assets/categorias/soda.png" },
-    { id: "golosinas", nombre: "Golosinas", img: "/src/assets/categorias/candy.png" },
-    { id: "sandwiches", nombre: "Sándwiches", img: "/src/assets/categorias/sandwich.png" },
-    { id: "snacks", nombre: "Snacks", img: "/src/assets/categorias/potato-chips.png" },
-    { id: "postres", nombre: "Postres", img: "/src/assets/categorias/cookie.png" },
+    { id: "bebidas", nombre: "Bebidas", img: "/categorias/soda.png" },
+    { id: "golosinas", nombre: "Golosinas", img: "/categorias/candy.png" },
+    { id: "sandwiches", nombre: "Sándwiches", img: "/categorias/sandwich.png" },
+    { id: "snacks", nombre: "Snacks", img: "/categorias/potato-chips.png" },
+    { id: "postres", nombre: "Postres", img: "/categorias/cookie.png" },
   ];
 
   const [promociones, setPromociones] = useState([]);
@@ -28,7 +28,9 @@ function Home() {
         if (!res.ok) throw new Error("Error al cargar productos");
         const data = await res.json();
         // Filtrar productos marcados como promocion === true
-        const promos = (data || []).filter((p) => p.promocion === true || p.promocion === 'true');
+        const promos = (data || []).filter(
+          (p) => p.promocion === true || p.promocion === "true"
+        );
         setPromociones(promos);
       } catch (err) {
         console.error("Error fetching promociones:", err);
@@ -86,14 +88,16 @@ function Home() {
   return (
     <>
       <main className="home-container">
-
         {/* Hero Carrusel */}
         <section className="hero-carousel">
           <div className="hero-slide active">
             <div className="hero-content">
               <h1>Buffet UNaB</h1>
               <p>Disfrutá de la mejor comida con variedad y calidad</p>
-              <button className="btn-primary" onClick={() => navigate("/productos")}>
+              <button
+                className="btn-primary"
+                onClick={() => navigate("/productos")}
+              >
                 Ver productos
               </button>
             </div>
@@ -104,7 +108,10 @@ function Home() {
             <div className="hero-content">
               <h1>Sabores que te acompañan</h1>
               <p>Desde el desayuno hasta la merienda</p>
-              <button className="btn-primary" onClick={() => navigate("/productos")}>
+              <button
+                className="btn-primary"
+                onClick={() => navigate("/productos")}
+              >
                 Ver menú
               </button>
             </div>
@@ -115,7 +122,10 @@ function Home() {
             <div className="hero-content">
               <h1>Pedidos rápidos</h1>
               <p>Hacé tu pedido sin filas ni esperas</p>
-              <button className="btn-primary" onClick={() => navigate("/productos")}>
+              <button
+                className="btn-primary"
+                onClick={() => navigate("/productos")}
+              >
                 Pedir ahora
               </button>
             </div>
@@ -137,7 +147,7 @@ function Home() {
         {/* Banners */}
         <section className="home-banners">
           <div className="banner-card">
-            <img src="/src/assets/home/card-image-1.png" alt="Promo del día" />
+            <img src="/home/card-image-1.png" alt="Promo del día" />
             <div className="banner-text">
               <h3>Pedí desde tu aula</h3>
               <p>Sin filas, sin esperas</p>
@@ -145,7 +155,7 @@ function Home() {
           </div>
 
           <div className="banner-card">
-            <img src="/src/assets/home/card-image-2.png" alt="Desayuno" />
+            <img src="/home/card-image-2.png" alt="Desayuno" />
             <div className="banner-text">
               <h3>Un Desayuno Perfecto</h3>
               <p>Para tu mañana</p>
@@ -153,7 +163,7 @@ function Home() {
           </div>
 
           <div className="banner-card">
-            <img src="/src/assets/home/card-image-3.png" alt="Snacks" />
+            <img src="/home/card-image-3.png" alt="Snacks" />
             <div className="banner-text">
               <h3>Promo Snacks</h3>
               <p>¡No te lo pierdas!</p>
@@ -161,7 +171,7 @@ function Home() {
           </div>
 
           <div className="banner-card">
-            <img src="/src/assets/home/card-image-4.png" alt="Desayuno" />
+            <img src="/home/card-image-4.png" alt="Desayuno" />
             <div className="banner-text">
               <h3>Refresca tu día</h3>
               <p>Variedad de bebidas para elegir</p>
@@ -191,11 +201,14 @@ function Home() {
         {/* Banner Buffet */}
         <section className="home-banner-cafe">
           <div className="banner-cafe">
-            <img src="/src/assets/home/banner-Buffet.png" alt="Banner Buffet" />
+            <img src="/home/banner-Buffet.png" alt="Banner Buffet" />
             <div className="banner-cafe-text">
               <h2>Promociones del Buffet</h2>
               <p>Por compras superiores a $5.000 obtené un café gratis</p>
-              <button className="btn-banner" onClick={() => navigate("/productos")}>
+              <button
+                className="btn-banner"
+                onClick={() => navigate("/productos")}
+              >
                 Pedir ahora
               </button>
             </div>
@@ -211,33 +224,48 @@ function Home() {
             {!loadingPromos && !promosError && promociones.length === 0 && (
               <p>No hay promociones disponibles por el momento.</p>
             )}
-            {!loadingPromos && promociones.map((promo) => (
-              <ProductCard key={promo.id} producto={promo} onAddToCart={handleAddToCart} />
-            ))}
+            {!loadingPromos &&
+              promociones.map((promo) => (
+                <ProductCard
+                  key={promo.id}
+                  producto={promo}
+                  onAddToCart={handleAddToCart}
+                />
+              ))}
           </div>
         </section>
 
-         {/* Banners Promocionales Buffet */}
+        {/* Banners Promocionales Buffet */}
         <section className="home-banners-buffet">
           <div className="buffet-banner-item">
             <div className="buffet-banner-text">
-              <h3>HASTA <span>20% OFF</span></h3>
+              <h3>
+                HASTA <span>20% OFF</span>
+              </h3>
               <p>En combos de almuerzo</p>
               <div className="banner-extra">Con pedidos desde el aula </div>
             </div>
             <div className="buffet-banner-img">
-              <img src="/src/assets/home/banner-combo.png" alt="Combo de almuerzo" />
+              <img
+                src="/home/banner-combo.png"
+                alt="Combo de almuerzo"
+              />
             </div>
           </div>
 
           <div className="buffet-banner-item">
             <div className="buffet-banner-text">
-              <h3><span>2x1</span> EN DESAYUNOS</h3>
+              <h3>
+                <span>2x1</span> EN DESAYUNOS
+              </h3>
               <p>De 8:00 a 10:00 hs</p>
               <div className="banner-extra">Con café o medialunas </div>
             </div>
             <div className="buffet-banner-img">
-              <img src="/src/assets/home/banner-desayuno.png" alt="Desayuno Buffet" />
+              <img
+                src="/home/banner-desayuno.png"
+                alt="Desayuno Buffet"
+              />
             </div>
           </div>
         </section>
