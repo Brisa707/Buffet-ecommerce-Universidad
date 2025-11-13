@@ -1,47 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaBell, FaTimes } from "react-icons/fa";
 import { FiCheck } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./notificaciones.css";
+import { API_URL } from "@config/api"; // API_URL = process.env.VITE_API_URL
 
 const Notificaciones = () => {
-  const [notificaciones, setNotificaciones] = useState([
-    { id: 1, mensaje: "Tu pedido #103 esta pendiente", leida: false },
-    { id: 2, mensaje: "Tu pedido #102 fue entregado", leida: true },
-  ]);
-
+  const [notificaciones, setNotificaciones] = useState([]);
   const [open, setOpen] = useState(false);
+
   const notificacionesNoLeidas = notificaciones.filter((n) => !n.leida).length;
 
-  // Agregar nueva notificación + toast
-  const agregarNotificacion = (mensaje) => {
-    const nueva = { id: Date.now(), mensaje, leida: false };
-    setNotificaciones((prev) => [nueva, ...prev]);
-    toast.info(mensaje, {
-      position: "bottom-right",
-      autoClose: 4000,
-      theme: "colored",
-    });
-  };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch(`${API_URL}/notificaciones`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Error en la respuesta del servidor");
+        return res.json();
+      })
+      .then((data) => {
+        setNotificaciones(data);
+
+        // 🔒 Control persistente de toasts ya mostrados
+        const yaMostrados = new Set(
+          JSON.parse(sessionStorage.getItem("toastsMostrados") || "[]")
+        );
+        const nuevos = [];
+
+        data
+          .filter((n) => !n.leida)
+          .forEach((n) => {
+            const clave = n.mensaje.trim();
+            if (!yaMostrados.has(clave)) {
+              toast.info(clave, {
+                position: "bottom-right",
+                autoClose: 4000,
+                theme: "colored",
+              });
+              yaMostrados.add(clave);
+              nuevos.push(clave);
+            }
+          });
+
+        sessionStorage.setItem(
+          "toastsMostrados",
+          JSON.stringify(Array.from(yaMostrados))
+        );
+      })
+      .catch((err) => console.error("Error al cargar notificaciones:", err));
+  }, []);
 
   const marcarComoLeida = (id) => {
-    setNotificaciones((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, leida: true } : n))
+    const token = localStorage.getItem("token");
+    fetch(`${API_URL}/notificaciones/${id}`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(() =>
+      setNotificaciones((prev) =>
+        prev.map((n) => (n.id === id ? { ...n, leida: true } : n))
+      )
     );
   };
 
   const marcarTodasComoLeidas = () => {
-    setNotificaciones((prev) => prev.map((n) => ({ ...n, leida: true })));
+    notificaciones.forEach((n) => marcarComoLeida(n.id));
   };
 
   const eliminarNotificacion = (id) => {
-    setNotificaciones((prev) => prev.filter((n) => n.id !== id));
+    const token = localStorage.getItem("token");
+    fetch(`${API_URL}/notificaciones/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(() =>
+      setNotificaciones((prev) => prev.filter((n) => n.id !== id))
+    );
   };
 
   return (
     <div className="notificaciones-container">
-      {/* Icono campana */}
       <div className="icono-campana" onClick={() => setOpen(!open)}>
         <FaBell className="nav-icon" />
         {notificacionesNoLeidas > 0 && (
@@ -49,7 +88,6 @@ const Notificaciones = () => {
         )}
       </div>
 
-      {/* Panel de notificaciones */}
       {open && (
         <div className="lista-notificaciones">
           <div className="notificaciones-header">
@@ -82,17 +120,6 @@ const Notificaciones = () => {
               </div>
             ))
           )}
-
-          <button
-            className="btn-simular"
-            onClick={() =>
-              agregarNotificacion(
-                "Te avisaremos por correo electrónico cuando tu pedido esté listo"
-              )
-            }
-          >
-            Simular nueva notificación
-          </button>
         </div>
       )}
 
@@ -102,5 +129,3 @@ const Notificaciones = () => {
 };
 
 export default Notificaciones;
-
-

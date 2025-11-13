@@ -3,7 +3,6 @@ import { Html5Qrcode } from "html5-qrcode";
 import "./qr-admin.css";
 import { API_URL } from "@config/api";
 
-
 export default function QRAdmin() {
   const qrRef = useRef(null);
   const html5QrCodeRef = useRef(null);
@@ -61,28 +60,27 @@ export default function QRAdmin() {
   }, []);
 
   const handleSubmit = (e) => {
-  e.preventDefault();
-  setResultado(`Verificando código: ${codigo}`);
+    e.preventDefault();
+    setResultado(`Verificando código: ${codigo}`);
 
-  const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-  fetch(`${API_URL}/pedidos/verificar-entrega`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ codigo }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      setResultado(data.mensaje || "Verificación completada");
+    fetch(`${API_URL}/pedidos/verificar-entrega`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ codigo }),
     })
-    .catch(() => {
-      setResultado("Error al verificar el código");
-    });
-};
-
+      .then((res) => res.json())
+      .then((data) => {
+        setResultado(data.mensaje || "Verificación completada");
+      })
+      .catch(() => {
+        setResultado("Error al verificar el código");
+      });
+  };
 
   return (
     <div className="admin-qr-container">
@@ -94,11 +92,7 @@ export default function QRAdmin() {
       </div>
 
       <div className="admin-qr-scanner-wrapper">
-        <div
-          id="qr-reader"
-          className="admin-qr-scanner"
-          ref={qrRef}
-        ></div>
+        <div id="qr-reader" className="admin-qr-scanner" ref={qrRef}></div>
       </div>
 
       <form className="admin-qr-form" onSubmit={handleSubmit}>

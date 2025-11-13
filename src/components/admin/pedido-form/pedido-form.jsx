@@ -4,9 +4,9 @@ import "./pedido-form.css";
 export default function PedidoForm({
   onSubmit,
   title,
-  productosDisponibles = [],   
-  usuariosDisponibles = [],    
-  pedido = null,              
+  productosDisponibles = [],
+  usuariosDisponibles = [],
+  pedido = null,
 }) {
   const [items, setItems] = useState([{ productoId: "", cantidad: 1 }]);
   const [usuarioId, setUsuarioId] = useState("");
@@ -45,9 +45,9 @@ export default function PedidoForm({
 
     const estadoMap = {
       pendiente: "Pendiente",
-      listo: "Confirmado",
+      listo: "Listo",
+      cancelado: "Cancelado",
       entregado: "Entregado",
-      cancelado: "Pendiente",
     };
 
     const productos = items.map((item) => {
@@ -119,8 +119,8 @@ export default function PedidoForm({
           >
             <option value="pendiente">Pendiente</option>
             <option value="listo">Listo</option>
-            <option value="entregado">Entregado</option>
             <option value="cancelado">Cancelado</option>
+            <option value="entregado">Entregado</option>
           </select>
         </label>
 
@@ -160,7 +160,11 @@ export default function PedidoForm({
           </div>
         ))}
 
-        <button type="button" className="agregar-producto" onClick={agregarItem}>
+        <button
+          type="button"
+          className="agregar-producto"
+          onClick={agregarItem}
+        >
           + Agregar producto
         </button>
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaPlus, FaEdit, FaBan  } from "react-icons/fa"; 
+import { FaPlus, FaEdit, FaBan } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "@config/api";
 import "./pedidos-admin.css";
@@ -25,13 +25,13 @@ export default function PedidosAdmin() {
 
   const confirmarEliminacion = () => {
     const token = localStorage.getItem("token");
-    fetch(`${API_URL}/pedidos/${pedidoAEliminar.id}/cancelar`, {
+    fetch(`${API_URL}/pedidos/${pedidoAEliminar.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ estado: "Cancelado" }),
+      body: JSON.stringify({ estado: "Cancelado" }), // 👈 coincide con backend
     })
       .then((res) => res.json())
       .then(() => {
@@ -51,9 +51,10 @@ export default function PedidosAdmin() {
 
   // Aplicar búsqueda y filtros
   const pedidosFiltrados = pedidos
-    .filter((p) =>
-      p.numero_pedido.toString().includes(busqueda) ||
-      p.usuario_id.toString().includes(busqueda)
+    .filter(
+      (p) =>
+        p.numero_pedido.toString().includes(busqueda) ||
+        p.usuario_id.toString().includes(busqueda)
     )
     .filter((p) =>
       estadoFiltro === "all"
@@ -87,9 +88,10 @@ export default function PedidosAdmin() {
           onChange={(e) => setEstadoFiltro(e.target.value)}
         >
           <option value="all">Todos los estados</option>
-          <option value="pendiente">Pendiente</option>
-          <option value="enviado">Enviado</option>
-          <option value="cancelado">Cancelado</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="Confirmado">Confirmado</option>
+          <option value="Cancelado">Cancelado</option>
+          <option value="Entregado">Entregado</option>
         </select>
       </div>
 
@@ -137,7 +139,7 @@ export default function PedidosAdmin() {
                       className="admin-pedidos-boton eliminar"
                       onClick={() => setPedidoAEliminar(pedido)}
                     >
-                      <FaBan  />
+                      <FaBan />
                     </button>
                   </td>
                 </tr>
